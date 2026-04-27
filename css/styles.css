@@ -1159,14 +1159,16 @@ h3 {
 }
 
 .site-footer {
-  background: var(--color-dark);
+  background:
+    linear-gradient(180deg, var(--color-dark-soft) 0%, var(--color-dark) 100%);
   color: #ffffff;
-  padding: var(--space-10) 0;
+  padding: var(--space-10) 0 0;
 }
 
 .footer-grid {
   display: grid;
-  gap: var(--space-8);
+  gap: var(--space-6);
+  padding-bottom: var(--space-8);
 }
 
 .brand--footer small,
@@ -1174,15 +1176,47 @@ h3 {
   color: rgb(255 255 255 / 68%);
 }
 
-.site-footer address,
-.site-footer nav {
+.footer-brand {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.footer-brand p,
+.footer-column p {
+  margin-bottom: 0;
+}
+
+.footer-column {
   display: grid;
   gap: var(--space-2);
+  align-content: start;
   font-style: normal;
+}
+
+.footer-column > strong {
+  color: #ffffff;
+  font-size: var(--text-sm);
+  text-transform: uppercase;
+}
+
+.footer-column a,
+.footer-column p {
+  color: rgb(255 255 255 / 72%);
 }
 
 .site-footer a:hover {
   color: var(--color-accent);
+}
+
+.footer-bottom {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: var(--space-3);
+  border-top: 1px solid rgb(255 255 255 / 12%);
+  padding: var(--space-4) 0;
+  color: rgb(255 255 255 / 64%);
+  font-size: var(--text-sm);
 }
 
 .scroll-top {
@@ -1349,7 +1383,7 @@ h3 {
   }
 
   .footer-grid {
-    grid-template-columns: 1.4fr 1fr 0.8fr;
+    grid-template-columns: 1.5fr 0.9fr 0.8fr 1fr;
   }
 }
 
