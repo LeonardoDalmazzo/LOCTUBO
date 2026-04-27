@@ -490,6 +490,20 @@ h3 {
   color: #ffffff;
 }
 
+.benefits-parallax {
+  position: relative;
+  overflow: hidden;
+  background:
+    linear-gradient(90deg, rgb(16 24 29 / 92%) 0%, rgb(16 24 29 / 78%) 48%, rgb(16 24 29 / 64%) 100%),
+    url("https://images.unsplash.com/photo-1541888946425-d81bb19240f5?auto=format&fit=crop&w=1800&q=82")
+      center / cover no-repeat;
+}
+
+.benefits-parallax .container {
+  position: relative;
+  z-index: 1;
+}
+
 .section__heading {
   max-width: 45rem;
   margin-bottom: var(--space-8);
@@ -774,7 +788,8 @@ h3 {
 
 .benefit-list article {
   border-color: rgb(255 255 255 / 14%);
-  background: var(--color-dark-soft);
+  background: rgb(28 41 49 / 88%);
+  backdrop-filter: blur(10px);
 }
 
 .benefit-list p {
@@ -802,7 +817,10 @@ h3 {
 }
 
 .quote-section {
-  background: var(--color-secondary-dark);
+  background:
+    linear-gradient(90deg, rgb(13 66 73 / 94%) 0%, rgb(13 66 73 / 84%) 46%, rgb(16 24 29 / 72%) 100%),
+    url("https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1800&q=82")
+      center / cover no-repeat;
   color: #ffffff;
 }
 
@@ -1106,6 +1124,14 @@ h3 {
   .hero__content {
     padding-bottom: var(--space-16);
   }
+
+  .benefits-parallax {
+    background-attachment: fixed;
+  }
+
+  .quote-section {
+    background-attachment: fixed;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1125,5 +1151,13 @@ h3 {
 
   .button:hover {
     transform: none;
+  }
+
+  .benefits-parallax {
+    background-attachment: scroll;
+  }
+
+  .quote-section {
+    background-attachment: scroll;
   }
 }
