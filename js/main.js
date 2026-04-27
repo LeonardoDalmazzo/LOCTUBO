@@ -3,6 +3,7 @@ const menuButton = document.querySelector("[data-menu-toggle]");
 const heroCarousel = document.querySelector("[data-hero-carousel]");
 const heroCarouselDots = document.querySelector("[data-hero-carousel-dots]");
 const searchPanel = document.querySelector(".search-panel");
+const scrollTopButton = document.querySelector("[data-scroll-top]");
 
 const setHeaderState = () => {
   if (!header) return;
@@ -11,6 +12,17 @@ const setHeaderState = () => {
 
 setHeaderState();
 window.addEventListener("scroll", setHeaderState, { passive: true });
+
+const setScrollTopState = () => {
+  scrollTopButton?.classList.toggle("is-visible", window.scrollY > 560);
+};
+
+setScrollTopState();
+window.addEventListener("scroll", setScrollTopState, { passive: true });
+
+scrollTopButton?.addEventListener("click", () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+});
 
 if (menuButton) {
   const menu = document.querySelector(menuButton.dataset.menuToggle);

@@ -29,10 +29,30 @@
       </button>
 
       <nav class="site-nav" id="primary-menu" aria-label="Navegacao principal">
-        <a href="#catalogo">Catalogo</a>
-        <a href="#detalhes">Equipamentos</a>
-        <a href="#vantagens">Vantagens</a>
-        <a class="site-nav__cta" href="#orcamento">Orcamento</a>
+        <a href="#catalogo">
+          <svg class="site-nav__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path d="M6 2h9l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 2H6v16h12V8h-4V4Zm-5 8h6v2H9v-2Zm0 4h6v2H9v-2Zm0-8h3v2H9V8Z"></path>
+          </svg>
+          Catalogo
+        </a>
+        <a href="#localizacao">
+          <svg class="site-nav__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"></path>
+          </svg>
+          Localizacao
+        </a>
+        <a href="#contato">
+          <svg class="site-nav__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path d="M4 4h16a2 2 0 0 1 2 2v9.5a2 2 0 0 1-2 2H8.8L4 21.4v-3.9a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2Zm0 2v9.5h2v1.7l2.1-1.7H20V6H4Zm3 2h10v2H7V8Zm0 4h7v2H7v-2Z"></path>
+          </svg>
+          Contato
+        </a>
+        <a class="site-nav__cta" href="#orcamento">
+          <svg class="site-nav__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path d="M13 2v2.1c2.3.3 4 1.7 4.8 3.8l-3 1.1c-.5-1.2-1.4-1.9-2.9-1.9-1.3 0-2.2.5-2.2 1.4 0 .9.8 1.2 3.1 1.7 3.4.7 5.3 1.9 5.3 4.8 0 2.5-1.9 4.2-5.1 4.7V22h-2v-2.2c-2.9-.4-5-2.1-5.7-4.8l3.1-.9c.5 1.8 1.8 2.8 3.7 2.8 1.6 0 2.6-.6 2.6-1.6 0-1-.8-1.3-3.2-1.8-3.2-.7-5.1-1.8-5.1-4.7 0-2.4 1.8-4.1 4.6-4.6V2h2Z"></path>
+          </svg>
+          Orcamento
+        </a>
       </nav>
     </header>
 
@@ -689,9 +709,81 @@
           </form>
         </div>
       </section>
+
+      <section class="section location-section" id="localizacao" aria-labelledby="localizacao-title">
+        <div class="container location-layout">
+          <div class="section__heading section__heading--left">
+            <p class="eyebrow">Localizacao</p>
+            <h2 id="localizacao-title">Retire no Butanta ou combine a entrega na sua obra.</h2>
+            <p>
+              Estamos na Rua Manoel de Afonseca, 61, Jardim das Vertentes, Sao Paulo. Use o mapa
+              para planejar retirada, visita ou rota de entrega.
+            </p>
+            <a class="button button--secondary" href="https://www.google.com/maps/search/?api=1&query=Rua%20Manoel%20de%20Afonseca%2061%20Sao%20Paulo%20SP" target="_blank" rel="noreferrer">
+              <svg class="button__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6a2.5 2.5 0 0 1 0 5.5Z"></path>
+              </svg>
+              Abrir no Google Maps
+            </a>
+          </div>
+          <div class="map-frame">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.3584980816095!2d-46.74485992378745!3d-23.59147256270081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce56846d227925%3A0xf8e684933fd21629!2sR.%20Manoel%20de%20Afonseca%2C%2061%20-%20Jardim%20das%20Vertentes%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005541-150!5e0!3m2!1sen!2sbr!4v1777287641230!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa da LocTubo"></iframe>
+          </div>
+        </div>
+      </section>
+
+      <section class="section contact-section" id="contato" aria-labelledby="contato-title">
+        <div class="container contact-layout">
+          <div class="section__heading section__heading--left">
+            <p class="eyebrow">Contato</p>
+            <h2 id="contato-title">Quer acelerar seu orcamento?</h2>
+            <p>
+              Chame a LocTubo no canal que preferir. Pelo WhatsApp, envie fotos da obra,
+              medidas, endereco e periodo de locacao para receber uma resposta mais precisa.
+            </p>
+          </div>
+          <div class="social-grid" aria-label="Canais de contato">
+            <a class="social-card social-card--whatsapp" href="https://wa.me/5511986740961">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M12.04 2a9.9 9.9 0 0 0-8.5 15.03L2.45 22l5.09-1.06A9.91 9.91 0 1 0 12.04 2Zm0 1.95a7.96 7.96 0 0 1 6.78 12.11 7.9 7.9 0 0 1-9.95 2.87l-.35-.16-3.01.63.64-2.91-.18-.36a7.96 7.96 0 0 1 6.07-12.18Zm-3.1 4.17c-.18 0-.47.07-.72.34-.25.27-.94.92-.94 2.24s.96 2.6 1.1 2.78c.13.18 1.89 2.88 4.58 4.04.64.28 1.14.44 1.53.56.64.2 1.23.17 1.69.1.52-.08 1.6-.65 1.82-1.28.23-.63.23-1.17.16-1.28-.07-.12-.25-.18-.52-.32-.27-.13-1.6-.79-1.85-.88-.25-.09-.43-.13-.61.14-.18.27-.7.88-.85 1.06-.16.18-.32.2-.59.07-.27-.14-1.14-.42-2.17-1.34-.8-.71-1.34-1.59-1.5-1.86-.15-.27-.02-.42.12-.55.12-.12.27-.32.4-.47.14-.16.18-.27.27-.45.09-.18.05-.34-.02-.47-.07-.14-.61-1.48-.84-2.02-.22-.53-.45-.46-.61-.47h-.52Z"></path>
+              </svg>
+              <span>WhatsApp</span>
+              <strong>Falar agora</strong>
+            </a>
+            <a class="social-card" href="https://pt-br.facebook.com/LoctuboLocadora" target="_blank" rel="noreferrer" aria-label="Facebook da LocTubo">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M14 8.5V6.8c0-.8.3-1.2 1.3-1.2H17V2.4c-.8-.1-1.7-.2-2.5-.2-2.9 0-4.8 1.7-4.8 4.8v1.5H6.6V12h3.1v9.8H14V12h2.9l.5-3.5H14Z"></path>
+              </svg>
+              <span>Facebook</span>
+              <strong>Acompanhar novidades</strong>
+            </a>
+            <a class="social-card" href="https://www.linkedin.com/in/loctubo-locadora-2187b221/" target="_blank" rel="noreferrer" aria-label="LinkedIn da LocTubo">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M5 8.8H2v12h3v-12ZM3.5 3.1A1.75 1.75 0 1 0 3.5 6.6a1.75 1.75 0 0 0 0-3.5Zm6.2 5.7H6.8v12h3v-6.4c0-1.7.8-2.8 2.2-2.8 1.3 0 1.9.9 1.9 2.8v6.4h3v-7.1c0-3.5-1.8-5.2-4.3-5.2-1.9 0-2.7 1-3.1 1.7V8.8Z"></path>
+              </svg>
+              <span>LinkedIn</span>
+              <strong>Conectar com a empresa</strong>
+            </a>
+            <a class="social-card" href="https://x.com/locacaoandaimes" target="_blank" rel="noreferrer" aria-label="X da LocTubo">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M14 10.5 21.4 2h-2.5l-6 6.9L8.1 2H2l7.8 11.2L2 22h2.5l6.4-7.3 5 7.3H22l-8-11.5Zm-2.2 2.5-1.1-1.5L5.5 3.9h1.6l4.6 6.7 1.1 1.5 5.6 8h-1.6L11.8 13Z"></path>
+              </svg>
+              <span>Twitter</span>
+              <strong>Ver atualizacoes</strong>
+            </a>
+            <a class="social-card" href="https://www.youtube.com/user/loctubo1" target="_blank" rel="noreferrer" aria-label="YouTube da LocTubo">
+              <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+                <path d="M21.6 7.1s-.2-1.6-.9-2.3c-.9-.9-1.9-.9-2.3-1C15.1 3.6 12 3.6 12 3.6s-3.1 0-6.4.2c-.5.1-1.5.1-2.3 1-.7.7-.9 2.3-.9 2.3S2.2 9 2.2 10.9v1.8c0 1.9.2 3.8.2 3.8s.2 1.6.9 2.3c.8.9 2 .9 2.5 1 1.8.2 6.2.2 6.2.2s3.1 0 6.4-.2c.5-.1 1.5-.1 2.3-1 .7-.7.9-2.3.9-2.3s.2-1.9.2-3.8v-1.8c0-1.9-.2-3.8-.2-3.8ZM10.1 15.1V8.5l5.9 3.3-5.9 3.3Z"></path>
+              </svg>
+              <span>YouTube</span>
+              <strong>Assistir demonstracoes</strong>
+            </a>
+          </div>
+        </div>
+      </section>
     </main>
 
-    <footer class="site-footer" id="contato">
+    <footer class="site-footer">
       <div class="container footer-grid">
         <div>
           <a class="brand brand--footer" href="#inicio">
@@ -710,11 +802,17 @@
         </address>
         <nav aria-label="Links de rodape">
           <a href="#catalogo">Catalogo</a>
-          <a href="#detalhes">Equipamentos</a>
+          <a href="#localizacao">Localizacao</a>
+          <a href="#contato">Contato</a>
           <a href="#orcamento">Orcamento</a>
-          <a href="#contato">Localizacao</a>
         </nav>
       </div>
     </footer>
+
+    <button class="scroll-top" type="button" data-scroll-top aria-label="Voltar ao topo">
+      <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+        <path d="M12 5 5 12l1.4 1.4 4.6-4.6V20h2V8.8l4.6 4.6L19 12z"></path>
+      </svg>
+    </button>
   </body>
 </html>
