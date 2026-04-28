@@ -7,7 +7,18 @@ const scrollTopButton = document.querySelector("[data-scroll-top]");
 const equipmentDrawer = document.querySelector("[data-equipment-drawer]");
 const equipmentDrawerPanel = equipmentDrawer?.querySelector(".equipment-drawer__panel");
 const equipmentDrawerContent = document.querySelector("[data-equipment-drawer-content]");
+const photoViewer = document.querySelector("[data-photo-viewer]");
+const photoViewerDialog = photoViewer?.querySelector(".photo-viewer__dialog");
+const photoViewerMedia = photoViewer?.querySelector(".photo-viewer__media");
+const photoViewerImage = document.querySelector("[data-photo-viewer-image]");
+const photoViewerTitle = document.querySelector("[data-photo-viewer-title]");
+const photoViewerCount = document.querySelector("[data-photo-viewer-count]");
+const photoViewerPrev = document.querySelector("[data-photo-viewer-prev]");
+const photoViewerNext = document.querySelector("[data-photo-viewer-next]");
 let lastFocusedElement = null;
+let lastPhotoFocusedElement = null;
+let photoViewerImages = [];
+let photoViewerIndex = 0;
 
 const setHeaderState = () => {
   if (!header) return;
@@ -116,6 +127,82 @@ document.querySelectorAll("[data-card-carousel]").forEach((carousel) => {
   }
 });
 
+const updatePhotoViewer = () => {
+  if (!photoViewerImage || !photoViewerTitle || !photoViewerCount || photoViewerImages.length === 0) return;
+
+  const currentImage = photoViewerImages[photoViewerIndex];
+  photoViewerImage.src = currentImage.src;
+  photoViewerImage.alt = currentImage.alt;
+  photoViewerTitle.textContent = currentImage.title;
+  photoViewerCount.textContent = `${photoViewerIndex + 1} de ${photoViewerImages.length}`;
+
+  const hasMultipleImages = photoViewerImages.length > 1;
+  photoViewerPrev?.toggleAttribute("disabled", !hasMultipleImages);
+  photoViewerNext?.toggleAttribute("disabled", !hasMultipleImages);
+};
+
+const closePhotoViewer = (restoreFocus = true) => {
+  if (!photoViewer) return;
+
+  photoViewer.classList.remove("is-open");
+  photoViewer.setAttribute("aria-hidden", "true");
+  photoViewer.inert = true;
+  document.body.classList.remove("photo-viewer-open");
+
+  if (photoViewerImage) {
+    photoViewerImage.removeAttribute("src");
+    photoViewerImage.alt = "";
+  }
+
+  if (restoreFocus && lastPhotoFocusedElement instanceof HTMLElement) {
+    lastPhotoFocusedElement.focus();
+  }
+};
+
+const showPhotoViewerImage = (index) => {
+  if (photoViewerImages.length === 0) return;
+
+  photoViewerIndex = (index + photoViewerImages.length) % photoViewerImages.length;
+  updatePhotoViewer();
+};
+
+const openPhotoViewer = (images, title, startIndex, trigger) => {
+  if (!photoViewer || images.length === 0) return;
+
+  photoViewerImages = images.map((image) => ({
+    src: image.src,
+    alt: image.alt || title,
+    title
+  }));
+  photoViewerIndex = Math.max(0, startIndex);
+  lastPhotoFocusedElement = trigger;
+
+  updatePhotoViewer();
+  photoViewer.inert = false;
+  photoViewer.classList.add("is-open");
+  photoViewer.setAttribute("aria-hidden", "false");
+  document.body.classList.add("photo-viewer-open");
+  photoViewerDialog?.focus();
+};
+
+photoViewerNext?.addEventListener("click", () => {
+  showPhotoViewerImage(photoViewerIndex + 1);
+});
+
+photoViewerPrev?.addEventListener("click", () => {
+  showPhotoViewerImage(photoViewerIndex - 1);
+});
+
+document.querySelectorAll("[data-photo-viewer-close]").forEach((trigger) => {
+  trigger.addEventListener("click", () => closePhotoViewer());
+});
+
+photoViewerMedia?.addEventListener("click", (event) => {
+  if (event.target === photoViewerMedia) {
+    closePhotoViewer();
+  }
+});
+
 const closeEquipmentDrawer = (restoreFocus = true) => {
   if (!equipmentDrawer) return;
 
@@ -129,7 +216,95 @@ const closeEquipmentDrawer = (restoreFocus = true) => {
   }
 };
 
-const openEquipmentDrawer = (detailId, trigger) => {
+const getCardImages = (card) =>
+  Array.from(card.querySelectorAll(".card-carousel__image")).map((image) => ({
+    src: image.currentSrc || image.src,
+    alt: image.alt || card.querySelector("h4")?.textContent?.trim() || "Foto do equipamento"
+  }));
+
+const createEquipmentGallery = (card) => {
+  const images = getCardImages(card);
+  const title = card.querySelector("h4")?.textContent?.trim() || "Foto do equipamento";
+  const activeIndex = Math.max(
+    0,
+    Array.from(card.querySelectorAll(".card-carousel__image")).findIndex((image) => image.classList.contains("is-active"))
+  );
+  let currentIndex = activeIndex;
+
+  const gallery = document.createElement("section");
+  gallery.className = "equipment-gallery";
+  gallery.setAttribute("aria-label", `Fotos de ${title}`);
+
+  const viewerButton = document.createElement("button");
+  viewerButton.className = "equipment-gallery__viewer";
+  viewerButton.type = "button";
+  viewerButton.setAttribute("aria-label", `Ampliar foto de ${title}`);
+
+  const mainImage = document.createElement("img");
+  viewerButton.append(mainImage);
+
+  const counter = document.createElement("span");
+  counter.className = "equipment-gallery__counter";
+
+  const controls = document.createElement("div");
+  controls.className = "equipment-gallery__controls";
+
+  const prevButton = document.createElement("button");
+  prevButton.type = "button";
+  prevButton.textContent = "Anterior";
+
+  const nextButton = document.createElement("button");
+  nextButton.type = "button";
+  nextButton.textContent = "Próxima";
+
+  controls.append(prevButton, nextButton);
+
+  const thumbnails = document.createElement("div");
+  thumbnails.className = "equipment-gallery__thumbs";
+
+  const thumbButtons = images.map((image, index) => {
+    const button = document.createElement("button");
+    button.type = "button";
+    button.setAttribute("aria-label", `Ver foto ${index + 1} de ${title}`);
+
+    const thumb = document.createElement("img");
+    thumb.src = image.src;
+    thumb.alt = "";
+    button.append(thumb);
+    thumbnails.append(button);
+    return button;
+  });
+
+  const setGalleryImage = (index) => {
+    if (images.length === 0) return;
+
+    currentIndex = (index + images.length) % images.length;
+    const image = images[currentIndex];
+    mainImage.src = image.src;
+    mainImage.alt = image.alt;
+    counter.textContent = `${currentIndex + 1} de ${images.length}`;
+    thumbButtons.forEach((button, buttonIndex) => {
+      button.classList.toggle("is-active", buttonIndex === currentIndex);
+    });
+
+    const hasMultipleImages = images.length > 1;
+    prevButton.toggleAttribute("disabled", !hasMultipleImages);
+    nextButton.toggleAttribute("disabled", !hasMultipleImages);
+  };
+
+  prevButton.addEventListener("click", () => setGalleryImage(currentIndex - 1));
+  nextButton.addEventListener("click", () => setGalleryImage(currentIndex + 1));
+  viewerButton.addEventListener("click", () => openPhotoViewer(images, title, currentIndex, viewerButton));
+  thumbButtons.forEach((button, index) => {
+    button.addEventListener("click", () => setGalleryImage(index));
+  });
+
+  gallery.append(viewerButton, counter, controls, thumbnails);
+  setGalleryImage(currentIndex);
+  return gallery;
+};
+
+const openEquipmentDrawer = (detailId, trigger, card) => {
   if (!equipmentDrawer || !equipmentDrawerContent) return;
 
   const source = document.getElementById(detailId);
@@ -142,6 +317,10 @@ const openEquipmentDrawer = (detailId, trigger) => {
   const title = detail.querySelector("h3");
   if (title) {
     title.id = "equipment-drawer-title";
+  }
+
+  if (card) {
+    detail.prepend(createEquipmentGallery(card));
   }
 
   equipmentDrawerContent.replaceChildren(detail);
@@ -159,7 +338,7 @@ document.querySelectorAll(".product-card[href^='#']").forEach((card) => {
     if (!detailId || !document.getElementById(detailId)) return;
 
     event.preventDefault();
-    openEquipmentDrawer(detailId, card);
+    openEquipmentDrawer(detailId, card, card);
   });
 });
 
@@ -168,6 +347,21 @@ document.querySelectorAll("[data-equipment-drawer-close]").forEach((trigger) => 
 });
 
 document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape" && photoViewer?.classList.contains("is-open")) {
+    closePhotoViewer();
+    return;
+  }
+
+  if (event.key === "ArrowRight" && photoViewer?.classList.contains("is-open")) {
+    showPhotoViewerImage(photoViewerIndex + 1);
+    return;
+  }
+
+  if (event.key === "ArrowLeft" && photoViewer?.classList.contains("is-open")) {
+    showPhotoViewerImage(photoViewerIndex - 1);
+    return;
+  }
+
   if (event.key === "Escape" && equipmentDrawer?.classList.contains("is-open")) {
     closeEquipmentDrawer();
   }
@@ -179,12 +373,12 @@ document.querySelectorAll("form").forEach((form) => {
       event.preventDefault();
       const formData = new FormData(form);
       const message = [
-        "Ola, gostaria de solicitar um orcamento pela LocTubo.",
+        "Olá, gostaria de solicitar um orçamento pela LocTubo.",
         `Nome: ${formData.get("nome") || ""}`,
         `Telefone: ${formData.get("telefone") || ""}`,
         `Empresa: ${formData.get("empresa") || ""}`,
         `Equipamento: ${formData.get("equipamento") || ""}`,
-        `Periodo: ${formData.get("periodo") || ""}`,
+        `Período: ${formData.get("periodo") || ""}`,
         `CEP: ${formData.get("cep") || ""}`,
         `Detalhes: ${formData.get("detalhes") || ""}`
       ].join("\n");
