@@ -326,7 +326,11 @@ textarea {
 }
 
 .hero__copy {
-  max-width: 44rem;
+  max-width: 52rem;
+}
+
+.hero__copy h1 {
+  max-width: 15ch;
 }
 
 .eyebrow {
@@ -345,10 +349,9 @@ p {
 }
 
 h1 {
-  max-width: 10ch;
   margin-bottom: var(--space-5);
   font-size: var(--title-lg);
-  line-height: 0.98;
+  line-height: 1.02;
 }
 
 h2 {
@@ -364,7 +367,7 @@ h3 {
 }
 
 .hero__copy > p {
-  max-width: 39rem;
+  max-width: 42rem;
   color: rgb(255 255 255 / 86%);
   font-size: var(--text-md);
 }
