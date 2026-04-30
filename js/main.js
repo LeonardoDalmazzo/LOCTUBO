@@ -4,6 +4,8 @@ const heroCarousel = document.querySelector("[data-hero-carousel]");
 const heroCarouselDots = document.querySelector("[data-hero-carousel-dots]");
 const searchPanel = document.querySelector(".search-panel");
 const scrollTopButton = document.querySelector("[data-scroll-top]");
+const quoteForm = document.querySelector(".quote-form");
+const quoteFeedback = document.querySelector("[data-quote-feedback]");
 const equipmentDrawer = document.querySelector("[data-equipment-drawer]");
 const equipmentDrawerPanel = equipmentDrawer?.querySelector(".equipment-drawer__panel");
 const equipmentDrawerContent = document.querySelector("[data-equipment-drawer-content]");
@@ -19,6 +21,49 @@ let lastFocusedElement = null;
 let lastPhotoFocusedElement = null;
 let photoViewerImages = [];
 let photoViewerIndex = 0;
+let catalogState = null;
+
+const imageSizes = {
+  "andaimeFachadeiro.png": [1054, 581],
+  "Produto-Sem-Imagem-600-x-600px.jpg": [600, 600],
+  "photo-1503387762-592deb58ef4e.avif": [1800, 1013],
+  "photo-1504917595217-d4dc5ebe6122.avif": [1800, 1200],
+  "photo-1541888946425-d81bb19240f5.avif": [1800, 1200],
+  "loctubo-logo.png": [93, 83]
+};
+
+const applyImagePerformanceAttributes = (image) => {
+  const fileName = image.currentSrc.split("/").pop() || image.src.split("/").pop();
+  const dimensions = imageSizes[fileName] || [320, 320];
+
+  if (!image.hasAttribute("decoding")) {
+    image.decoding = "async";
+  }
+
+  if (!image.hasAttribute("width")) {
+    image.width = dimensions[0];
+  }
+
+  if (!image.hasAttribute("height")) {
+    image.height = dimensions[1];
+  }
+
+  if (!image.hasAttribute("sizes")) {
+    image.sizes = image.closest(".hero-carousel")
+      ? "100vw"
+      : "(min-width: 78rem) 25vw, (min-width: 58rem) 33vw, (min-width: 42rem) 50vw, 100vw";
+  }
+
+  if (!image.hasAttribute("srcset") && image.src) {
+    image.srcset = `${image.src} ${dimensions[0]}w`;
+  }
+
+  if (!image.closest(".hero-carousel") && !image.closest(".site-header") && !image.hasAttribute("loading")) {
+    image.loading = "lazy";
+  }
+};
+
+document.querySelectorAll("img").forEach(applyImagePerformanceAttributes);
 
 const setHeaderState = () => {
   if (!header) return;
@@ -263,6 +308,7 @@ const createProductCard = (category, rawItem) => {
     element.className = index === 0 ? "card-carousel__image is-active" : "card-carousel__image";
     element.src = image.src;
     element.alt = image.alt || item.name;
+    applyImagePerformanceAttributes(element);
     media.append(element);
   });
 
@@ -286,7 +332,7 @@ const createProductCard = (category, rawItem) => {
   return card;
 };
 
-const catalogPageSize = 12;
+const catalogPageSize = 15;
 
 const setCatalogFilter = (state, filter) => {
   state.filter = filter;
@@ -294,8 +340,22 @@ const setCatalogFilter = (state, filter) => {
   renderCatalogPage(state);
 };
 
+const showCatalogCard = (card) => {
+  if (!catalogState || !card) return;
+
+  catalogState.filter = "todos";
+  const cards = catalogState.cards;
+  const cardIndex = cards.indexOf(card);
+
+  if (cardIndex >= 0) {
+    catalogState.page = Math.floor(cardIndex / catalogPageSize) + 1;
+  }
+
+  renderCatalogPage(catalogState);
+};
+
 const renderCatalogPage = (state) => {
-  const { buttons, cards, counter, emptyMessage, nextButton, prevButton } = state;
+  const { buttons, cards, emptyMessage, itemFeedback, nextButton, pageIndicator, prevButton } = state;
   const filteredCards = cards.filter((card) => state.filter === "todos" || card.dataset.catalogCategory === state.filter);
   const totalPages = Math.max(1, Math.ceil(filteredCards.length / catalogPageSize));
 
@@ -324,19 +384,17 @@ const renderCatalogPage = (state) => {
     emptyMessage.hidden = hasItems;
   }
 
-  if (counter) {
+  if (itemFeedback) {
     const firstVisible = hasItems ? startIndex + 1 : 0;
     const lastVisible = hasItems ? startIndex + visibleCards.length : 0;
-    counter.textContent = `Visualizando ${firstVisible}-${lastVisible} de ${filteredCards.length} itens`;
+    itemFeedback.textContent = `Visualizando ${firstVisible}-${lastVisible} de ${filteredCards.length} itens`;
   }
 
-  if (prevButton) {
-    prevButton.disabled = state.page <= 1;
+  if (pageIndicator) {
+    pageIndicator.textContent = `Página ${state.page} / ${totalPages}`;
   }
 
-  if (nextButton) {
-    nextButton.disabled = state.page >= totalPages;
-  }
+  state.totalPages = totalPages;
 };
 
 const setupCatalog = () => {
@@ -384,31 +442,42 @@ const setupCatalog = () => {
   const pagination = document.createElement("div");
   pagination.className = "catalog-pagination";
 
+  const itemFeedback = document.createElement("span");
+  itemFeedback.className = "catalog-pagination__feedback";
+  itemFeedback.setAttribute("aria-live", "polite");
+
+  const paginationControls = document.createElement("div");
+  paginationControls.className = "catalog-pagination__controls";
+
   const prevButton = document.createElement("button");
   prevButton.type = "button";
-  prevButton.textContent = "Página anterior";
+  prevButton.textContent = "Anterior";
 
-  const counter = document.createElement("span");
-  counter.setAttribute("aria-live", "polite");
+  const pageIndicator = document.createElement("span");
+  pageIndicator.setAttribute("aria-live", "polite");
 
   const nextButton = document.createElement("button");
   nextButton.type = "button";
-  nextButton.textContent = "Próxima página";
+  nextButton.textContent = "Próxima";
 
-  pagination.append(prevButton, counter, nextButton);
+  paginationControls.append(prevButton, pageIndicator, nextButton);
+  pagination.append(itemFeedback, paginationControls);
 
   const buttons = Array.from(filterNav.querySelectorAll("[data-catalog-filter]"));
   const cards = Array.from(grid.querySelectorAll("[data-catalog-category]"));
   const state = {
     buttons,
     cards,
-    counter,
     emptyMessage,
     filter: "todos",
+    itemFeedback,
     nextButton,
     page: 1,
-    prevButton
+    pageIndicator,
+    prevButton,
+    totalPages: 1
   };
+  catalogState = state;
 
   buttons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -417,13 +486,15 @@ const setupCatalog = () => {
   });
 
   prevButton.addEventListener("click", () => {
-    state.page -= 1;
+    state.page = state.page <= 1 ? state.totalPages : state.page - 1;
     renderCatalogPage(state);
+    catalogShell.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   nextButton.addEventListener("click", () => {
-    state.page += 1;
+    state.page = state.page >= state.totalPages ? 1 : state.page + 1;
     renderCatalogPage(state);
+    catalogShell.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
   catalogShell.replaceChildren(filterNav, content, emptyMessage, pagination);
@@ -431,6 +502,7 @@ const setupCatalog = () => {
 };
 
 setupCatalog();
+
 
 if (heroCarousel) {
   const slides = Array.from(heroCarousel.querySelectorAll(".hero-carousel__image"));
@@ -473,6 +545,7 @@ document.querySelectorAll("[data-card-carousel]").forEach((carousel) => {
   const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const dots = [];
   let activeIndex = 0;
+  let autoAdvanceId = null;
 
   const setActiveSlide = (index) => {
     activeIndex = index;
@@ -493,10 +566,28 @@ document.querySelectorAll("[data-card-carousel]").forEach((carousel) => {
 
   setActiveSlide(activeIndex);
 
-  if (slides.length > 1 && !shouldReduceMotion) {
-    window.setInterval(() => {
+  const startAutoAdvance = () => {
+    if (autoAdvanceId || slides.length <= 1 || shouldReduceMotion) return;
+
+    autoAdvanceId = window.setInterval(() => {
       setActiveSlide((activeIndex + 1) % slides.length);
     }, 3600);
+  };
+
+  if ("IntersectionObserver" in window) {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries.some((entry) => entry.isIntersecting)) {
+          startAutoAdvance();
+          observer.disconnect();
+        }
+      },
+      { rootMargin: "240px 0px" }
+    );
+
+    observer.observe(carousel);
+  } else {
+    startAutoAdvance();
   }
 });
 
@@ -512,6 +603,41 @@ const updatePhotoViewer = () => {
   const hasMultipleImages = photoViewerImages.length > 1;
   photoViewerPrev?.toggleAttribute("disabled", !hasMultipleImages);
   photoViewerNext?.toggleAttribute("disabled", !hasMultipleImages);
+};
+
+const getFocusableElements = (container) =>
+  Array.from(
+    container.querySelectorAll(
+      'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
+    )
+  ).filter((element) => element.getClientRects().length > 0);
+
+const trapFocus = (container, event) => {
+  if (event.key !== "Tab") return false;
+
+  const focusableElements = getFocusableElements(container);
+  if (focusableElements.length === 0) {
+    event.preventDefault();
+    container.focus();
+    return true;
+  }
+
+  const firstElement = focusableElements[0];
+  const lastElement = focusableElements[focusableElements.length - 1];
+
+  if (event.shiftKey && document.activeElement === firstElement) {
+    event.preventDefault();
+    lastElement.focus();
+    return true;
+  }
+
+  if (!event.shiftKey && document.activeElement === lastElement) {
+    event.preventDefault();
+    firstElement.focus();
+    return true;
+  }
+
+  return false;
 };
 
 const closePhotoViewer = (restoreFocus = true) => {
@@ -614,6 +740,7 @@ const createEquipmentGallery = (card) => {
   viewerButton.setAttribute("aria-label", `Ampliar foto de ${title}`);
 
   const mainImage = document.createElement("img");
+  applyImagePerformanceAttributes(mainImage);
   viewerButton.append(mainImage);
 
   const counter = document.createElement("span");
@@ -643,6 +770,7 @@ const createEquipmentGallery = (card) => {
     const thumb = document.createElement("img");
     thumb.src = image.src;
     thumb.alt = "";
+    applyImagePerformanceAttributes(thumb);
     button.append(thumb);
     thumbnails.append(button);
     return button;
@@ -761,6 +889,14 @@ document.querySelectorAll("[data-equipment-drawer-close]").forEach((trigger) => 
 });
 
 document.addEventListener("keydown", (event) => {
+  if (photoViewer?.classList.contains("is-open") && photoViewerDialog && trapFocus(photoViewerDialog, event)) {
+    return;
+  }
+
+  if (equipmentDrawer?.classList.contains("is-open") && equipmentDrawerPanel && trapFocus(equipmentDrawerPanel, event)) {
+    return;
+  }
+
   if (event.key === "Escape" && photoViewer?.classList.contains("is-open")) {
     closePhotoViewer();
     return;
@@ -781,26 +917,118 @@ document.addEventListener("keydown", (event) => {
   }
 });
 
-document.querySelectorAll("form").forEach((form) => {
-  form.addEventListener("submit", (event) => {
-    if (form.classList.contains("quote-form")) {
-      event.preventDefault();
-      const formData = new FormData(form);
-      const message = [
-        "Olá, gostaria de solicitar um orçamento pela LocTubo.",
-        `Nome: ${formData.get("nome") || ""}`,
-        `Telefone: ${formData.get("telefone") || ""}`,
-        `Empresa: ${formData.get("empresa") || ""}`,
-        `Equipamento: ${formData.get("equipamento") || ""}`,
-        `Período: ${formData.get("periodo") || ""}`,
-        `CEP: ${formData.get("cep") || ""}`,
-        `Detalhes: ${formData.get("detalhes") || ""}`
-      ].join("\n");
+const onlyNumbers = (value) => value.replace(/\D/g, "");
 
-      window.location.href = `https://wa.me/5511986740961?text=${encodeURIComponent(message)}`;
-    }
+const formatPhone = (value) => {
+  const digits = onlyNumbers(value).slice(0, 11);
+
+  if (digits.length <= 2) return digits;
+  if (digits.length <= 6) return `(${digits.slice(0, 2)}) ${digits.slice(2)}`;
+  if (digits.length <= 10) return `(${digits.slice(0, 2)}) ${digits.slice(2, 6)}-${digits.slice(6)}`;
+
+  return `(${digits.slice(0, 2)}) ${digits.slice(2, 7)}-${digits.slice(7)}`;
+};
+
+const formatCep = (value) => {
+  const digits = onlyNumbers(value).slice(0, 8);
+
+  if (digits.length <= 5) return digits;
+  return `${digits.slice(0, 5)}-${digits.slice(5)}`;
+};
+
+const setQuoteFeedback = (message = "") => {
+  if (!quoteFeedback) return;
+
+  quoteFeedback.textContent = message;
+  quoteFeedback.hidden = message.length === 0;
+};
+
+const focusInvalidField = (field, message) => {
+  setQuoteFeedback(message);
+  field?.setAttribute("aria-invalid", "true");
+  field?.focus();
+};
+
+const setFieldValidity = (field, isValid) => {
+  if (!field) return;
+  field.toggleAttribute("aria-invalid", !isValid);
+};
+
+if (quoteForm) {
+  const phoneInput = quoteForm.querySelector("input[name='telefone']");
+  const cepInput = quoteForm.querySelector("input[name='cep']");
+
+  quoteFeedback?.setAttribute("hidden", "");
+
+  phoneInput?.addEventListener("input", () => {
+    phoneInput.value = formatPhone(phoneInput.value);
+    const phoneDigits = onlyNumbers(phoneInput.value);
+    setFieldValidity(phoneInput, phoneDigits.length === 0 || (phoneDigits.length >= 10 && phoneDigits.length <= 11));
   });
-});
+
+  cepInput?.addEventListener("input", () => {
+    cepInput.value = formatCep(cepInput.value);
+    const cepDigits = onlyNumbers(cepInput.value);
+    setFieldValidity(cepInput, cepDigits.length === 0 || cepDigits.length === 8);
+  });
+
+  quoteForm.addEventListener("submit", (event) => {
+    event.preventDefault();
+    const formData = new FormData(quoteForm);
+    const name = String(formData.get("nome") || "").trim();
+    const phone = String(formData.get("telefone") || "").trim();
+    const phoneDigits = onlyNumbers(phone);
+    const cep = String(formData.get("cep") || "").trim();
+    const cepDigits = onlyNumbers(cep);
+    const details = String(formData.get("detalhes") || "").trim();
+
+    setQuoteFeedback();
+    quoteForm.querySelectorAll("[aria-invalid='true']").forEach((field) => {
+      field.removeAttribute("aria-invalid");
+    });
+
+    if (name.length < 3) {
+      focusInvalidField(quoteForm.querySelector("input[name='nome']"), "Informe seu nome completo.");
+      return;
+    }
+
+    if (phoneDigits.length < 10 || phoneDigits.length > 11) {
+      focusInvalidField(phoneInput, "Informe um telefone com DDD.");
+      return;
+    }
+
+    if (!formData.get("equipamento")) {
+      focusInvalidField(quoteForm.querySelector("select[name='equipamento']"), "Selecione o equipamento desejado.");
+      return;
+    }
+
+    if (cepDigits.length > 0 && cepDigits.length !== 8) {
+      focusInvalidField(cepInput, "Informe um CEP válido com 8 números ou deixe o campo em branco.");
+      return;
+    }
+
+    if (details.length < 10) {
+      focusInvalidField(
+        quoteForm.querySelector("textarea[name='detalhes']"),
+        "Descreva medidas, quantidade ou prazo com um pouco mais de detalhe."
+      );
+      return;
+    }
+
+    const message = [
+      "Olá, gostaria de solicitar um orçamento pela LocTubo.",
+      `Nome: ${name}`,
+      `Telefone: ${phone}`,
+      `Empresa: ${String(formData.get("empresa") || "").trim() || "Não informado"}`,
+      `Equipamento: ${formData.get("equipamento") || ""}`,
+      `Período: ${formData.get("periodo") || "A definir"}`,
+      `CEP: ${cep || "Não informado"}`,
+      `Detalhes: ${details}`
+    ].join("\n");
+
+    window.location.href = `https://wa.me/5511986740961?text=${encodeURIComponent(message)}`;
+  });
+}
 
 const normalizeText = (value) =>
   value
@@ -813,12 +1041,12 @@ if (searchPanel) {
     event.preventDefault();
     const input = searchPanel.querySelector("input[type='search']");
     const term = normalizeText(input?.value.trim() || "");
-    document.querySelector("[data-catalog-filter='todos']")?.click();
     const targets = Array.from(document.querySelectorAll(".product-card"));
 
     targets.forEach((target) => target.classList.remove("is-highlighted"));
 
     if (!term) {
+      document.querySelector("[data-catalog-filter='todos']")?.click();
       document.querySelector("#catalogo")?.scrollIntoView({ behavior: "smooth" });
       return;
     }
@@ -826,6 +1054,7 @@ if (searchPanel) {
     const match = targets.find((target) => normalizeText(target.textContent || "").includes(term));
 
     if (match) {
+      showCatalogCard(match);
       match.classList.add("is-highlighted");
       match.scrollIntoView({ behavior: "smooth", block: "center" });
     } else {
