@@ -29,6 +29,7 @@ const imageSizes = {
   "photo-1503387762-592deb58ef4e.avif": [1800, 1013],
   "photo-1504917595217-d4dc5ebe6122.avif": [1800, 1200],
   "photo-1541888946425-d81bb19240f5.avif": [1800, 1200],
+  "isotipo loctubo.png": [55, 123],
   "loctubo-logo.png": [93, 83]
 };
 
