@@ -611,15 +611,17 @@ h3 {
 .benefits-parallax {
   position: relative;
   overflow: hidden;
+  scroll-margin-top: var(--anchor-offset);
+  min-height: clamp(18rem, 44vw, 34rem);
   background:
-    linear-gradient(90deg, rgb(16 24 29 / 92%) 0%, rgb(16 24 29 / 78%) 48%, rgb(16 24 29 / 64%) 100%),
+    linear-gradient(180deg, rgb(16 24 29 / 12%) 0%, rgb(16 24 29 / 18%) 100%),
     url("../assets/backgrounds/bgEquipamentos.png")
       center / cover no-repeat;
 }
 
-.benefits-parallax .container {
-  position: relative;
-  z-index: 1;
+.benefits-content {
+  background:
+    linear-gradient(180deg, #ffffff 0%, var(--color-bg) 100%);
 }
 
 .section__heading {
@@ -1350,9 +1352,10 @@ h3 {
 }
 
 .benefit-list article {
-  border-color: rgb(255 255 255 / 14%);
-  background: rgb(28 41 49 / 88%);
-  backdrop-filter: blur(10px);
+  min-height: 11rem;
+  border-color: rgb(216 221 227 / 86%);
+  background: var(--color-surface);
+  box-shadow: 0 16px 34px rgb(16 24 29 / 8%);
 }
 
 .benefit-list [data-reveal] {
@@ -1361,10 +1364,6 @@ h3 {
     translateY(var(--reveal-y, 1.8rem))
     scale(var(--reveal-scale, 0.96));
   will-change: opacity, transform;
-}
-
-.benefit-list p {
-  color: rgb(255 255 255 / 74%);
 }
 
 .process {
