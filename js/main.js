@@ -356,7 +356,28 @@ const createProductCard = (category, rawItem) => {
   return card;
 };
 
-const catalogPageSize = 15;
+const catalogRowsPerPage = 4;
+
+const getGridColumnCount = (grid) => {
+  if (!grid) return 1;
+
+  const templateColumns = window.getComputedStyle(grid).gridTemplateColumns;
+  const columns = templateColumns.split(" ").filter(Boolean);
+  return Math.max(1, columns.length);
+};
+
+const getCatalogPageSize = (grid) => Math.max(4, getGridColumnCount(grid) * catalogRowsPerPage);
+
+const syncCatalogPageSize = (state) => {
+  if (!state?.grid) return;
+
+  const nextPageSize = getCatalogPageSize(state.grid);
+  if (state.pageSize === nextPageSize) return;
+
+  const currentStartIndex = Math.max(0, (state.page - 1) * (state.pageSize || nextPageSize));
+  state.pageSize = nextPageSize;
+  state.page = Math.floor(currentStartIndex / nextPageSize) + 1;
+};
 
 const setCatalogFilter = (state, filter) => {
   state.filter = filter;
@@ -372,16 +393,20 @@ const showCatalogCard = (card) => {
   const cardIndex = cards.indexOf(card);
 
   if (cardIndex >= 0) {
-    catalogState.page = Math.floor(cardIndex / catalogPageSize) + 1;
+    syncCatalogPageSize(catalogState);
+    catalogState.page = Math.floor(cardIndex / catalogState.pageSize) + 1;
   }
 
   renderCatalogPage(catalogState);
 };
 
 const renderCatalogPage = (state) => {
+  syncCatalogPageSize(state);
+
   const { buttons, cards, emptyMessage, itemFeedback, nextButton, pageIndicator, prevButton } = state;
+  const pageSize = state.pageSize || 4;
   const filteredCards = cards.filter((card) => state.filter === "todos" || card.dataset.catalogCategory === state.filter);
-  const totalPages = Math.max(1, Math.ceil(filteredCards.length / catalogPageSize));
+  const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
 
   state.page = Math.min(Math.max(state.page, 1), totalPages);
 
@@ -395,8 +420,8 @@ const renderCatalogPage = (state) => {
     card.classList.add("is-filtered-out");
   });
 
-  const startIndex = (state.page - 1) * catalogPageSize;
-  const visibleCards = filteredCards.slice(startIndex, startIndex + catalogPageSize);
+  const startIndex = (state.page - 1) * pageSize;
+  const visibleCards = filteredCards.slice(startIndex, startIndex + pageSize);
 
   visibleCards.forEach((card) => {
     card.classList.remove("is-filtered-out");
@@ -494,9 +519,11 @@ const setupCatalog = () => {
     cards,
     emptyMessage,
     filter: "todos",
+    grid,
     itemFeedback,
     nextButton,
     page: 1,
+    pageSize: getCatalogPageSize(grid),
     pageIndicator,
     prevButton,
     totalPages: 1
@@ -521,8 +548,24 @@ const setupCatalog = () => {
     catalogShell.scrollIntoView({ behavior: "smooth", block: "start" });
   });
 
+  let resizeFrame = 0;
+  const handleCatalogResize = () => {
+    if (resizeFrame) return;
+
+    resizeFrame = window.requestAnimationFrame(() => {
+      resizeFrame = 0;
+      const previousPageSize = state.pageSize;
+      syncCatalogPageSize(state);
+
+      if (state.pageSize !== previousPageSize) {
+        renderCatalogPage(state);
+      }
+    });
+  };
+
   catalogShell.replaceChildren(filterNav, content, emptyMessage, pagination);
   renderCatalogPage(state);
+  window.addEventListener("resize", handleCatalogResize);
 };
 
 setupCatalog();
