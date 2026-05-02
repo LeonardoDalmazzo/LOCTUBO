@@ -26,9 +26,10 @@ let catalogState = null;
 const imageSizes = {
   "andaimeFachadeiro.png": [1054, 581],
   "Produto-Sem-Imagem-600-x-600px.jpg": [600, 600],
-  "photo-1503387762-592deb58ef4e.avif": [1800, 1013],
-  "photo-1504917595217-d4dc5ebe6122.avif": [1800, 1200],
-  "photo-1541888946425-d81bb19240f5.avif": [1800, 1200],
+  "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
+  "bg-Slide-Equipamentos.png": [1684, 934],
+  "bg-Slide-Equipamentos-concretagem.png": [1685, 934],
+  "bg-andaimeLocTuboLogoMarca.png": [1774, 887],
   "isotipo loctubo.png": [55, 123],
   "loctubo-logo.png": [93, 83]
 };
@@ -1086,7 +1087,7 @@ document.addEventListener("click", (event) => {
 });
 
 const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
-const processRevealSection = document.querySelector("[data-process-reveal]");
+const sideRevealSections = Array.from(document.querySelectorAll("[data-process-reveal], [data-side-reveal]"));
 const reduceScrollMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let revealTicking = false;
 
@@ -1130,21 +1131,21 @@ if (revealItems.length > 0) {
   }
 }
 
-if (processRevealSection) {
-  processRevealSection.classList.add("is-reveal-ready");
+if (sideRevealSections.length > 0) {
+  sideRevealSections.forEach((section) => section.classList.add("is-reveal-ready"));
 
   if (reduceScrollMotion || !("IntersectionObserver" in window)) {
-    processRevealSection.classList.add("is-visible");
+    sideRevealSections.forEach((section) => section.classList.add("is-visible"));
   } else {
-    const processRevealObserver = new IntersectionObserver((entries, observer) => {
+    const sideRevealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach((entry) => {
         if (!entry.isIntersecting) return;
 
-        processRevealSection.classList.add("is-visible");
-        observer.unobserve(processRevealSection);
+        entry.target.classList.add("is-visible");
+        observer.unobserve(entry.target);
       });
     }, { threshold: 0.18 });
 
-    processRevealObserver.observe(processRevealSection);
+    sideRevealSections.forEach((section) => sideRevealObserver.observe(section));
   }
 }
