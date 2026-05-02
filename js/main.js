@@ -88,6 +88,14 @@ scrollTopButton?.addEventListener("click", () => {
 
 if (menuButton) {
   const menu = document.querySelector(menuButton.dataset.menuToggle);
+  const desktopMenuQuery = window.matchMedia("(min-width: 58rem)");
+
+  const closeMenu = () => {
+    menu?.classList.remove("is-open");
+    menuButton.setAttribute("aria-expanded", "false");
+    header?.classList.remove("is-open");
+    document.body.classList.remove("menu-open");
+  };
 
   menuButton.addEventListener("click", () => {
     const isOpen = menu?.classList.toggle("is-open") ?? false;
@@ -98,12 +106,26 @@ if (menuButton) {
 
   menu?.querySelectorAll("a").forEach((link) => {
     link.addEventListener("click", () => {
-      menu.classList.remove("is-open");
-      menuButton.setAttribute("aria-expanded", "false");
-      header?.classList.remove("is-open");
-      document.body.classList.remove("menu-open");
+      closeMenu();
     });
   });
+
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && menu?.classList.contains("is-open")) {
+      closeMenu();
+      menuButton.focus();
+    }
+  });
+
+  const handleDesktopMenuChange = (event) => {
+    if (event.matches) closeMenu();
+  };
+
+  if (typeof desktopMenuQuery.addEventListener === "function") {
+    desktopMenuQuery.addEventListener("change", handleDesktopMenuChange);
+  } else if (typeof desktopMenuQuery.addListener === "function") {
+    desktopMenuQuery.addListener(handleDesktopMenuChange);
+  }
 }
 
 const placeholderImage = "assets/img/Produto-Sem-Imagem-600-x-600px.jpg";
