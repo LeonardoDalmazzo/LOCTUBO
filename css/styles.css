@@ -1394,9 +1394,17 @@ h3 {
 }
 
 .process {
+  overflow-x: clip;
   background:
     linear-gradient(135deg, rgb(169 15 22 / 96%) 0%, rgb(215 25 32 / 92%) 54%, rgb(124 14 19 / 96%) 100%);
   color: #ffffff;
+}
+
+.process[data-process-reveal] > .container {
+  opacity: var(--process-reveal-opacity, 0);
+  transform: translateX(var(--process-reveal-x, 42vw));
+  transition: opacity 120ms linear;
+  will-change: opacity, transform;
 }
 
 .process .section__heading {
@@ -2008,6 +2016,7 @@ h3 {
   .benefit-list [data-reveal],
   .benefit-list article,
   .benefit-list article::before,
+  .process[data-process-reveal] > .container,
   .steps article,
   .steps article::before,
   .steps span,
