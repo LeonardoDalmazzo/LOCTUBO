@@ -59,6 +59,7 @@ body {
   font-family: var(--font-sans);
   font-size: var(--text-base);
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 body.menu-open {
@@ -1400,11 +1401,16 @@ h3 {
   color: #ffffff;
 }
 
-.process[data-process-reveal] > .container {
-  opacity: var(--process-reveal-opacity, 0);
-  transform: translateX(var(--process-reveal-x, 42vw));
-  transition: opacity 120ms linear;
+.process[data-process-reveal].is-reveal-ready {
+  opacity: 0;
+  transform: translateX(100vw);
+  transition: opacity 560ms ease, transform 860ms cubic-bezier(0.2, 0.82, 0.24, 1);
   will-change: opacity, transform;
+}
+
+.process[data-process-reveal].is-reveal-ready.is-visible {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .process .section__heading {
@@ -2016,7 +2022,7 @@ h3 {
   .benefit-list [data-reveal],
   .benefit-list article,
   .benefit-list article::before,
-  .process[data-process-reveal] > .container,
+  .process[data-process-reveal].is-reveal-ready,
   .steps article,
   .steps article::before,
   .steps span,

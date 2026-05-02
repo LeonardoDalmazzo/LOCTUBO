@@ -1089,7 +1089,6 @@ const revealItems = Array.from(document.querySelectorAll("[data-reveal]"));
 const processRevealSection = document.querySelector("[data-process-reveal]");
 const reduceScrollMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 let revealTicking = false;
-let processRevealTicking = false;
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -1131,36 +1130,21 @@ if (revealItems.length > 0) {
   }
 }
 
-const setProcessRevealProgress = () => {
-  if (!processRevealSection) return;
-
-  const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
-  const rect = processRevealSection.getBoundingClientRect();
-  const rawProgress = (viewportHeight - rect.top) / (viewportHeight * 0.82 + rect.height * 0.32);
-  const progress = clamp(rawProgress, 0, 1);
-  const easedProgress = 1 - Math.pow(1 - progress, 3);
-  const offset = (1 - easedProgress) * 42;
-
-  processRevealSection.style.setProperty("--process-reveal-opacity", easedProgress.toFixed(3));
-  processRevealSection.style.setProperty("--process-reveal-x", `${offset.toFixed(3)}vw`);
-
-  processRevealTicking = false;
-};
-
-const requestProcessRevealProgress = () => {
-  if (processRevealTicking) return;
-
-  processRevealTicking = true;
-  window.requestAnimationFrame(setProcessRevealProgress);
-};
-
 if (processRevealSection) {
-  if (reduceScrollMotion) {
-    processRevealSection.style.setProperty("--process-reveal-opacity", "1");
-    processRevealSection.style.setProperty("--process-reveal-x", "0vw");
+  processRevealSection.classList.add("is-reveal-ready");
+
+  if (reduceScrollMotion || !("IntersectionObserver" in window)) {
+    processRevealSection.classList.add("is-visible");
   } else {
-    setProcessRevealProgress();
-    window.addEventListener("scroll", requestProcessRevealProgress, { passive: true });
-    window.addEventListener("resize", requestProcessRevealProgress);
+    const processRevealObserver = new IntersectionObserver((entries, observer) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+
+        processRevealSection.classList.add("is-visible");
+        observer.unobserve(processRevealSection);
+      });
+    }, { threshold: 0.18 });
+
+    processRevealObserver.observe(processRevealSection);
   }
 }
