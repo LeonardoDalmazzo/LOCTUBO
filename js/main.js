@@ -24,8 +24,17 @@ let photoViewerIndex = 0;
 let catalogState = null;
 
 const imageSizes = {
+  "aspirador-industrial.png": [1292, 1217],
   "andaimeFachadeiro.png": [1054, 581],
+  "betoneira.png": [800, 960],
+  "compressor-de-ar.png": [1254, 1254],
+  "esmerilhadeira.png": [1254, 1254],
+  "mangote-vibrador.png": [789, 923],
+  "pistola-finca-pino.png": [1254, 1254],
+  "prancha-vibratoria.png": [1254, 1254],
   "Produto-Sem-Imagem-600-x-600px.jpg": [600, 600],
+  "serra-de-bancada.png": [1254, 1254],
+  "serra-de-marmore.png": [1254, 1254],
   "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
   "bg-Slide-Equipamentos.png": [1684, 934],
   "bg-Slide-Equipamentos-concretagem.png": [1685, 934],
@@ -238,7 +247,28 @@ const catalogCategories = [
     eyebrow: "Corte, fixação e apoio",
     title: "Ferramentas elétricas",
     description: "Ferramentas para cortes, fixação e apoio em etapas de obra, reforma e manutenção.",
-    items: ["Esmerilhadeira", "Serra mármore", "Serra de bancada", "Pistola finca-pino", "Compressor de ar"]
+    items: [
+      {
+        name: "Esmerilhadeira",
+        images: [{ src: "assets/imagens-catalogo/esmerilhadeira.png", alt: "Esmerilhadeira" }]
+      },
+      {
+        name: "Serra mármore",
+        images: [{ src: "assets/imagens-catalogo/serra-de-marmore.png", alt: "Serra mármore" }]
+      },
+      {
+        name: "Serra de bancada",
+        images: [{ src: "assets/imagens-catalogo/serra-de-bancada.png", alt: "Serra de bancada" }]
+      },
+      {
+        name: "Pistola finca-pino",
+        images: [{ src: "assets/imagens-catalogo/pistola-finca-pino.png", alt: "Pistola finca-pino" }]
+      },
+      {
+        name: "Compressor de ar",
+        images: [{ src: "assets/imagens-catalogo/compressor-de-ar.png", alt: "Compressor de ar" }]
+      }
+    ]
   },
   {
     id: "ferramentas-bateria",
@@ -259,14 +289,13 @@ const catalogCategories = [
         name: "Betoneira 400 litros",
         detailId: "betoneira-400",
         images: [
-          { src: "assets/img/betoneira-eletrica-400-litros-1.jpg", alt: "Betoneira 400 litros" },
-          { src: "assets/img/betoneira-eletrica-400-litros-2.png", alt: "Betoneira amarela 400 litros" }
+          { src: "assets/imagens-catalogo/betoneira.png", alt: "Betoneira 400 litros" }
         ]
       },
       {
         name: "Mangote vibrador",
         detailId: "mangote-vibrador",
-        images: [{ src: "assets/img/mangote-vibrador-eletrico.jpg", alt: "Mangote vibrador de imersão para concreto" }]
+        images: [{ src: "assets/imagens-catalogo/mangote-vibrador.png", alt: "Mangote vibrador de imersão para concreto" }]
       }
     ]
   },
@@ -276,7 +305,12 @@ const catalogCategories = [
     eyebrow: "Preparo de base",
     title: "Compactação",
     description: "Equipamento para compactar solo, base e áreas de circulação antes de assentamentos ou concretagem.",
-    items: ["Prancha vibratória"]
+    items: [
+      {
+        name: "Prancha vibratória",
+        images: [{ src: "assets/imagens-catalogo/prancha-vibratoria.png", alt: "Prancha vibratória" }]
+      }
+    ]
   },
   {
     id: "limpeza",
@@ -284,7 +318,12 @@ const catalogCategories = [
     eyebrow: "Organização da obra",
     title: "Limpeza",
     description: "Equipamento para limpeza pesada e apoio na organização do canteiro.",
-    items: ["Aspirador industrial"]
+    items: [
+      {
+        name: "Aspirador industrial",
+        images: [{ src: "assets/imagens-catalogo/aspirador-industrial.png", alt: "Aspirador industrial" }]
+      }
+    ]
   }
 ];
 
