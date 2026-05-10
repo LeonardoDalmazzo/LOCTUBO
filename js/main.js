@@ -25,13 +25,12 @@ let catalogState = null;
 
 const imageSizes = {
   "aspirador-industrial.png": [1292, 1217],
-  "andaimeFachadeiro.png": [1054, 581],
   "betoneira.png": [800, 960],
   "compressor-de-ar.png": [1254, 1254],
   "esmerilhadeira.png": [1254, 1254],
   "mangote-vibrador.png": [789, 923],
   "pistola-finca-pino.png": [1254, 1254],
-  "prancha-vibratoria.png": [1254, 1254],
+  "placa-vibratoria.png": [1254, 1254],
   "Produto-Sem-Imagem-600-x-600px.jpg": [600, 600],
   "serra-de-bancada.png": [1254, 1254],
   "serra-de-marmore.png": [1254, 1254],
@@ -137,7 +136,14 @@ if (menuButton) {
   }
 }
 
-const placeholderImage = "assets/img/Produto-Sem-Imagem-600-x-600px.jpg";
+const placeholderImage = "assets/imagens-catalogo/Produto-Sem-Imagem-600-x-600px.jpg";
+// Manutencao rapida: adicione aqui o nome exato do equipamento para deixar indisponivel.
+// Em itens objeto, tambem funciona usar available: false ou className: "is-unavailable".
+const unavailableEquipmentNames = new Set([
+  "Ferramentas a bateria"
+  // "Martelete rompedor 30 kg"
+]);
+
 const catalogCategories = [
   {
     id: "andaimes-tubulares",
@@ -145,27 +151,84 @@ const catalogCategories = [
     eyebrow: "Acesso e trabalho em altura",
     title: "Andaimes tubulares",
     description: "Quadros, pranchas, sapatas, rodas, escadas e guarda-corpos para montar a configuração conforme a altura e a área de trabalho.",
-    imageSet: [
-      { src: "assets/img/andaime-acessorios.jpg", alt: "Acessórios para andaime tubular" },
-      { src: "assets/img/andaime-torre-ilustracao.jpg", alt: "Ilustração de andaime tubular" },
-      { src: "assets/img/andaime-torre-estoque.jpg", alt: "Andaime tubular em estoque" }
-    ],
     items: [
-      "Quadro 0,40 x 1,0",
-      "Quadro 0,40 x 1,5",
-      "Quadro 1,0 x 1,0",
-      "Quadro 1,0 x 1,5",
-      "Quadro 1,0 x 2,0",
-      "Prancha metálica 2,0",
-      "Prancha metálica 1,5",
-      "Prancha metálica 1,0",
-      "Sapata ajustável",
-      "Sapata fixa",
-      "Rodas emborrachadas",
-      "Escada",
-      "Guarda-corpo 2,0",
-      "Guarda-corpo 1,5",
-      "Guarda-corpo 1,0"
+      {
+        name: "Andaime tubular",
+        summary: "Monte a configuração com quadros, pranchas, sapatas, rodas, escadas e guarda-corpos.",
+        description: "Selecione o tipo de montagem, tamanho da base e quantidade de peças para solicitar um orçamento mais preciso.",
+        images: [
+          { src: "assets/imagens-catalogo/andaime-torre.png", alt: "Andaime tubular tipo torre" },
+          { src: "assets/imagens-catalogo/svg/escada.svg", alt: "Escada para andaime" },
+          { src: "assets/imagens-catalogo/svg/guarda%20corpo.svg", alt: "Guarda-corpo para andaime" },
+          { src: "assets/imagens-catalogo/svg/piso_metálico.svg", alt: "Piso metálico para andaime" },
+          { src: "assets/imagens-catalogo/svg/travessa_andaime.svg", alt: "Travessa para andaime" },
+          { src: "assets/imagens-catalogo/svg/quadro_andaime.svg", alt: "Quadro para andaime" },
+          { src: "assets/imagens-catalogo/svg/roda%20.svg", alt: "Roda para andaime" },
+          { src: "assets/imagens-catalogo/svg/sapata_fixa.svg", alt: "Sapata fixa para andaime" },
+          { src: "assets/imagens-catalogo/svg/sapata_ajustavel.svg", alt: "Sapata ajustável para andaime" },
+          { src: "assets/imagens-catalogo/svg/diagonal_andaime.svg", alt: "Diagonal para andaime" }
+        ],
+        configurator: {
+          title: "Monte seu andaime",
+          fields: [
+            {
+              label: "Tipo de montagem",
+              name: "tipo",
+              options: ["Torre", "Fachadeiro", "A definir com a equipe"]
+            },
+            {
+              label: "Base desejada",
+              name: "base",
+              options: ["1,0 x 1,0 m", "1,0 x 1,5 m", "1,0 x 2,0 m", "1,5 x 1,5 m", "2,0 x 2,0 m", "A definir"]
+            },
+            {
+              label: "Altura aproximada",
+              name: "altura",
+              options: ["A definir", "2 m", "4 m", "6 m", "8 m", "10 m ou mais"]
+            }
+          ],
+          pieces: [
+            "Quadro 0,40 x 1,0",
+            "Quadro 0,40 x 1,5",
+            "Quadro 1,0 x 1,0",
+            "Quadro 1,0 x 1,5",
+            "Quadro 1,0 x 2,0",
+            "Prancha metálica 2,0",
+            "Prancha metálica 1,5",
+            "Prancha metálica 1,0",
+            "Sapata ajustável",
+            "Sapata fixa",
+            "Rodas emborrachadas",
+            "Escada",
+            "Guarda-corpo 2,0",
+            "Guarda-corpo 1,5",
+            "Guarda-corpo 1,0"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    id: "escadas",
+    label: "Escadas",
+    eyebrow: "Acesso em altura",
+    title: "Escadas",
+    description: "Escadas para obras, reformas e manutenções que precisam de acesso rápido, versátil e seguro.",
+    items: [
+      {
+        name: "Escada extensível 37 degraus",
+        summary: "Escada extensível para acesso em altura em serviços de obra, reforma e manutenção.",
+        images: [
+          { src: "assets/imagens-catalogo/svg/escada_extensivel_37degraus.svg", alt: "Ilustração da escada extensível 37 degraus" }
+        ]
+      },
+      {
+        name: "Escada multiarticular",
+        summary: "Escada articulada para diferentes posições de trabalho em obras e manutenções.",
+        images: [
+          { src: "assets/imagens-catalogo/svg/escada_multiarticular.svg", alt: "Ilustração da escada multiarticular" }
+        ]
+      }
     ]
   },
   {
@@ -174,26 +237,51 @@ const catalogCategories = [
     eyebrow: "Estrutura e concretagem",
     title: "Escoramento",
     description: "Peças para escoramento, reescoramento e montagem de torres metálicas com ajuste ao projeto da obra.",
-    imageSet: [
-      { src: "assets/img/p-escoramento-metalico-230-1.jpg", alt: "Escoramento metálico com escoras pontuais" },
-      { src: "assets/img/p-escoramento-metalico-230-2.jpg", alt: "Torres de escoramento metálico" },
-      { src: "assets/img/p-escoramento-metalico-230-3.jpg", alt: "Acessórios para escoramento metálico" },
-      { src: "assets/img/p-escoramento-metalico-230-4.jpg", alt: "Sistema de escoramento metálico para lajes" }
-    ],
     items: [
-      "Quadro reforçado 1,0 x 1,5",
-      "Quadro 1,0 x 1,0",
-      "Quadro 0,40 x 1,0",
-      "Quadro 0,40 x 1,5",
-      "Sapata ajustável 30 cm",
-      "Forcado ajustável 30 cm",
-      "Escora metálica 3,50",
-      "Escora metálica 4,20",
-      "Forcado metálico simples",
-      "Forcado metálico duplo",
-      "Longarina metálica 2 m",
-      "Longarina metálica 3 m",
-      "Longarina metálica 4 m"
+      {
+        name: "Escoramento metálico",
+        summary: "Configure torres, escoras, sapatas, forcados e longarinas conforme o projeto.",
+        description: "Informe o tipo de escoramento e as peças desejadas para a equipe orientar a composição ideal.",
+        images: [
+          { src: "assets/imagens-catalogo/escoramento-metalico.png", alt: "Escoramento metálico" },
+          { src: "assets/imagens-catalogo/escoramento-metalico2.png", alt: "Escoramento metálico em obra" }
+        ],
+        configurator: {
+          title: "Monte seu escoramento",
+          fields: [
+            {
+              label: "Tipo de escoramento",
+              name: "tipo",
+              options: ["Torre metálica", "Escora pontual", "Sistema misto", "A definir com a equipe"]
+            },
+            {
+              label: "Altura aproximada",
+              name: "altura",
+              options: ["A definir", "Até 3,50 m", "Até 4,20 m", "Acima de 4,20 m"]
+            },
+            {
+              label: "Aplicação",
+              name: "aplicacao",
+              options: ["Laje", "Viga", "Reescoramento", "A definir"]
+            }
+          ],
+          pieces: [
+            "Quadro reforçado 1,0 x 1,5",
+            "Quadro 1,0 x 1,0",
+            "Quadro 0,40 x 1,0",
+            "Quadro 0,40 x 1,5",
+            "Sapata ajustável 30 cm",
+            "Forcado ajustável 30 cm",
+            "Escora metálica 3,50",
+            "Escora metálica 4,20",
+            "Forcado metálico simples",
+            "Forcado metálico duplo",
+            "Longarina metálica 2 m",
+            "Longarina metálica 3 m",
+            "Longarina metálica 4 m"
+          ]
+        }
+      }
     ]
   },
   {
@@ -207,36 +295,44 @@ const catalogCategories = [
         name: "Martelete rompedor 5 kg",
         detailId: "martelete-6",
         images: [
-          { src: "assets/img/p-martelete-eletrico-rompedor-bosch-5.8-kg-6.0-kg-gsh-5-ce-225-1.jpg", alt: "Martelete rompedor 5 kg" },
-          { src: "assets/img/p-martelete-eletrico-rompedor-bosch-5.8-kg-6.0-kg-gsh-5-ce-225-2.jpg", alt: "Martelete rompedor 5 kg em detalhe" },
-          { src: "assets/img/p-martelete-eletrico-rompedor-bosch-5.8-kg-6.0-kg-gsh-5-ce-225-3.jpg", alt: "Martelete rompedor 5 kg com acessório" }
+          { src: "assets/imagens-catalogo/martelete-rompedor-5kg.png", alt: "Martelete rompedor 5 kg" },
+          { src: "assets/imagens-catalogo/p-martelete-eletrico-rompedor-bosch-5.8-kg-6.0-kg-gsh-5-ce-225-2.jpg", alt: "Martelete rompedor 5 kg em detalhe" },
+          { src: "assets/imagens-catalogo/p-martelete-eletrico-rompedor-bosch-5.8-kg-6.0-kg-gsh-5-ce-225-3.jpg", alt: "Martelete rompedor 5 kg com acessório" }
+        ]
+      },
+      {
+        name: "Martelete rompedor 6 kg",
+        images: [
+          { src: "assets/imagens-catalogo/svg/martelete_6Kg.svg", alt: "Ilustração do martelete rompedor 6 kg" }
+        ]
+      },
+      {
+        name: "Martelete rompedor 11 kg",
+        images: [
+          { src: "assets/imagens-catalogo/svg/matelete_11kg.svg", alt: "Ilustração do martelete rompedor 11 kg" }
         ]
       },
       {
         name: "Martelete rompedor 10 kg",
         detailId: "martelete-10",
         images: [
-          { src: "assets/img/p-martelete-eletrico-rompedor-perfurador-bosch-10-kg-11316-11245-gsh-11-e-professional-226-1.jpg", alt: "Martelete rompedor 10 kg" },
-          { src: "assets/img/p-martelete-eletrico-rompedor-perfurador-bosch-10-kg-11316-11245-gsh-11-e-professional-226-2.jpg", alt: "Martelete rompedor 10 kg com ponteiro" },
-          { src: "assets/img/p-martelete-eletrico-rompedor-perfurador-bosch-10-kg-11316-11245-gsh-11-e-professional-226-3.jpg", alt: "Martelete rompedor 10 kg em detalhe" }
+          { src: "assets/imagens-catalogo/martelete-rompedor-10kg.png", alt: "Martelete rompedor 10 kg" }
         ]
       },
       {
         name: "Martelete rompedor 18 kg",
         detailId: "martelete-18",
         images: [
-          { src: "assets/img/p-martelete-eletrico-demolidor-bosch-18.5-kg-gsh-16-28-professional-227-1.jpg", alt: "Martelete rompedor 18 kg" },
-          { src: "assets/img/p-martelete-eletrico-demolidor-bosch-18.5-kg-gsh-16-28-professional-227-2.jpg", alt: "Martelete rompedor 18 kg em detalhe" },
-          { src: "assets/img/p-martelete-eletrico-demolidor-bosch-18.5-kg-gsh-16-28-professional-227-3.jpg", alt: "Martelete rompedor 18 kg inclinado" },
-          { src: "assets/img/p-martelete-eletrico-demolidor-bosch-18.5-kg-gsh-16-28-professional-227-4.jpg", alt: "Martelete rompedor 18 kg com acessório" }
+          { src: "assets/imagens-catalogo/martelete-rompedor-18kg.png", alt: "Martelete rompedor 18 kg" },
+          { src: "assets/imagens-catalogo/p-martelete-eletrico-demolidor-bosch-18.5-kg-gsh-16-28-professional-227-2.jpg", alt: "Martelete rompedor 18 kg em detalhe" },
+          { src: "assets/imagens-catalogo/p-martelete-eletrico-demolidor-bosch-18.5-kg-gsh-16-28-professional-227-3.jpg", alt: "Martelete rompedor 18 kg inclinado" }
         ]
       },
       {
         name: "Martelete rompedor 30 kg",
         detailId: "martelete-30",
         images: [
-          { src: "assets/img/p-martelete-eletrico-demolidor-bosch-30-kg-gsh-27-professional-11304-228-1.jpg", alt: "Martelete rompedor 30 kg" },
-          { src: "assets/img/p-martelete-eletrico-demolidor-bosch-30-kg-gsh-27-professional-11304-228-2.jpg", alt: "Martelete rompedor 30 kg com ponteiro" }
+          { src: "assets/imagens-catalogo/svg/martelete_30Kg.svg", alt: "Ilustração do martelete rompedor 30 kg" }
         ]
       }
     ]
@@ -254,7 +350,10 @@ const catalogCategories = [
       },
       {
         name: "Serra mármore",
-        images: [{ src: "assets/imagens-catalogo/serra-de-marmore.png", alt: "Serra mármore" }]
+        images: [
+          { src: "assets/imagens-catalogo/svg/serra_mamore.svg", alt: "Ilustração da serra mármore" },
+          { src: "assets/imagens-catalogo/serra-de-marmore.png", alt: "Serra mármore" }
+        ]
       },
       {
         name: "Serra de bancada",
@@ -262,7 +361,10 @@ const catalogCategories = [
       },
       {
         name: "Pistola finca-pino",
-        images: [{ src: "assets/imagens-catalogo/pistola-finca-pino.png", alt: "Pistola finca-pino" }]
+        images: [
+          { src: "assets/imagens-catalogo/svg/pistola_finca_pino.svg", alt: "Ilustração da pistola finca-pino" },
+          { src: "assets/imagens-catalogo/pistola-finca-pino.png", alt: "Pistola finca-pino" }
+        ]
       },
       {
         name: "Compressor de ar",
@@ -289,6 +391,7 @@ const catalogCategories = [
         name: "Betoneira 400 litros",
         detailId: "betoneira-400",
         images: [
+          { src: "assets/imagens-catalogo/svg/betoneira_400L.svg", alt: "Ilustração da betoneira 400 litros" },
           { src: "assets/imagens-catalogo/betoneira.png", alt: "Betoneira 400 litros" }
         ]
       },
@@ -307,8 +410,25 @@ const catalogCategories = [
     description: "Equipamento para compactar solo, base e áreas de circulação antes de assentamentos ou concretagem.",
     items: [
       {
-        name: "Prancha vibratória",
-        images: [{ src: "assets/imagens-catalogo/prancha-vibratoria.png", alt: "Prancha vibratória" }]
+        name: "Placa vibratória",
+        images: [
+          { src: "assets/imagens-catalogo/svg/placa_vibratoria.svg", alt: "Ilustração da placa vibratória" },
+          { src: "assets/imagens-catalogo/placa-vibratoria.png", alt: "Placa vibratória" }
+        ]
+      },
+      {
+        name: "Perfurador de solo a gasolina",
+        summary: "Equipamento para perfuração de solo em fundações, cercas, mourões e serviços externos.",
+        images: [
+          { src: "assets/imagens-catalogo/svg/Perfurador_solo_gasolina%20.svg", alt: "Ilustração do perfurador de solo a gasolina" }
+        ]
+      },
+      {
+        name: "Compactador de solo tipo sapo a gasolina",
+        summary: "Compactador tipo sapo para valas, bases, aterros e áreas com acesso mais estreito.",
+        images: [
+          { src: "assets/imagens-catalogo/svg/Compactador_solo_tipo%20sapo_gasolina.svg", alt: "Ilustração do compactador de solo tipo sapo a gasolina" }
+        ]
       }
     ]
   },
@@ -321,7 +441,10 @@ const catalogCategories = [
     items: [
       {
         name: "Aspirador industrial",
-        images: [{ src: "assets/imagens-catalogo/aspirador-industrial.png", alt: "Aspirador industrial" }]
+        images: [
+          { src: "assets/imagens-catalogo/svg/aspirador_industrial.svg", alt: "Ilustração do aspirador industrial" },
+          { src: "assets/imagens-catalogo/aspirador-industrial.png", alt: "Aspirador industrial" }
+        ]
       }
     ]
   }
@@ -342,24 +465,39 @@ const getCatalogItemImages = (category, item) => {
   return [{ src: placeholderImage, alt: `Imagem ilustrativa de ${item.name || item}` }];
 };
 
+const normalizeCatalogItem = (rawItem) =>
+  typeof rawItem === "string" ? { name: rawItem } : rawItem;
+
+const isCatalogItemAvailable = (item) =>
+  item.available !== false &&
+  item.status !== "indisponivel" &&
+  item.status !== "unavailable" &&
+  !String(item.className || "").split(/\s+/).includes("is-unavailable") &&
+  !unavailableEquipmentNames.has(item.name);
+
 const createProductCard = (category, rawItem) => {
-  const item = typeof rawItem === "string" ? { name: rawItem } : rawItem;
+  const item = normalizeCatalogItem(rawItem);
+  const isAvailable = isCatalogItemAvailable(item);
   const images = getCatalogItemImages(category, item);
   const detailId = item.detailId || `produto-${category.id}-${normalizeSlug(item.name)}`;
   const card = document.createElement("a");
-  card.className = "product-card";
+  card.className = ["product-card", item.className || "", isAvailable ? "" : "is-unavailable"].filter(Boolean).join(" ");
   card.href = `#${detailId}`;
   card.dataset.catalogCategory = category.id;
   card.dataset.catalogTag = category.label;
   card.dataset.detailCategory = category.label;
   card.dataset.detailTitle = item.name;
+  card.dataset.available = String(isAvailable);
+  if (item.configurator) {
+    card.dataset.configurator = JSON.stringify(item.configurator);
+  }
   card.dataset.detailDescription =
     item.description ||
-    `${item.name} para locação na categoria ${category.label}. Informe quantidade, prazo e local da obra para receber orientação sobre disponibilidade, retirada ou entrega.`;
+    `${item.name} para locação na categoria ${category.label}. Informe quantidade, prazo e local da obra para receber orientação sobre disponibilidade e frete.`;
   card.dataset.detailSpecs = JSON.stringify(item.specs || [
     `Categoria: ${category.label}`,
-    "Disponibilidade sob consulta",
-    "Retirada no Butantã ou entrega combinada"
+    isAvailable ? "Disponibilidade sob consulta" : "Indisponível no momento",
+    "Entrega combinada com frete"
   ]);
 
   const media = document.createElement("div");
@@ -383,7 +521,7 @@ const createProductCard = (category, rawItem) => {
 
   const tag = document.createElement("span");
   tag.className = "product-card__tag";
-  tag.textContent = category.label;
+  tag.textContent = isAvailable ? category.label : "Indisponível";
 
   const title = document.createElement("h4");
   title.textContent = item.name;
@@ -911,6 +1049,97 @@ const createEquipmentGallery = (card) => {
   return gallery;
 };
 
+const getConfiguratorFromCard = (card) => {
+  if (!card?.dataset.configurator) return null;
+
+  try {
+    return JSON.parse(card.dataset.configurator);
+  } catch {
+    return null;
+  }
+};
+
+const createEquipmentConfigurator = (configurator) => {
+  if (!configurator) return null;
+
+  const form = document.createElement("section");
+  form.className = "equipment-configurator";
+  form.setAttribute("aria-label", configurator.title || "Configuração do equipamento");
+
+  const title = document.createElement("h4");
+  title.textContent = configurator.title || "Monte sua configuração";
+  form.append(title);
+
+  if (Array.isArray(configurator.fields) && configurator.fields.length > 0) {
+    const fields = document.createElement("div");
+    fields.className = "equipment-configurator__fields";
+
+    configurator.fields.forEach((field) => {
+      const label = document.createElement("label");
+      const select = document.createElement("select");
+      select.dataset.configField = field.label;
+
+      (field.options || []).forEach((optionLabel) => {
+        const option = document.createElement("option");
+        option.textContent = optionLabel;
+        select.append(option);
+      });
+
+      label.append(field.label, select);
+      fields.append(label);
+    });
+
+    form.append(fields);
+  }
+
+  if (Array.isArray(configurator.pieces) && configurator.pieces.length > 0) {
+    const pieces = document.createElement("div");
+    pieces.className = "equipment-configurator__pieces";
+
+    configurator.pieces.forEach((piece) => {
+      const label = document.createElement("label");
+      const input = document.createElement("input");
+
+      input.type = "number";
+      input.min = "0";
+      input.step = "1";
+      input.inputMode = "numeric";
+      input.value = "0";
+      input.dataset.configPiece = piece;
+
+      label.append(piece, input);
+      pieces.append(label);
+    });
+
+    form.append(pieces);
+  }
+
+  return form;
+};
+
+const getConfiguratorSummary = (root) => {
+  const configurator = root?.querySelector(".equipment-configurator");
+  if (!configurator) return "";
+
+  const fields = Array.from(configurator.querySelectorAll("[data-config-field]"))
+    .map((field) => `${field.dataset.configField}: ${field.value}`)
+    .filter(Boolean);
+
+  const pieces = Array.from(configurator.querySelectorAll("[data-config-piece]"))
+    .map((field) => ({
+      name: field.dataset.configPiece,
+      quantity: Number(field.value || 0)
+    }))
+    .filter((piece) => piece.quantity > 0)
+    .map((piece) => `${piece.name}: ${piece.quantity}`);
+
+  const summary = [];
+  if (fields.length > 0) summary.push(`Opções: ${fields.join("; ")}`);
+  if (pieces.length > 0) summary.push(`Peças: ${pieces.join("; ")}`);
+
+  return summary.join("\n");
+};
+
 const createGeneratedEquipmentDetail = (card) => {
   const detail = document.createElement("article");
   detail.className = "equipment-detail";
@@ -918,6 +1147,7 @@ const createGeneratedEquipmentDetail = (card) => {
   const title = card.dataset.detailTitle || card.querySelector("h4")?.textContent?.trim() || "Equipamento";
   const category = card.dataset.detailCategory || "Catálogo";
   const description = card.dataset.detailDescription || "Item disponível para locação. Consulte disponibilidade e condições de entrega.";
+  const isAvailable = card?.dataset.available !== "false";
   let specs = [];
 
   try {
@@ -941,13 +1171,24 @@ const createGeneratedEquipmentDetail = (card) => {
     specList.append(item);
   });
 
-  const quoteLink = document.createElement("a");
-  quoteLink.className = "button button--secondary";
-  quoteLink.href = "#orcamento";
-  quoteLink.dataset.quoteEquipment = title;
-  quoteLink.textContent = "Solicitar orçamento";
+  const configurator = createEquipmentConfigurator(getConfiguratorFromCard(card));
+  if (configurator) {
+    detail.classList.add("has-configurator");
+  }
 
-  detail.append(intro, specList, quoteLink);
+  const quoteLink = document.createElement("a");
+  quoteLink.className = `button button--secondary${isAvailable ? "" : " button--disabled"}`;
+  quoteLink.href = isAvailable ? "#orcamento" : "#";
+  if (isAvailable) {
+    quoteLink.dataset.quoteEquipment = title;
+  } else {
+    quoteLink.setAttribute("aria-disabled", "true");
+  }
+  quoteLink.textContent = isAvailable ? "Solicitar orçamento" : "Indisponível";
+
+  detail.append(intro, specList);
+  if (configurator) detail.append(configurator);
+  detail.append(quoteLink);
   return detail;
 };
 
@@ -968,6 +1209,30 @@ const openEquipmentDrawer = (detailId, trigger, card) => {
   }
 
   if (card) {
+    const isAvailable = card.dataset.available !== "false";
+    const quoteLink = detail.querySelector("[data-quote-equipment]");
+    const configurator = createEquipmentConfigurator(getConfiguratorFromCard(card));
+
+    if (quoteLink) {
+      if (configurator && !detail.querySelector(".equipment-configurator")) {
+        detail.classList.add("has-configurator");
+        quoteLink.before(configurator);
+      }
+
+      if (isAvailable) {
+        quoteLink.dataset.quoteEquipment = card.dataset.detailTitle || quoteLink.dataset.quoteEquipment || "";
+        quoteLink.classList.remove("button--disabled");
+        quoteLink.removeAttribute("aria-disabled");
+        quoteLink.textContent = "Solicitar orçamento";
+      } else {
+        quoteLink.classList.add("button--disabled");
+        quoteLink.removeAttribute("data-quote-equipment");
+        quoteLink.setAttribute("aria-disabled", "true");
+        quoteLink.setAttribute("href", "#");
+        quoteLink.textContent = "Indisponível";
+      }
+    }
+
     detail.prepend(createEquipmentGallery(card));
   }
 
@@ -1060,16 +1325,57 @@ const setFieldValidity = (field, isValid) => {
   field.toggleAttribute("aria-invalid", !isValid);
 };
 
+const populateQuoteEquipmentOptions = (select) => {
+  if (!select) return;
+
+  const placeholder = select.querySelector("option[value='']")?.cloneNode(true) || new Option("Selecione uma opção", "");
+  select.replaceChildren(placeholder);
+
+  catalogCategories.forEach((category) => {
+    const group = document.createElement("optgroup");
+    group.label = category.label;
+
+    category.items.forEach((rawItem) => {
+      const item = normalizeCatalogItem(rawItem);
+      const option = document.createElement("option");
+      const isAvailable = isCatalogItemAvailable(item);
+
+      option.value = item.name;
+      option.textContent = isAvailable ? item.name : `${item.name} - indisponível`;
+      option.disabled = !isAvailable;
+      group.append(option);
+    });
+
+    select.append(group);
+  });
+};
+
 if (quoteForm) {
   const phoneInput = quoteForm.querySelector("input[name='telefone']");
+  const emailInput = quoteForm.querySelector("input[name='email']");
   const cepInput = quoteForm.querySelector("input[name='cep']");
+  const equipmentSelect = quoteForm.querySelector("select[name='equipamento']");
+  const periodSelect = quoteForm.querySelector("select[name='periodo']");
+  const configInput = document.createElement("input");
+  configInput.type = "hidden";
+  configInput.name = "configuracao";
+  quoteForm.append(configInput);
 
   quoteFeedback?.setAttribute("hidden", "");
+  populateQuoteEquipmentOptions(equipmentSelect);
+
+  equipmentSelect?.addEventListener("change", () => {
+    configInput.value = "";
+  });
 
   phoneInput?.addEventListener("input", () => {
     phoneInput.value = formatPhone(phoneInput.value);
     const phoneDigits = onlyNumbers(phoneInput.value);
     setFieldValidity(phoneInput, phoneDigits.length === 0 || (phoneDigits.length >= 10 && phoneDigits.length <= 11));
+  });
+
+  emailInput?.addEventListener("input", () => {
+    setFieldValidity(emailInput, emailInput.value.trim().length === 0 || emailInput.checkValidity());
   });
 
   cepInput?.addEventListener("input", () => {
@@ -1083,9 +1389,13 @@ if (quoteForm) {
     const formData = new FormData(quoteForm);
     const name = String(formData.get("nome") || "").trim();
     const phone = String(formData.get("telefone") || "").trim();
+    const email = String(formData.get("email") || "").trim();
     const phoneDigits = onlyNumbers(phone);
     const cep = String(formData.get("cep") || "").trim();
     const cepDigits = onlyNumbers(cep);
+    const equipment = String(formData.get("equipamento") || "").trim();
+    const period = String(formData.get("periodo") || "").trim();
+    const configuration = String(formData.get("configuracao") || "").trim();
     const details = String(formData.get("detalhes") || "").trim();
 
     setQuoteFeedback();
@@ -1103,8 +1413,18 @@ if (quoteForm) {
       return;
     }
 
-    if (!formData.get("equipamento")) {
-      focusInvalidField(quoteForm.querySelector("select[name='equipamento']"), "Selecione o equipamento desejado.");
+    if (!emailInput?.checkValidity() || email.length < 5) {
+      focusInvalidField(emailInput, "Informe um e-mail válido.");
+      return;
+    }
+
+    if (!equipment) {
+      focusInvalidField(equipmentSelect, "Selecione o equipamento desejado.");
+      return;
+    }
+
+    if (!period) {
+      focusInvalidField(periodSelect, "Selecione o período de locação.");
       return;
     }
 
@@ -1125,12 +1445,14 @@ if (quoteForm) {
       "Olá, gostaria de solicitar um orçamento pela LocTubo.",
       `Nome: ${name}`,
       `Telefone: ${phone}`,
+      `E-mail: ${email}`,
       `Empresa: ${String(formData.get("empresa") || "").trim() || "Não informado"}`,
-      `Equipamento: ${formData.get("equipamento") || ""}`,
-      `Período: ${formData.get("periodo") || "A definir"}`,
+      `Equipamento: ${equipment}`,
+      configuration ? `Configuração:\n${configuration}` : "",
+      `Período: ${period}`,
       `CEP: ${cep || "Não informado"}`,
       `Detalhes: ${details}`
-    ].join("\n");
+    ].filter(Boolean).join("\n");
 
     window.location.href = `https://wa.me/5511986740961?text=${encodeURIComponent(message)}`;
   });
@@ -1170,21 +1492,28 @@ if (searchPanel) {
 }
 
 document.addEventListener("click", (event) => {
+  const disabledAction = event.target.closest("[aria-disabled='true']");
+  if (disabledAction) {
+    event.preventDefault();
+    return;
+  }
+
   const trigger = event.target.closest("[data-quote-equipment]");
   if (!trigger) return;
 
   const select = document.querySelector(".quote-form select[name='equipamento']");
   if (select) {
     const equipmentName = trigger.dataset.quoteEquipment || "";
-    const hasOption = Array.from(select.options).some((option) => option.value === equipmentName || option.textContent === equipmentName);
+    const option = Array.from(select.options).find((item) => item.value === equipmentName && !item.disabled);
 
-    if (equipmentName && !hasOption) {
-      const option = document.createElement("option");
-      option.textContent = equipmentName;
-      select.append(option);
+    if (option) {
+      select.value = equipmentName;
     }
+  }
 
-    select.value = equipmentName;
+  const configInput = document.querySelector(".quote-form input[name='configuracao']");
+  if (configInput) {
+    configInput.value = getConfiguratorSummary(trigger.closest(".equipment-detail"));
   }
 
   closeEquipmentDrawer(false);

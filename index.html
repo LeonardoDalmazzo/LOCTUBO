@@ -67,7 +67,13 @@
           <svg class="site-nav__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
             <path d="M6 2h9l5 5v15H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2Zm8 2H6v16h12V8h-4V4Zm-5 8h6v2H9v-2Zm0 4h6v2H9v-2Zm0-8h3v2H9V8Z"></path>
           </svg>
-          Catalogo
+          Catálogo
+        </a>
+        <a href="#sobre">
+          <svg class="site-nav__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+            <path d="M12 2a6 6 0 0 1 6 6c0 2.1-1.1 4-2.8 5.1A8.02 8.02 0 0 1 20 20v2H4v-2a8.02 8.02 0 0 1 4.8-6.9A6 6 0 0 1 12 2Zm0 2a4 4 0 1 0 0 8 4 4 0 0 0 0-8Zm0 10c-3.1 0-5.7 2.1-6 5h12c-.3-2.9-2.9-5-6-5Z"></path>
+          </svg>
+          Sobre
         </a>
         <a href="#localizacao">
           <svg class="site-nav__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
@@ -182,7 +188,7 @@
         </div>
       </section>
 
-      <section class="section section--tight">
+      <section class="section section--tight" id="sobre" aria-label="Destaques e sobre a LocTubo">
         <div class="container metrics" aria-label="Destaques da LocTubo">
           <article>
             <strong>35+</strong>
@@ -194,8 +200,50 @@
           </article>
           <article>
             <strong>SP</strong>
-            <span>entrega e retirada</span>
+            <span>entrega com frete</span>
           </article>
+        </div>
+      </section>
+
+      <section class="section about-section" id="sobre-conteudo" aria-labelledby="sobre-title" data-side-reveal="left">
+        <div class="container about-layout">
+          <div class="section__heading">
+            <p class="eyebrow">Sobre a LocTubo</p>
+            <h2 id="sobre-title">Equipamentos prontos para obra, com atendimento rápido e experiência de quem atua no setor desde 1988.</h2>
+            <p>
+              A LocTubo atua há mais de 35 anos oferecendo locação de equipamentos para construção civil em São Paulo e região. Trabalhamos com foco em agilidade, suporte direto ao cliente e equipamentos revisados para atender obras, reformas e manutenções com mais segurança e eficiência.
+            </p>
+          </div>
+
+          <div class="about-story">
+            <p>
+              Nossa equipe auxilia desde a escolha do equipamento até a logística de entrega, ajudando empresas, profissionais e equipes de obra a evitarem atrasos e reduzirem custos com equipamentos próprios.
+            </p>
+            <div class="about-highlights" aria-label="Diferenciais da LocTubo">
+              <article>
+                <strong>Atendimento rápido</strong>
+                <span>Orçamentos e suporte direto para agilizar sua obra.</span>
+              </article>
+              <article>
+                <strong>Equipamentos revisados</strong>
+                <span>Locação com manutenção e conferência antes da entrega.</span>
+              </article>
+              <article>
+                <strong>Entrega para sua obra</strong>
+                <span>Frete combinado conforme região e necessidade do serviço..</span>
+              </article>
+            </div>
+            <div class="trust-strip" aria-label="Público atendido pela LocTubo">
+              <p>Atendimento para quem precisa de equipamento certo, orientação rápida e entrega combinada.</p>
+              <ul>
+                <li>Obras residenciais</li>
+                <li>Reformas comerciais</li>
+                <li>Construção civil</li>
+                <li>Manutenção predial</li>
+                <li>Empresas e profissionais autônomos</li>
+              </ul>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -409,17 +457,17 @@
       <section class="section benefits-content" aria-labelledby="vantagens-title">
         <div class="container split">
           <div class="section__heading section__heading--left">
-            <p class="eyebrow">Por que alugar</p>
-            <h2 id="vantagens-title">Menos custo parado, mais equipamento pronto para uso.</h2>
+            <p class="eyebrow">Por que alugar?</p>
+            <h2 id="vantagens-title">Reduza custos com equipamentos parados e tenha mais eficiência na obra</h2>
             <p>
-              Alugue somente o que a obra precisa, com equipamentos revisados, orientação na escolha
-              e suporte para reduzir improvisos no canteiro.
+              Alugue apenas o que realmente precisa, com equipamentos revisados, suporte especializado
+              e orientação na escolha ideal para evitar improvisos.
             </p>
           </div>
           <div class="benefit-list" data-reveal-group>
             <article data-reveal>
-              <h3>Delivery</h3>
-              <p>Comodidade total com entrega na obra e opção de retirada no endereço da empresa.</p>
+              <h3>Frete</h3>
+              <p>Comodidade total com entrega na obra, com frete combinado conforme o endereço e o equipamento.</p>
             </article>
             <article data-reveal>
               <h3>Atendimento técnico</h3>
@@ -437,7 +485,7 @@
         </div>
       </section>
 
-      <section class="section process" id="orcamento" aria-labelledby="orcamento-title" data-process-reveal>
+      <section class="section process" id="orcamento" aria-labelledby="orcamento-title" data-side-reveal="left">
         <div class="container quote-layout">
           <div>
             <p class="eyebrow">Fale com a LocTubo</p>
@@ -454,7 +502,11 @@
             </label>
             <label>
               Telefone com DDD
-              <input type="tel" name="telefone" autocomplete="tel" inputmode="tel" placeholder="(11) 98674-0961" maxlength="15" required>
+              <input type="tel" name="telefone" autocomplete="tel" inputmode="tel" placeholder="(11) 90000-0000" maxlength="15" required>
+            </label>
+            <label>
+              E-mail
+              <input type="email" name="email" autocomplete="email" required>
             </label>
             <label>
               Empresa
@@ -464,23 +516,15 @@
               Equipamento desejado
               <select name="equipamento" required>
                 <option value="">Selecione uma opção</option>
-                <option>Andaime tubular tipo torre</option>
-                <option>Andaime fachadeiro</option>
-                <option>Escoramento metálico</option>
-                <option>Martelete demolidor 30 kg</option>
-                <option>Martelete demolidor 18,5 kg</option>
-                <option>Martelete rompedor/perfurador 10 kg</option>
-                <option>Martelete rompedor 5,8 / 6,0 kg</option>
-                <option>Betoneira elétrica 400 litros</option>
-                <option>Mangote vibrador elétrico</option>
-                <option>Outro equipamento</option>
               </select>
             </label>
             <label>
               Período de locação
-              <select name="periodo">
-                <option value="">A definir</option>
+              <select name="periodo" required>
+                <option value="">Selecione uma opção</option>
+                <option>1 dia</option>
                 <option>3 dias</option>
+                <option>5 dias</option>
                 <option>7 dias</option>
                 <option>15 dias</option>
                 <option>30 dias</option>
@@ -504,10 +548,10 @@
         <div class="container location-layout">
           <div class="section__heading section__heading--left">
             <p class="eyebrow">Localização</p>
-            <h2 id="localizacao-title">Retire no Butantã ou combine a entrega na sua obra.</h2>
+            <h2 id="localizacao-title">Atendimento em São Paulo com entrega na sua obra.</h2>
             <p>
               Estamos na Rua Manoel de Afonseca, 61, Jardim das Vertentes, São Paulo. Use o mapa
-              para planejar retirada, visita ou rota de entrega.
+              como referência da empresa e fale com a equipe para combinar o frete até a obra.
             </p>
             <a class="button button--secondary" href="https://www.google.com/maps/search/?api=1&query=Rua%20Manoel%20de%20Afonseca%2061%20Sao%20Paulo%20SP" target="_blank" rel="noreferrer">
               <svg class="button__icon" aria-hidden="true" viewBox="0 0 24 24" focusable="false">
@@ -558,8 +602,8 @@
                 <strong>(11) 3746-8893</strong>
               </a>
               <a class="contact-method" href="https://www.google.com/maps/search/?api=1&query=Rua%20Manoel%20de%20Afonseca%2061%20Sao%20Paulo%20SP" target="_blank" rel="noreferrer">
-                <span>Retirada</span>
-                <strong>Butantã, São Paulo</strong>
+                <span>Entrega</span>
+                <strong>Frete para a obra</strong>
               </a>
             </div>
           </div>
@@ -579,7 +623,7 @@
           </a>
           <p>
             Locação de equipamentos para construção civil com atendimento em São Paulo,
-            retirada no Butantã e entrega combinada para sua obra.
+            frete combinado e entrega direta na sua obra.
           </p>
         </div>
 
@@ -593,6 +637,7 @@
         <nav class="footer-column" aria-label="Links de rodapé">
           <strong>Navegação</strong>
           <a href="#catalogo">Catálogo</a>
+          <a href="#sobre">Sobre</a>
           <a href="#localizacao">Localização</a>
           <a href="#contato">Contato</a>
           <a href="#orcamento">Orçamento</a>
