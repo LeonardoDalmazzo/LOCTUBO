@@ -147,26 +147,26 @@ const unavailableEquipmentNames = new Set([
 const catalogCategories = [
   {
     id: "andaimes-tubulares",
-    label: "Andaimes tubulares",
+    label: "Andaimes",
     eyebrow: "Acesso e trabalho em altura",
-    title: "Andaimes tubulares",
-    description: "Quadros, pranchas, sapatas, rodas, escadas e guarda-corpos para montar a configuração conforme a altura e a área de trabalho.",
+    title: "Andaimes",
+    description: "Quadros, diagonais, travessas, pisos metálicos, rodapés, sapatas, rodas, escadas e guarda-corpos para montar a configuração conforme a altura e a área de trabalho.",
     items: [
       {
-        name: "Andaime tubular",
-        summary: "Monte a configuração com quadros, pranchas, sapatas, rodas, escadas e guarda-corpos.",
-        description: "Selecione o tipo de montagem, tamanho da base e quantidade de peças para solicitar um orçamento mais preciso.",
+        name: "Andaime",
+        summary: "Monte a configuração com quadros, diagonais, travessas, pisos metálicos, rodapés, sapatas, rodas, escadas e guarda-corpos.",
+        description: "Selecione o tipo de montagem, altura aproximada, tamanhos e quantidades de peças para solicitar um orçamento mais preciso.",
         images: [
-          { src: "assets/imagens-catalogo/andaime-torre.png", alt: "Andaime tubular tipo torre" },
-          { src: "assets/imagens-catalogo/svg/escada.svg", alt: "Escada para andaime" },
-          { src: "assets/imagens-catalogo/svg/guarda%20corpo.svg", alt: "Guarda-corpo para andaime" },
-          { src: "assets/imagens-catalogo/svg/piso_metálico.svg", alt: "Piso metálico para andaime" },
-          { src: "assets/imagens-catalogo/svg/travessa_andaime.svg", alt: "Travessa para andaime" },
+          { src: "assets/imagens-catalogo/svg/torre_andaime.svg", alt: "Torre de andaime" },
           { src: "assets/imagens-catalogo/svg/quadro_andaime.svg", alt: "Quadro para andaime" },
-          { src: "assets/imagens-catalogo/svg/roda%20.svg", alt: "Roda para andaime" },
+          { src: "assets/imagens-catalogo/svg/diagonal_andaime.svg", alt: "Diagonal para andaime" },
+          { src: "assets/imagens-catalogo/svg/travessa_andaime.svg", alt: "Travessa para andaime" },
+          { src: "assets/imagens-catalogo/svg/piso_metálico.svg", alt: "Piso metálico para andaime" },
+          { src: "assets/imagens-catalogo/svg/guarda%20corpo.svg", alt: "Guarda-corpo para andaime" },
           { src: "assets/imagens-catalogo/svg/sapata_fixa.svg", alt: "Sapata fixa para andaime" },
           { src: "assets/imagens-catalogo/svg/sapata_ajustavel.svg", alt: "Sapata ajustável para andaime" },
-          { src: "assets/imagens-catalogo/svg/diagonal_andaime.svg", alt: "Diagonal para andaime" }
+          { src: "assets/imagens-catalogo/svg/roda%20.svg", alt: "Roda para andaime" },
+          { src: "assets/imagens-catalogo/svg/escada.svg", alt: "Escada para andaime" }
         ],
         configurator: {
           title: "Monte seu andaime",
@@ -177,32 +177,40 @@ const catalogCategories = [
               options: ["Torre", "Fachadeiro", "A definir com a equipe"]
             },
             {
-              label: "Base desejada",
-              name: "base",
-              options: ["1,0 x 1,0 m", "1,0 x 1,5 m", "1,0 x 2,0 m", "1,5 x 1,5 m", "2,0 x 2,0 m", "A definir"]
-            },
-            {
               label: "Altura aproximada",
               name: "altura",
               options: ["A definir", "2 m", "4 m", "6 m", "8 m", "10 m ou mais"]
             }
           ],
           pieces: [
-            "Quadro 0,40 x 1,0",
-            "Quadro 0,40 x 1,5",
-            "Quadro 1,0 x 1,0",
-            "Quadro 1,0 x 1,5",
-            "Quadro 1,0 x 2,0",
-            "Prancha metálica 2,0",
-            "Prancha metálica 1,5",
-            "Prancha metálica 1,0",
-            "Sapata ajustável",
+            {
+              label: "Quadro",
+              options: ["1,0 x 1,0 m", "1,0 x 1,5 m", "1,0 x 1,5 m reforçado", "1,0 x 2,0 m", "0,4 x 1,0 m", "0,4 x 1,5 m"]
+            },
+            {
+              label: "Diagonal",
+              options: ["1 m", "1,5 m", "1,8 m", "2 m"]
+            },
+            {
+              label: "Travessa",
+              options: ["1 m", "1 m apoio", "1,5 m", "1,5 m apoio", "1,8 m", "2 m"]
+            },
+            {
+              label: "Piso metálico",
+              options: ["1 m", "1,5 m", "2 m"]
+            },
+            {
+              label: "Rodapé",
+              options: ["1 m", "1,5 m", "2 m"]
+            },
+            {
+              label: "Guarda-corpo",
+              options: ["1 m", "1,5 m", "2 m"]
+            },
             "Sapata fixa",
-            "Rodas emborrachadas",
-            "Escada",
-            "Guarda-corpo 2,0",
-            "Guarda-corpo 1,5",
-            "Guarda-corpo 1,0"
+            "Sapata ajustável",
+            "Roda",
+            "Escada"
           ]
         }
       }
@@ -292,48 +300,24 @@ const catalogCategories = [
     description: "Marteletes rompedores para demolição leve, média e pesada em paredes, pisos e lajes.",
     items: [
       {
-        name: "Martelete rompedor 5 kg",
-        detailId: "martelete-6",
-        images: [
-          { src: "assets/imagens-catalogo/martelete-rompedor-5kg.png", alt: "Martelete rompedor 5 kg" },
-          { src: "assets/imagens-catalogo/p-martelete-eletrico-rompedor-bosch-5.8-kg-6.0-kg-gsh-5-ce-225-2.jpg", alt: "Martelete rompedor 5 kg em detalhe" },
-          { src: "assets/imagens-catalogo/p-martelete-eletrico-rompedor-bosch-5.8-kg-6.0-kg-gsh-5-ce-225-3.jpg", alt: "Martelete rompedor 5 kg com acessório" }
-        ]
-      },
-      {
         name: "Martelete rompedor 6 kg",
-        images: [
-          { src: "assets/imagens-catalogo/svg/martelete_6Kg.svg", alt: "Ilustração do martelete rompedor 6 kg" }
-        ]
+        description: "O martelete rompedor 6kg é indicado para serviços de demolição, perfuração e remoção em concreto, alvenaria e superfícies resistentes, oferecendo potência, precisão e alto desempenho na construção civil. Compacto e versátil, o equipamento é ideal para reformas, instalações elétricas e hidráulicas, abertura de canaletas e pequenos rompimentos, garantindo mais agilidade e eficiência na execução do trabalho. Com estrutura robusta, fácil manuseio e excelente desempenho operacional, o martelete rompedor proporciona mais produtividade, conforto e segurança para diferentes tipos de obra.",
+        images: [{ src: "assets/imagens-catalogo/martelete-rompedor-6kg.png", alt: "Martelete rompedor 6 kg" }]
       },
       {
         name: "Martelete rompedor 11 kg",
-        images: [
-          { src: "assets/imagens-catalogo/svg/matelete_11kg.svg", alt: "Ilustração do martelete rompedor 11 kg" }
-        ]
-      },
-      {
-        name: "Martelete rompedor 10 kg",
-        detailId: "martelete-10",
-        images: [
-          { src: "assets/imagens-catalogo/martelete-rompedor-10kg.png", alt: "Martelete rompedor 10 kg" }
-        ]
+        description: "O martelete rompedor 11kg é ideal para serviços pesados de demolição e rompimento em concreto, pisos, lajes, asfaltos e estruturas de alta resistência. Com elevada força de impacto e alto desempenho operacional, o equipamento garante mais rapidez e eficiência em obras de construção civil, reformas e infraestrutura. Robusto, resistente e de fácil operação, o martelete de 11kg é indicado para trabalhos intensivos que exigem potência e produtividade, proporcionando maior rendimento, redução do esforço operacional e excelente desempenho no canteiro de obras.",
+        images: [{ src: "assets/imagens-catalogo/martelete-rompedor-11kg.png", alt: "Martelete rompedor 11 kg" }]
       },
       {
         name: "Martelete rompedor 18 kg",
-        detailId: "martelete-18",
-        images: [
-          { src: "assets/imagens-catalogo/martelete-rompedor-18kg.png", alt: "Martelete rompedor 18 kg" },
-          { src: "assets/imagens-catalogo/p-martelete-eletrico-demolidor-bosch-18.5-kg-gsh-16-28-professional-227-2.jpg", alt: "Martelete rompedor 18 kg em detalhe" },
-          { src: "assets/imagens-catalogo/p-martelete-eletrico-demolidor-bosch-18.5-kg-gsh-16-28-professional-227-3.jpg", alt: "Martelete rompedor 18 kg inclinado" }
-        ]
+        description: "O martelete rompedor 18kg é indicado para demolições pesadas e serviços de alto impacto em concreto, asfalto, pisos industriais, lajes e estruturas de grande resistência. Com elevada potência e força de rompimento, o equipamento oferece máximo desempenho em obras de construção civil, infraestrutura e reformas de grande porte, garantindo mais rapidez e eficiência na execução dos trabalhos. Robusto, resistente e preparado para operações intensivas, o martelete de 18kg proporciona alta produtividade, redução do esforço operacional e excelente desempenho mesmo nas aplicações mais exigentes.",
+        images: [{ src: "assets/imagens-catalogo/martelete-rompedor-18kg.png", alt: "Martelete rompedor 18 kg" }]
       },
       {
         name: "Martelete rompedor 30 kg",
-        detailId: "martelete-30",
-        images: [
-          { src: "assets/imagens-catalogo/svg/martelete_30Kg.svg", alt: "Ilustração do martelete rompedor 30 kg" }
-        ]
+        description: "O martelete rompedor 30kg é a escolha ideal para demolições pesadas e trabalhos de grande impacto em concreto armado, asfalto, fundações, pisos industriais e estruturas de alta resistência. Desenvolvido para operações intensivas, o equipamento oferece extrema potência e alta capacidade de rompimento, garantindo máxima eficiência e produtividade em obras de construção civil, infraestrutura e manutenção pesada. Com estrutura robusta e desempenho superior, o martelete de 30kg proporciona mais agilidade na execução dos serviços, redução do tempo de trabalho e excelente rendimento mesmo nas aplicações mais exigentes.",
+        images: [{ src: "assets/imagens-catalogo/martelete-rompedor-30kg.png", alt: "Martelete rompedor 30 kg" }]
       }
     ]
   },
@@ -346,10 +330,12 @@ const catalogCategories = [
     items: [
       {
         name: "Esmerilhadeira",
+        description: "A esmerilhadeira é um equipamento versátil e indispensável para cortes, desbastes, lixamentos e acabamentos em metais, concreto, pedras e diversos materiais da construção civil. Compacta, potente e de fácil manuseio, ela oferece alto desempenho e precisão em serviços de serralheria, reformas, manutenção e obras em geral. Indicada para trabalhos que exigem agilidade e eficiência, a esmerilhadeira proporciona excelente acabamento, maior produtividade e segurança nas operações, atendendo desde pequenos ajustes até aplicações mais intensivas.",
         images: [{ src: "assets/imagens-catalogo/esmerilhadeira.png", alt: "Esmerilhadeira" }]
       },
       {
         name: "Serra mármore",
+        description: "A serra mármore é ideal para cortes precisos e eficientes em materiais como porcelanato, cerâmica, mármore, granito, concreto e alvenaria. Compacta, potente e de fácil manuseio, o equipamento proporciona excelente acabamento e alto desempenho em obras, reformas e instalações, garantindo mais agilidade e precisão nos cortes. Indicada para profissionais da construção civil e acabamentos, a serra mármore oferece praticidade, segurança e produtividade em diferentes tipos de aplicação.",
         images: [
           { src: "assets/imagens-catalogo/svg/serra_mamore.svg", alt: "Ilustração da serra mármore" },
           { src: "assets/imagens-catalogo/serra-de-marmore.png", alt: "Serra mármore" }
@@ -361,6 +347,7 @@ const catalogCategories = [
       },
       {
         name: "Pistola finca-pino",
+        description: "A pistola finca pino é ideal para fixações rápidas, seguras e eficientes em concreto, aço e alvenaria, proporcionando mais agilidade e praticidade em obras e instalações. Indicada para fixação de perfis, suportes, conduítes, forros, estruturas metálicas e diversos componentes da construção civil, o equipamento oferece alto desempenho e precisão, reduzindo o tempo de execução e o esforço operacional. Compacta, resistente e de fácil manuseio, a pistola finca pino garante produtividade, firmeza nas fixações e excelente desempenho em aplicações profissionais.",
         images: [
           { src: "assets/imagens-catalogo/svg/pistola_finca_pino.svg", alt: "Ilustração da pistola finca-pino" },
           { src: "assets/imagens-catalogo/pistola-finca-pino.png", alt: "Pistola finca-pino" }
@@ -389,7 +376,7 @@ const catalogCategories = [
     items: [
       {
         name: "Betoneira 400 litros",
-        detailId: "betoneira-400",
+        description: "A betoneira 400L é ideal para o preparo eficiente de concreto, argamassa e massa em obras de pequeno, médio e grande porte. Com alta capacidade de mistura e excelente desempenho, o equipamento garante maior produtividade, uniformidade dos materiais e agilidade na execução dos serviços. Robusta, resistente e de fácil operação, a betoneira é indicada para construções, reformas, fundações, calçadas e diversas aplicações da construção civil, proporcionando mais praticidade, economia de tempo e qualidade no canteiro de obras.",
         images: [
           { src: "assets/imagens-catalogo/svg/betoneira_400L.svg", alt: "Ilustração da betoneira 400 litros" },
           { src: "assets/imagens-catalogo/betoneira.png", alt: "Betoneira 400 litros" }
@@ -397,7 +384,7 @@ const catalogCategories = [
       },
       {
         name: "Mangote vibrador",
-        detailId: "mangote-vibrador",
+        description: "O mangote vibrador é essencial para garantir a compactação e o adensamento correto do concreto, eliminando bolhas de ar e evitando falhas estruturais durante a concretagem. Indicado para obras de pequeno, médio e grande porte, o equipamento proporciona maior resistência, uniformidade e qualidade no acabamento de pilares, vigas, lajes, fundações e estruturas em concreto armado. Robusto, eficiente e de fácil operação, o mangote vibrador contribui para mais produtividade, segurança e durabilidade nas etapas de concretagem da obra.",
         images: [{ src: "assets/imagens-catalogo/mangote-vibrador.png", alt: "Mangote vibrador de imersão para concreto" }]
       }
     ]
@@ -411,6 +398,7 @@ const catalogCategories = [
     items: [
       {
         name: "Placa vibratória",
+        description: "A placa vibratória é um equipamento essencial para serviços de compactação em obras de construção civil, garantindo maior firmeza, nivelamento e estabilidade do solo. Indicada para compactar areia, brita, cascalho, solo granular e pavimentos intertravados, ela oferece alto desempenho em aplicações como preparação de terrenos, assentamento de pisos, calçadas, valas e pequenas fundações. Com operação prática, estrutura robusta e excelente eficiência, a placa vibratória proporciona acabamento uniforme, reduz falhas na compactação e contribui para mais agilidade, segurança e produtividade na execução da obra.",
         images: [
           { src: "assets/imagens-catalogo/svg/placa_vibratoria.svg", alt: "Ilustração da placa vibratória" },
           { src: "assets/imagens-catalogo/placa-vibratoria.png", alt: "Placa vibratória" }
@@ -419,6 +407,7 @@ const catalogCategories = [
       {
         name: "Perfurador de solo a gasolina",
         summary: "Equipamento para perfuração de solo em fundações, cercas, mourões e serviços externos.",
+        description: "O perfurador de solo é a solução ideal para perfurações rápidas, precisas e eficientes em diversos tipos de terreno. Indicado para instalação de cercas, mourões, postes, estacas, plantio e fundações leves, o equipamento oferece alto desempenho com menor esforço operacional, agilizando os serviços em obras, áreas rurais e projetos de paisagismo. Com estrutura robusta, fácil manuseio e excelente capacidade de perfuração, o perfurador de solo proporciona mais produtividade, praticidade e segurança na execução do trabalho.",
         images: [
           { src: "assets/imagens-catalogo/svg/Perfurador_solo_gasolina%20.svg", alt: "Ilustração do perfurador de solo a gasolina" }
         ]
@@ -426,6 +415,7 @@ const catalogCategories = [
       {
         name: "Compactador de solo tipo sapo a gasolina",
         summary: "Compactador tipo sapo para valas, bases, aterros e áreas com acesso mais estreito.",
+        description: "O compactador de solo tipo sapinho é ideal para compactação de solos em áreas estreitas e de difícil acesso, oferecendo alto desempenho e eficiência em obras de construção civil, saneamento e infraestrutura. Indicado para compactar solos argilosos, valas, fundações, calçadas e reparos de pavimentação, o equipamento possui forte impacto vertical, garantindo excelente densidade e estabilidade do terreno. Robusto, resistente e de fácil operação, o sapinho proporciona maior precisão na compactação, reduz retrabalhos e contribui para mais produtividade, segurança e qualidade na execução da obra.",
         images: [
           { src: "assets/imagens-catalogo/svg/Compactador_solo_tipo%20sapo_gasolina.svg", alt: "Ilustração do compactador de solo tipo sapo a gasolina" }
         ]
@@ -441,6 +431,7 @@ const catalogCategories = [
     items: [
       {
         name: "Aspirador industrial",
+        description: "O aspirador industrial é ideal para limpeza pesada e remoção eficiente de resíduos sólidos e líquidos em obras, indústrias, oficinas e ambientes comerciais. Com alta capacidade de sucção e excelente desempenho, o equipamento facilita a limpeza de poeira, entulhos, serragem, água e diversos tipos de resíduos, proporcionando mais praticidade, agilidade e organização no ambiente de trabalho. Robusto, resistente e de fácil operação, o aspirador industrial contribui para maior produtividade, segurança e eficiência nas atividades de limpeza e manutenção.",
         images: [
           { src: "assets/imagens-catalogo/svg/aspirador_industrial.svg", alt: "Ilustração do aspirador industrial" },
           { src: "assets/imagens-catalogo/aspirador-industrial.png", alt: "Aspirador industrial" }
@@ -1097,6 +1088,10 @@ const createEquipmentConfigurator = (configurator) => {
     pieces.className = "equipment-configurator__pieces";
 
     configurator.pieces.forEach((piece) => {
+      const pieceName = typeof piece === "string" ? piece : piece.label;
+      const options = typeof piece === "string" ? [] : piece.options || [];
+      const wrapper = document.createElement("div");
+      wrapper.className = "equipment-configurator__piece";
       const label = document.createElement("label");
       const input = document.createElement("input");
 
@@ -1105,10 +1100,26 @@ const createEquipmentConfigurator = (configurator) => {
       input.step = "1";
       input.inputMode = "numeric";
       input.value = "0";
-      input.dataset.configPiece = piece;
+      input.dataset.configPiece = pieceName;
 
-      label.append(piece, input);
-      pieces.append(label);
+      if (options.length > 0) {
+        const sizeLabel = document.createElement("label");
+        const select = document.createElement("select");
+        select.dataset.configPieceSize = pieceName;
+
+        options.forEach((optionLabel) => {
+          const option = document.createElement("option");
+          option.textContent = optionLabel;
+          select.append(option);
+        });
+
+        sizeLabel.append(`${pieceName} - tamanho`, select);
+        wrapper.append(sizeLabel);
+      }
+
+      label.append(`${pieceName} - quantidade`, input);
+      wrapper.append(label);
+      pieces.append(wrapper);
     });
 
     form.append(pieces);
@@ -1126,10 +1137,17 @@ const getConfiguratorSummary = (root) => {
     .filter(Boolean);
 
   const pieces = Array.from(configurator.querySelectorAll("[data-config-piece]"))
-    .map((field) => ({
-      name: field.dataset.configPiece,
-      quantity: Number(field.value || 0)
-    }))
+    .map((field) => {
+      const size = field
+        .closest(".equipment-configurator__piece")
+        ?.querySelector("[data-config-piece-size]")
+        ?.value;
+
+      return {
+        name: size ? `${field.dataset.configPiece} ${size}` : field.dataset.configPiece,
+        quantity: Number(field.value || 0)
+      };
+    })
     .filter((piece) => piece.quantity > 0)
     .map((piece) => `${piece.name}: ${piece.quantity}`);
 

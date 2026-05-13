@@ -1194,6 +1194,11 @@ h3 {
   gap: var(--space-3);
 }
 
+.equipment-configurator__piece {
+  display: grid;
+  gap: var(--space-3);
+}
+
 .equipment-configurator label {
   display: grid;
   gap: var(--space-2);
@@ -2319,6 +2324,11 @@ h3 {
   .equipment-configurator__fields,
   .equipment-configurator__pieces {
     grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .equipment-configurator__piece {
+    grid-template-columns: minmax(0, 1fr) minmax(7rem, 0.65fr);
+    align-items: end;
   }
 
   .equipment-detail .button {
