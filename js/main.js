@@ -156,6 +156,7 @@ const catalogCategories = [
         name: "Andaime",
         summary: "Monte a configuração com quadros, diagonais, travessas, pisos metálicos, rodapés, sapatas, rodas, escadas e guarda-corpos.",
         description: "Selecione o tipo de montagem, altura aproximada, tamanhos e quantidades de peças para solicitar um orçamento mais preciso.",
+        manual: "assets/docs/manual-instrucoes/manual_andaime.pdf",
         images: [
           { src: "assets/imagens-catalogo/svg/torre_andaime.svg", alt: "Torre de andaime" },
           { src: "assets/imagens-catalogo/svg/quadro_andaime.svg", alt: "Quadro para andaime" },
@@ -274,19 +275,30 @@ const catalogCategories = [
             }
           ],
           pieces: [
-            "Quadro reforçado 1,0 x 1,5",
-            "Quadro 1,0 x 1,0",
-            "Quadro 0,40 x 1,0",
-            "Quadro 0,40 x 1,5",
-            "Sapata ajustável 30 cm",
-            "Forcado ajustável 30 cm",
-            "Escora metálica 3,50",
-            "Escora metálica 4,20",
-            "Forcado metálico simples",
-            "Forcado metálico duplo",
-            "Longarina metálica 2 m",
-            "Longarina metálica 3 m",
-            "Longarina metálica 4 m"
+            {
+              label: "Quadro",
+              options: ["1,0 x 1,5 m reforçado", "1,0 x 1,0 m", "0,4 x 1,0 m", "0,4 x 1,5 m"]
+            },
+            {
+              label: "Sapata ajustável",
+              options: ["30 cm"]
+            },
+            {
+              label: "Forcado ajustável",
+              options: ["30 cm"]
+            },
+            {
+              label: "Escora metálica",
+              options: ["3,50 m", "4,20 m"]
+            },
+            {
+              label: "Forcado metálico",
+              options: ["Simples", "Duplo"]
+            },
+            {
+              label: "Longarina metálica",
+              options: ["2 m", "3 m", "4 m"]
+            }
           ]
         }
       }
@@ -399,6 +411,7 @@ const catalogCategories = [
       {
         name: "Placa vibratória",
         description: "A placa vibratória é um equipamento essencial para serviços de compactação em obras de construção civil, garantindo maior firmeza, nivelamento e estabilidade do solo. Indicada para compactar areia, brita, cascalho, solo granular e pavimentos intertravados, ela oferece alto desempenho em aplicações como preparação de terrenos, assentamento de pisos, calçadas, valas e pequenas fundações. Com operação prática, estrutura robusta e excelente eficiência, a placa vibratória proporciona acabamento uniforme, reduz falhas na compactação e contribui para mais agilidade, segurança e produtividade na execução da obra.",
+        manual: "assets/docs/manual-instrucoes/manual_placa vibratória.pdf",
         images: [
           { src: "assets/imagens-catalogo/svg/placa_vibratoria.svg", alt: "Ilustração da placa vibratória" },
           { src: "assets/imagens-catalogo/placa-vibratoria.png", alt: "Placa vibratória" }
@@ -481,6 +494,9 @@ const createProductCard = (category, rawItem) => {
   card.dataset.available = String(isAvailable);
   if (item.configurator) {
     card.dataset.configurator = JSON.stringify(item.configurator);
+  }
+  if (item.manual) {
+    card.dataset.manual = item.manual;
   }
   card.dataset.detailDescription =
     item.description ||
@@ -1062,12 +1078,19 @@ const createEquipmentConfigurator = (configurator) => {
   form.append(title);
 
   if (Array.isArray(configurator.fields) && configurator.fields.length > 0) {
+    const fieldSection = document.createElement("div");
+    fieldSection.className = "equipment-configurator__section";
+
     const fields = document.createElement("div");
     fields.className = "equipment-configurator__fields";
 
     configurator.fields.forEach((field) => {
+      const fieldName = `config-${normalizeSlug(configurator.title || "equipamento")}-${normalizeSlug(field.name || field.label)}`;
       const label = document.createElement("label");
       const select = document.createElement("select");
+
+      label.setAttribute("for", fieldName);
+      select.id = fieldName;
       select.dataset.configField = field.label;
 
       (field.options || []).forEach((optionLabel) => {
@@ -1080,31 +1103,54 @@ const createEquipmentConfigurator = (configurator) => {
       fields.append(label);
     });
 
-    form.append(fields);
+    fieldSection.append(fields);
+    form.append(fieldSection);
   }
 
   if (Array.isArray(configurator.pieces) && configurator.pieces.length > 0) {
+    const pieceSection = document.createElement("div");
+    pieceSection.className = "equipment-configurator__section";
+
+    const pieceTitle = document.createElement("h5");
+    pieceTitle.textContent = "Peças";
+    pieceSection.append(pieceTitle);
+
     const pieces = document.createElement("div");
     pieces.className = "equipment-configurator__pieces";
 
-    configurator.pieces.forEach((piece) => {
+    configurator.pieces.forEach((piece, index) => {
       const pieceName = typeof piece === "string" ? piece : piece.label;
       const options = typeof piece === "string" ? [] : piece.options || [];
       const wrapper = document.createElement("div");
       wrapper.className = "equipment-configurator__piece";
-      const label = document.createElement("label");
+      const heading = document.createElement("strong");
+      const controls = document.createElement("div");
+      const quantityLabel = document.createElement("label");
       const input = document.createElement("input");
+      const pieceSlug = normalizeSlug(pieceName || `peca-${index}`);
+      const quantityId = `config-${normalizeSlug(configurator.title || "equipamento")}-${pieceSlug}-quantidade`;
+
+      heading.className = "equipment-configurator__piece-name";
+      heading.textContent = pieceName;
+      controls.className = "equipment-configurator__piece-controls";
 
       input.type = "number";
       input.min = "0";
       input.step = "1";
       input.inputMode = "numeric";
       input.value = "0";
+      input.id = quantityId;
       input.dataset.configPiece = pieceName;
 
       if (options.length > 0) {
         const sizeLabel = document.createElement("label");
+        const sizeLabelText = document.createElement("span");
         const select = document.createElement("select");
+        const sizeId = `config-${normalizeSlug(configurator.title || "equipamento")}-${pieceSlug}-tamanho`;
+
+        sizeLabel.setAttribute("for", sizeId);
+        sizeLabelText.textContent = "Tamanho";
+        select.id = sizeId;
         select.dataset.configPieceSize = pieceName;
 
         options.forEach((optionLabel) => {
@@ -1113,16 +1159,22 @@ const createEquipmentConfigurator = (configurator) => {
           select.append(option);
         });
 
-        sizeLabel.append(`${pieceName} - tamanho`, select);
-        wrapper.append(sizeLabel);
+        sizeLabel.append(sizeLabelText, select);
+        controls.append(sizeLabel);
       }
 
-      label.append(`${pieceName} - quantidade`, input);
-      wrapper.append(label);
+      const quantityLabelText = document.createElement("span");
+      quantityLabel.setAttribute("for", quantityId);
+      quantityLabelText.textContent = "Quantidade";
+      quantityLabel.append(quantityLabelText, input);
+
+      controls.append(quantityLabel);
+      wrapper.append(heading, controls);
       pieces.append(wrapper);
     });
 
-    form.append(pieces);
+    pieceSection.append(pieces);
+    form.append(pieceSection);
   }
 
   return form;
@@ -1166,6 +1218,7 @@ const createGeneratedEquipmentDetail = (card) => {
   const category = card.dataset.detailCategory || "Catálogo";
   const description = card.dataset.detailDescription || "Item disponível para locação. Consulte disponibilidade e condições de entrega.";
   const isAvailable = card?.dataset.available !== "false";
+  const manual = card.dataset.manual;
   let specs = [];
 
   try {
@@ -1204,9 +1257,22 @@ const createGeneratedEquipmentDetail = (card) => {
   }
   quoteLink.textContent = isAvailable ? "Solicitar orçamento" : "Indisponível";
 
-  detail.append(intro, specList);
+  const actions = document.createElement("div");
+  actions.className = "equipment-detail__actions";
+  actions.append(quoteLink);
+
+  if (manual) {
+    const manualLink = document.createElement("a");
+    manualLink.className = "button button--secondary";
+    manualLink.href = manual;
+    manualLink.target = "_blank";
+    manualLink.rel = "noreferrer";
+    manualLink.textContent = "Ver manual";
+    actions.append(manualLink);
+  }
+
+  detail.append(intro, specList, actions);
   if (configurator) detail.append(configurator);
-  detail.append(quoteLink);
   return detail;
 };
 
@@ -1234,7 +1300,7 @@ const openEquipmentDrawer = (detailId, trigger, card) => {
     if (quoteLink) {
       if (configurator && !detail.querySelector(".equipment-configurator")) {
         detail.classList.add("has-configurator");
-        quoteLink.before(configurator);
+        quoteLink.after(configurator);
       }
 
       if (isAvailable) {
