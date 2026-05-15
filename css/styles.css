@@ -829,6 +829,430 @@ h3 {
   line-height: 1.45;
 }
 
+.about-layout--wide {
+  align-items: start;
+}
+
+.about-intro {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.about-intro .button {
+  width: fit-content;
+}
+
+.about-story--rich {
+  gap: var(--space-5);
+}
+
+.about-content {
+  display: grid;
+  justify-items: center;
+}
+
+.about-story--center {
+  width: min(100%, 60rem);
+  text-align: left;
+}
+
+.about-story--center .about-panel {
+  order: 1;
+  padding: var(--space-8);
+  text-align: center;
+}
+
+.about-story--center .about-pillars,
+.about-story--center .about-values {
+  display: grid;
+  text-align: left;
+}
+
+.about-story--center .about-pillars article:first-child {
+  order: 2;
+}
+
+.about-story--center .about-pillars article:last-child {
+  order: 3;
+}
+
+.about-story--center .about-values article:first-child {
+  order: 4;
+}
+
+.about-story--center .about-values article:last-child {
+  order: 5;
+}
+
+.about-story--center h2,
+.about-story--center h3,
+.about-story--center .about-pillars span {
+  text-align: inherit;
+}
+
+.about-story--center .about-panel h2 {
+  text-align: center;
+}
+
+.about-section-title {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.about-section-title h3 {
+  margin: 0;
+}
+
+.about-panel,
+.about-values article,
+.equipment-brands {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: var(--color-surface);
+  padding: var(--space-5);
+  box-shadow: 0 12px 30px rgb(16 24 29 / 7%);
+}
+
+.about-panel::after,
+.about-pillars article::after,
+.about-values article::after,
+.about-highlights article::after,
+.equipment-brands::after {
+  position: absolute;
+  inset: -40% auto -40% -70%;
+  width: 48%;
+  background:
+    linear-gradient(105deg, transparent 0%, rgb(255 255 255 / 8%) 28%, rgb(255 255 255 / 62%) 50%, rgb(255 255 255 / 10%) 72%, transparent 100%);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transform: skewX(-18deg);
+}
+
+.about-panel:hover::after,
+.about-pillars article:hover::after,
+.about-values article:hover::after,
+.about-highlights article:hover::after,
+.equipment-brands:hover::after {
+  animation: card-shine 900ms ease;
+  opacity: 1;
+}
+
+@keyframes card-shine {
+  0% {
+    left: -70%;
+    opacity: 0;
+  }
+
+  18% {
+    opacity: 0.82;
+  }
+
+  100% {
+    left: 122%;
+    opacity: 0;
+  }
+}
+
+.about-panel h3,
+.about-values h3,
+.equipment-brands h3 {
+  margin-bottom: 0;
+}
+
+.about-panel p,
+.about-pillars p,
+.about-values p,
+.equipment-brands p {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.about-pillars,
+.about-values,
+.brand-placeholder-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.about-pillars article {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+  min-height: 14rem;
+  align-content: center;
+  overflow: hidden;
+  border: 1px solid rgb(215 25 32 / 22%);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(135deg, #ffffff 0%, #f7f8fa 64%, rgb(215 25 32 / 7%) 100%);
+  padding: var(--space-8);
+  box-shadow: 0 18px 42px rgb(16 24 29 / 10%);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.about-values article {
+  min-height: 16rem;
+  align-content: start;
+  padding: var(--space-8);
+}
+
+.about-pillars article:hover,
+.about-values article:hover,
+.about-panel:hover,
+.equipment-brands:hover {
+  border-color: rgb(215 25 32 / 34%);
+  box-shadow: 0 26px 58px rgb(16 24 29 / 16%);
+  transform: translateY(-3px);
+}
+
+.about-pillars span {
+  color: var(--color-primary-dark);
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.check-list {
+  display: grid;
+  gap: var(--space-2);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.check-list li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: var(--space-2);
+  color: var(--color-muted);
+  line-height: 1.35;
+}
+
+.check-list li::before {
+  color: var(--color-primary);
+  content: "✓";
+  font-weight: 900;
+}
+
+.about-highlights--dense article {
+  min-height: 12.5rem;
+  overflow: hidden;
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.about-highlights--dense article:hover {
+  box-shadow: 0 24px 54px rgb(16 24 29 / 16%);
+  transform: translateY(-3px);
+}
+
+.brand-placeholder-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.brand-placeholder-grid span {
+  display: grid;
+  min-height: 5.5rem;
+  place-items: center;
+  border: 1px dashed rgb(98 106 115 / 44%);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface-strong);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+  font-weight: 800;
+  text-transform: uppercase;
+}
+
+.about-page-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 34rem;
+  padding-top: calc(var(--header-height) + var(--space-12));
+  padding-bottom: var(--space-10);
+  background:
+    linear-gradient(90deg, rgb(16 24 29 / 94%) 0%, rgb(16 24 29 / 72%) 58%, rgb(16 24 29 / 28%) 100%),
+    url("../assets/backgrounds/bg-Slide-Equipamentos-concretagem.png") center / cover no-repeat;
+  color: #ffffff;
+}
+
+.about-page-hero .container {
+  display: grid;
+  min-height: 22rem;
+  align-content: end;
+  gap: var(--space-5);
+}
+
+.about-page-hero h1 {
+  max-width: 13ch;
+}
+
+.about-page-hero p:not(.eyebrow) {
+  max-width: 44rem;
+  color: rgb(255 255 255 / 84%);
+  font-size: var(--text-md);
+}
+
+.about-page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
+}
+
+.about-page-nav a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  border: 1px solid rgb(255 255 255 / 22%);
+  border-radius: var(--radius-sm);
+  background: rgb(255 255 255 / 10%);
+  padding: 0.65rem 0.8rem;
+  color: #ffffff;
+  font-size: var(--text-sm);
+  font-weight: 800;
+}
+
+.about-page-nav__icon {
+  width: 1.1rem;
+  height: 1.1rem;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
+.about-page-nav a:hover,
+.about-page-nav a:focus-visible {
+  background: var(--color-primary);
+}
+
+.about-section-nav .about-page-nav {
+  justify-content: center;
+}
+
+.about-section-nav .about-page-nav a {
+  position: relative;
+  overflow: hidden;
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: #ffffff;
+  box-shadow: 0 12px 28px rgb(16 24 29 / 12%);
+}
+
+.about-section-nav .about-page-nav a::after {
+  position: absolute;
+  inset: -42% auto -42% -70%;
+  width: 48%;
+  background:
+    linear-gradient(105deg, transparent 0%, rgb(255 255 255 / 10%) 28%, rgb(255 255 255 / 68%) 50%, rgb(255 255 255 / 12%) 72%, transparent 100%);
+  content: "";
+  opacity: 0;
+  pointer-events: none;
+  transform: skewX(-18deg);
+}
+
+.about-section-nav .about-page-nav a:hover,
+.about-section-nav .about-page-nav a:focus-visible {
+  border-color: var(--color-primary);
+  background: #ffffff;
+  color: var(--color-primary);
+}
+
+.about-section-nav .about-page-nav a:hover::after,
+.about-section-nav .about-page-nav a:focus-visible::after {
+  animation: card-shine 900ms ease;
+  opacity: 1;
+}
+
+.about-section--page {
+  background:
+    linear-gradient(180deg, var(--color-surface) 0%, var(--color-bg) 100%);
+}
+
+.about-main-section {
+  background:
+    linear-gradient(180deg, #eef1f5 0%, #d8dde3 100%);
+  border-block: 1px solid rgb(98 106 115 / 20%);
+}
+
+.about-main-section .about-panel {
+  width: min(100%, 62rem);
+  border-color: var(--color-line);
+  background: var(--color-surface);
+}
+
+.about-main-section .about-panel h2 {
+  color: var(--color-ink);
+  text-align: center;
+}
+
+.about-principles-section {
+  background:
+    linear-gradient(135deg, rgb(169 15 22 / 96%) 0%, rgb(215 25 32 / 92%) 54%, rgb(124 14 19 / 96%) 100%);
+  color: #ffffff;
+}
+
+.about-principles-section .about-pillars article,
+.about-principles-section .about-values article {
+  border-color: rgb(255 255 255 / 32%);
+  background: rgb(255 255 255 / 94%);
+}
+
+.about-principles-section .about-pillars span,
+.about-principles-section .about-values h3 {
+  color: var(--color-ink);
+}
+
+.about-differentials-section .section__heading {
+  margin-inline: auto;
+  color: #ffffff;
+  text-align: center;
+}
+
+.about-differentials-section .section__heading .eyebrow {
+  color: #ffffff;
+}
+
+.about-differentials-section .about-highlights {
+  width: min(100%, 72rem);
+  justify-content: center;
+}
+
+.about-differentials-section .about-highlights article {
+  align-content: center;
+  text-align: center;
+  border-color: rgb(255 255 255 / 32%);
+  border-left-color: #ffffff;
+  background: rgb(255 255 255 / 92%);
+}
+
+.about-differentials-section {
+  overflow-x: clip;
+  background:
+    linear-gradient(180deg, rgb(16 24 29 / 74%) 0%, rgb(16 24 29 / 64%) 100%),
+    url("../assets/backgrounds/bg-Slide-Equipamentos.png") center / cover no-repeat;
+  color: #ffffff;
+}
+
+.about-equipment-section .equipment-brands {
+  width: min(100%, 62rem);
+}
+
+.quote-section.about-equipment-section {
+  background:
+    linear-gradient(135deg, rgb(169 15 22 / 96%) 0%, rgb(215 25 32 / 92%) 54%, rgb(124 14 19 / 96%) 100%);
+  color: #ffffff;
+}
+
+.quote-section.about-equipment-section .equipment-brands {
+  border-color: rgb(255 255 255 / 32%);
+  background: rgb(255 255 255 / 94%);
+  color: var(--color-ink);
+}
+
 .benefit-list,
 .steps {
   display: grid;
@@ -2320,6 +2744,34 @@ h3 {
     grid-column: 1 / -1;
   }
 
+  .about-pillars,
+  .about-values {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .brand-placeholder-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .about-story--center {
+    width: min(100%, 72rem);
+    text-align: left;
+  }
+
+  .about-story--center .about-panel {
+    grid-column: 1 / -1;
+    order: 1;
+  }
+
+  .about-story--center .about-pillars,
+  .about-story--center .about-values {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .about-story--center .about-panel h2 {
+    font-size: clamp(2.2rem, 5vw, 4rem);
+  }
+
   .product-grid,
   .benefit-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -2563,12 +3015,32 @@ h3 {
     align-items: start;
   }
 
+  .about-layout--wide {
+    grid-template-columns: minmax(18rem, 0.62fr) minmax(0, 1.38fr);
+  }
+
   .about-highlights {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
   .about-highlights article:last-child {
     grid-column: auto;
+  }
+
+  .about-differentials-section .about-highlights {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .about-differentials-section .about-highlights article {
+    grid-column: span 2;
+  }
+
+  .about-differentials-section .about-highlights article:nth-last-child(2) {
+    grid-column: 2 / span 2;
+  }
+
+  .about-differentials-section .about-highlights article:last-child {
+    grid-column: 4 / span 2;
   }
 
   .trust-strip {
@@ -2635,6 +3107,10 @@ h3 {
   }
 
   .quote-section {
+    background-attachment: fixed;
+  }
+
+  .about-differentials-section {
     background-attachment: fixed;
   }
 }
