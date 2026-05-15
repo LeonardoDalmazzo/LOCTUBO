@@ -26,14 +26,28 @@ let catalogState = null;
 const imageSizes = {
   "aspirador-industrial.png": [1292, 1217],
   "betoneira.png": [800, 960],
+  "compactador-solo-tipo-sapo-gasolina.png": [1086, 1448],
   "compressor-de-ar.png": [1254, 1254],
   "esmerilhadeira.png": [1254, 1254],
+  "escada-multiarticular.png": [1254, 1254],
+  "diagonal-andaime.png": [1254, 1254],
+  "escada-andaime.png": [1254, 1254],
+  "guarda-corpo-andaime.png": [1254, 1254],
   "mangote-vibrador.png": [789, 923],
+  "piso-metalico-andaime.png": [1254, 1254],
   "pistola-finca-pino.png": [1254, 1254],
+  "pistola-finca-pino1.png": [1254, 1254],
   "placa-vibratoria.png": [1254, 1254],
+  "perfurador-solo-gasolina .png": [1086, 1448],
   "Produto-Sem-Imagem-600-x-600px.jpg": [600, 600],
+  "quadro-andaime.png": [1254, 1254],
+  "roda-andaime.png": [1254, 1254],
+  "sapata-ajustavel-andaime.png": [1122, 1402],
+  "sapata-fixa-andaime.png": [1254, 1254],
   "serra-de-bancada.png": [1254, 1254],
   "serra-de-marmore.png": [1254, 1254],
+  "torre-andaime.png": [1122, 1402],
+  "travessa-andaime.png": [1122, 1402],
   "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
   "bg-Slide-Equipamentos.png": [1684, 934],
   "bg-Slide-Equipamentos-concretagem.png": [1685, 934],
@@ -158,16 +172,16 @@ const catalogCategories = [
         description: "Selecione o tipo de montagem, altura aproximada, tamanhos e quantidades de peças para solicitar um orçamento mais preciso.",
         manual: "assets/docs/manual-instrucoes/manual_andaime.pdf",
         images: [
-          { src: "assets/imagens-catalogo/svg/torre_andaime.svg", alt: "Torre de andaime" },
-          { src: "assets/imagens-catalogo/svg/quadro_andaime.svg", alt: "Quadro para andaime" },
-          { src: "assets/imagens-catalogo/svg/diagonal_andaime.svg", alt: "Diagonal para andaime" },
-          { src: "assets/imagens-catalogo/svg/travessa_andaime.svg", alt: "Travessa para andaime" },
-          { src: "assets/imagens-catalogo/svg/piso_metálico.svg", alt: "Piso metálico para andaime" },
-          { src: "assets/imagens-catalogo/svg/guarda%20corpo.svg", alt: "Guarda-corpo para andaime" },
-          { src: "assets/imagens-catalogo/svg/sapata_fixa.svg", alt: "Sapata fixa para andaime" },
-          { src: "assets/imagens-catalogo/svg/sapata_ajustavel.svg", alt: "Sapata ajustável para andaime" },
-          { src: "assets/imagens-catalogo/svg/roda%20.svg", alt: "Roda para andaime" },
-          { src: "assets/imagens-catalogo/svg/escada.svg", alt: "Escada para andaime" }
+          { src: "assets/imagens-catalogo/torre-andaime.png", alt: "Torre de andaime" },
+          { src: "assets/imagens-catalogo/quadro-andaime.png", alt: "Quadro para andaime" },
+          { src: "assets/imagens-catalogo/diagonal-andaime.png", alt: "Diagonal para andaime" },
+          { src: "assets/imagens-catalogo/travessa-andaime.png", alt: "Travessa para andaime" },
+          { src: "assets/imagens-catalogo/piso-metalico-andaime.png", alt: "Piso metálico para andaime" },
+          { src: "assets/imagens-catalogo/guarda-corpo-andaime.png", alt: "Guarda-corpo para andaime" },
+          { src: "assets/imagens-catalogo/sapata-fixa-andaime.png", alt: "Sapata fixa para andaime" },
+          { src: "assets/imagens-catalogo/sapata-ajustavel-andaime.png", alt: "Sapata ajustável para andaime" },
+          { src: "assets/imagens-catalogo/roda-andaime.png", alt: "Roda para andaime" },
+          { src: "assets/imagens-catalogo/escada-andaime.png", alt: "Escada para andaime" }
         ],
         configurator: {
           title: "Monte seu andaime",
@@ -228,14 +242,14 @@ const catalogCategories = [
         name: "Escada extensível 37 degraus",
         summary: "Escada extensível para acesso em altura em serviços de obra, reforma e manutenção.",
         images: [
-          { src: "assets/imagens-catalogo/svg/escada_extensivel_37degraus.svg", alt: "Ilustração da escada extensível 37 degraus" }
+          { src: "assets/imagens-catalogo/escada-andaime.png", alt: "Ilustração da escada extensível 37 degraus" }
         ]
       },
       {
         name: "Escada multiarticular",
         summary: "Escada articulada para diferentes posições de trabalho em obras e manutenções.",
         images: [
-          { src: "assets/imagens-catalogo/svg/escada_multiarticular.svg", alt: "Ilustração da escada multiarticular" }
+          { src: "assets/imagens-catalogo/escada-multiarticular.png", alt: "Escada multiarticular" }
         ]
       }
     ]
@@ -349,7 +363,6 @@ const catalogCategories = [
         name: "Serra mármore",
         description: "A serra mármore é ideal para cortes precisos e eficientes em materiais como porcelanato, cerâmica, mármore, granito, concreto e alvenaria. Compacta, potente e de fácil manuseio, o equipamento proporciona excelente acabamento e alto desempenho em obras, reformas e instalações, garantindo mais agilidade e precisão nos cortes. Indicada para profissionais da construção civil e acabamentos, a serra mármore oferece praticidade, segurança e produtividade em diferentes tipos de aplicação.",
         images: [
-          { src: "assets/imagens-catalogo/svg/serra_mamore.svg", alt: "Ilustração da serra mármore" },
           { src: "assets/imagens-catalogo/serra-de-marmore.png", alt: "Serra mármore" }
         ]
       },
@@ -361,8 +374,8 @@ const catalogCategories = [
         name: "Pistola finca-pino",
         description: "A pistola finca pino é ideal para fixações rápidas, seguras e eficientes em concreto, aço e alvenaria, proporcionando mais agilidade e praticidade em obras e instalações. Indicada para fixação de perfis, suportes, conduítes, forros, estruturas metálicas e diversos componentes da construção civil, o equipamento oferece alto desempenho e precisão, reduzindo o tempo de execução e o esforço operacional. Compacta, resistente e de fácil manuseio, a pistola finca pino garante produtividade, firmeza nas fixações e excelente desempenho em aplicações profissionais.",
         images: [
-          { src: "assets/imagens-catalogo/svg/pistola_finca_pino.svg", alt: "Ilustração da pistola finca-pino" },
-          { src: "assets/imagens-catalogo/pistola-finca-pino.png", alt: "Pistola finca-pino" }
+          { src: "assets/imagens-catalogo/pistola-finca-pino.png", alt: "Pistola finca-pino" },
+          { src: "assets/imagens-catalogo/pistola-finca-pino1.png", alt: "Pistola finca-pino" }
         ]
       },
       {
@@ -390,7 +403,6 @@ const catalogCategories = [
         name: "Betoneira 400 litros",
         description: "A betoneira 400L é ideal para o preparo eficiente de concreto, argamassa e massa em obras de pequeno, médio e grande porte. Com alta capacidade de mistura e excelente desempenho, o equipamento garante maior produtividade, uniformidade dos materiais e agilidade na execução dos serviços. Robusta, resistente e de fácil operação, a betoneira é indicada para construções, reformas, fundações, calçadas e diversas aplicações da construção civil, proporcionando mais praticidade, economia de tempo e qualidade no canteiro de obras.",
         images: [
-          { src: "assets/imagens-catalogo/svg/betoneira_400L.svg", alt: "Ilustração da betoneira 400 litros" },
           { src: "assets/imagens-catalogo/betoneira.png", alt: "Betoneira 400 litros" }
         ]
       },
@@ -413,7 +425,6 @@ const catalogCategories = [
         description: "A placa vibratória é um equipamento essencial para serviços de compactação em obras de construção civil, garantindo maior firmeza, nivelamento e estabilidade do solo. Indicada para compactar areia, brita, cascalho, solo granular e pavimentos intertravados, ela oferece alto desempenho em aplicações como preparação de terrenos, assentamento de pisos, calçadas, valas e pequenas fundações. Com operação prática, estrutura robusta e excelente eficiência, a placa vibratória proporciona acabamento uniforme, reduz falhas na compactação e contribui para mais agilidade, segurança e produtividade na execução da obra.",
         manual: "assets/docs/manual-instrucoes/manual_placa vibratória.pdf",
         images: [
-          { src: "assets/imagens-catalogo/svg/placa_vibratoria.svg", alt: "Ilustração da placa vibratória" },
           { src: "assets/imagens-catalogo/placa-vibratoria.png", alt: "Placa vibratória" }
         ]
       },
@@ -422,7 +433,7 @@ const catalogCategories = [
         summary: "Equipamento para perfuração de solo em fundações, cercas, mourões e serviços externos.",
         description: "O perfurador de solo é a solução ideal para perfurações rápidas, precisas e eficientes em diversos tipos de terreno. Indicado para instalação de cercas, mourões, postes, estacas, plantio e fundações leves, o equipamento oferece alto desempenho com menor esforço operacional, agilizando os serviços em obras, áreas rurais e projetos de paisagismo. Com estrutura robusta, fácil manuseio e excelente capacidade de perfuração, o perfurador de solo proporciona mais produtividade, praticidade e segurança na execução do trabalho.",
         images: [
-          { src: "assets/imagens-catalogo/svg/Perfurador_solo_gasolina%20.svg", alt: "Ilustração do perfurador de solo a gasolina" }
+          { src: "assets/imagens-catalogo/perfurador-solo-gasolina .png", alt: "Perfurador de solo a gasolina" }
         ]
       },
       {
@@ -430,7 +441,7 @@ const catalogCategories = [
         summary: "Compactador tipo sapo para valas, bases, aterros e áreas com acesso mais estreito.",
         description: "O compactador de solo tipo sapinho é ideal para compactação de solos em áreas estreitas e de difícil acesso, oferecendo alto desempenho e eficiência em obras de construção civil, saneamento e infraestrutura. Indicado para compactar solos argilosos, valas, fundações, calçadas e reparos de pavimentação, o equipamento possui forte impacto vertical, garantindo excelente densidade e estabilidade do terreno. Robusto, resistente e de fácil operação, o sapinho proporciona maior precisão na compactação, reduz retrabalhos e contribui para mais produtividade, segurança e qualidade na execução da obra.",
         images: [
-          { src: "assets/imagens-catalogo/svg/Compactador_solo_tipo%20sapo_gasolina.svg", alt: "Ilustração do compactador de solo tipo sapo a gasolina" }
+          { src: "assets/imagens-catalogo/compactador-solo-tipo-sapo-gasolina.png", alt: "Compactador de solo tipo sapo a gasolina" }
         ]
       }
     ]
@@ -446,7 +457,6 @@ const catalogCategories = [
         name: "Aspirador industrial",
         description: "O aspirador industrial é ideal para limpeza pesada e remoção eficiente de resíduos sólidos e líquidos em obras, indústrias, oficinas e ambientes comerciais. Com alta capacidade de sucção e excelente desempenho, o equipamento facilita a limpeza de poeira, entulhos, serragem, água e diversos tipos de resíduos, proporcionando mais praticidade, agilidade e organização no ambiente de trabalho. Robusto, resistente e de fácil operação, o aspirador industrial contribui para maior produtividade, segurança e eficiência nas atividades de limpeza e manutenção.",
         images: [
-          { src: "assets/imagens-catalogo/svg/aspirador_industrial.svg", alt: "Ilustração do aspirador industrial" },
           { src: "assets/imagens-catalogo/aspirador-industrial.png", alt: "Aspirador industrial" }
         ]
       }
