@@ -1419,6 +1419,40 @@ const setFieldValidity = (field, isValid) => {
   field.toggleAttribute("aria-invalid", !isValid);
 };
 
+let quoteConfigurationDetails = "";
+
+const removeQuoteConfigurationDetails = (details = "") => {
+  if (!quoteConfigurationDetails) return details.trim();
+
+  return details.replace(quoteConfigurationDetails, "").replace(/\n{3,}/g, "\n\n").trim();
+};
+
+const formatQuoteConfigurationDetails = (equipment, configuration) => {
+  if (!configuration) return "";
+
+  return [
+    "Montagem selecionada em Detalhes do equipamento:",
+    equipment ? `Equipamento: ${equipment}` : "",
+    configuration
+  ].filter(Boolean).join("\n");
+};
+
+const syncQuoteConfigurationDetails = (equipment, configuration) => {
+  const detailsInput = quoteForm?.querySelector("textarea[name='detalhes']");
+  if (!detailsInput) return;
+
+  const cleanDetails = removeQuoteConfigurationDetails(detailsInput.value);
+  quoteConfigurationDetails = formatQuoteConfigurationDetails(equipment, configuration);
+
+  if (!quoteConfigurationDetails) {
+    detailsInput.value = cleanDetails;
+    return;
+  }
+
+  detailsInput.value = [cleanDetails, quoteConfigurationDetails].filter(Boolean).join("\n\n");
+  setFieldValidity(detailsInput, true);
+};
+
 const populateQuoteEquipmentOptions = (select) => {
   if (!select) return;
 
@@ -1460,6 +1494,7 @@ if (quoteForm) {
 
   equipmentSelect?.addEventListener("change", () => {
     configInput.value = "";
+    syncQuoteConfigurationDetails("", "");
   });
 
   phoneInput?.addEventListener("input", () => {
@@ -1491,6 +1526,7 @@ if (quoteForm) {
     const period = String(formData.get("periodo") || "").trim();
     const configuration = String(formData.get("configuracao") || "").trim();
     const details = String(formData.get("detalhes") || "").trim();
+    const detailsForMessage = configuration ? removeQuoteConfigurationDetails(details) : details;
 
     setQuoteFeedback();
     quoteForm.querySelectorAll("[aria-invalid='true']").forEach((field) => {
@@ -1527,14 +1563,6 @@ if (quoteForm) {
       return;
     }
 
-    if (details.length < 10) {
-      focusInvalidField(
-        quoteForm.querySelector("textarea[name='detalhes']"),
-        "Descreva medidas, quantidade ou prazo com um pouco mais de detalhe."
-      );
-      return;
-    }
-
     const message = [
       "Olá, gostaria de solicitar um orçamento pela LocTubo.",
       `Nome: ${name}`,
@@ -1545,7 +1573,7 @@ if (quoteForm) {
       configuration ? `Configuração:\n${configuration}` : "",
       `Período: ${period}`,
       `CEP: ${cep || "Não informado"}`,
-      `Detalhes: ${details}`
+      detailsForMessage ? `Observações: ${detailsForMessage}` : ""
     ].filter(Boolean).join("\n");
 
     window.location.href = `https://wa.me/5511986740961?text=${encodeURIComponent(message)}`;
@@ -1607,7 +1635,9 @@ document.addEventListener("click", (event) => {
 
   const configInput = document.querySelector(".quote-form input[name='configuracao']");
   if (configInput) {
-    configInput.value = getConfiguratorSummary(trigger.closest(".equipment-detail"));
+    const configuration = getConfiguratorSummary(trigger.closest(".equipment-detail"));
+    configInput.value = configuration;
+    syncQuoteConfigurationDetails(trigger.dataset.quoteEquipment || "", configuration);
   }
 
   closeEquipmentDrawer(false);
