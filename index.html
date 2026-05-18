@@ -437,7 +437,7 @@
             </p>
           </div>
           <form class="quote-form" novalidate>
-            <label>
+            <label class="quote-form__wide">
               Nome completo
               <input type="text" name="nome" autocomplete="name" minlength="3" required>
             </label>
@@ -476,8 +476,8 @@
               <input type="text" name="cep" inputmode="numeric" autocomplete="postal-code" placeholder="00000-000" maxlength="9">
             </label>
             <label class="quote-form__wide">
-              Medidas, quantidade ou detalhe do serviço
-              <textarea name="detalhes" rows="5" minlength="10" placeholder="Ex: fachada 8 m x 20 m, laje com pé-direito 3 m, 15 dias de locação." required></textarea>
+              Observações
+              <textarea name="detalhes" rows="5" placeholder="Informe medidas, quantidade, prazo desejado ou qualquer detalhe importante para o orçamento."></textarea>
             </label>
             <p class="quote-form__feedback quote-form__wide" data-quote-feedback aria-live="polite"></p>
             <button class="button button--primary quote-form__wide" type="submit">Enviar pelo WhatsApp</button>
