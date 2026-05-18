@@ -51,7 +51,6 @@ const imageSizes = {
   "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
   "bg-Slide-Equipamentos.png": [1684, 934],
   "bg-Slide-Equipamentos-concretagem.png": [1685, 934],
-  "bg-andaimeLocTuboLogoMarca.png": [1774, 887],
   "isotipo loctubo.png": [55, 123],
   "loctubo-logo.png": [93, 83]
 };
@@ -423,7 +422,7 @@ const catalogCategories = [
       {
         name: "Placa vibratória",
         description: "A placa vibratória é um equipamento essencial para serviços de compactação em obras de construção civil, garantindo maior firmeza, nivelamento e estabilidade do solo. Indicada para compactar areia, brita, cascalho, solo granular e pavimentos intertravados, ela oferece alto desempenho em aplicações como preparação de terrenos, assentamento de pisos, calçadas, valas e pequenas fundações. Com operação prática, estrutura robusta e excelente eficiência, a placa vibratória proporciona acabamento uniforme, reduz falhas na compactação e contribui para mais agilidade, segurança e produtividade na execução da obra.",
-        manual: "assets/docs/manual-instrucoes/manual_placa vibratória.pdf",
+        manual: "assets/docs/manual-instrucoes/manual_placa-vibratoria.pdf",
         images: [
           { src: "assets/imagens-catalogo/placa-vibratoria.png", alt: "Placa vibratória" }
         ]
