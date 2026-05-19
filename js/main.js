@@ -241,7 +241,7 @@ const catalogCategories = [
         name: "Escada extensível 37 degraus",
         summary: "Escada extensível para acesso em altura em serviços de obra, reforma e manutenção.",
         images: [
-          { src: "assets/imagens-catalogo/escada-andaime.png", alt: "Ilustração da escada extensível 37 degraus" }
+          { src: "assets/imagens-catalogo/escada_extensivel_37degraus.svg", alt: "Ilustração da escada extensível 37 degraus" }
         ]
       },
       {
