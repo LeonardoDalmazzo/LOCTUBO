@@ -30,6 +30,7 @@ const imageSizes = {
   "compressor-de-ar.png": [1254, 1254],
   "esmerilhadeira.png": [1254, 1254],
   "escada-multiarticular.png": [1254, 1254],
+  "escada_extensivel_37degraus.svg": [1254, 1254],
   "diagonal-andaime.png": [1254, 1254],
   "escada-andaime.png": [1254, 1254],
   "guarda-corpo-andaime.png": [1254, 1254],
