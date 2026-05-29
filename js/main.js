@@ -28,6 +28,9 @@ const imageSizes = {
   "alisadora-de-concreto.png": [1254, 1254],
   "betoneira150L.png": [1211, 1299],
   "betoneira400L.png": [1254, 1254],
+  "Bomba-centrifuga-a-gasolina.png": [1254, 1254],
+  "bomba-de-mangote.png": [1254, 1254],
+  "bomba-submersivel.png": [1254, 1254],
   "compactador-solo-tipo-sapo-gasolina.png": [1086, 1448],
   "compressor-de-ar.png": [1254, 1254],
   "desbastadora-de-piso.png": [1254, 1254],
@@ -515,10 +518,10 @@ const catalogCategories = [
   },
   {
     id: "compactacao",
-    label: "Compactação",
+    label: "Compactação e Escavação",
     eyebrow: "Preparo de base",
-    title: "Compactação",
-    description: "Equipamento para compactar solo, base e áreas de circulação antes de assentamentos ou concretagem.",
+    title: "Compactação e Escavação",
+    description: "Equipamentos para compactar solo, abrir perfurações e preparar bases, valas, fundações leves e áreas de circulação da obra.",
     items: [
       {
         name: "Placa vibratória",
@@ -542,6 +545,39 @@ const catalogCategories = [
         description: "O compactador de solo tipo sapinho é ideal para compactação de solos em áreas estreitas e de difícil acesso, oferecendo alto desempenho e eficiência em obras de construção civil, saneamento e infraestrutura. Indicado para compactar solos argilosos, valas, fundações, calçadas e reparos de pavimentação, o equipamento possui forte impacto vertical, garantindo excelente densidade e estabilidade do terreno. Robusto, resistente e de fácil operação, o sapinho proporciona maior precisão na compactação, reduz retrabalhos e contribui para mais produtividade, segurança e qualidade na execução da obra.",
         images: [
           { src: "assets/imagens-catalogo/compactador-solo-tipo-sapo-gasolina.png", alt: "Compactador de solo tipo sapo a gasolina" }
+        ]
+      }
+    ]
+  },
+  {
+    id: "drenagem-agua",
+    label: "Drenagem de Água",
+    eyebrow: "Remoção e transferência",
+    title: "Drenagem de Água",
+    description: "Bombas para drenagem, transferência e esgotamento de água em obras, valas, caixas, poços e áreas alagadas.",
+    items: [
+      {
+        name: "Bomba centrífuga a gasolina",
+        summary: "Bomba a gasolina para transferência e drenagem de água em locais sem energia elétrica.",
+        description: "A bomba centrífuga a gasolina é indicada para transferência, drenagem e esgotamento de água em obras, áreas externas, valas e reservatórios. Por não depender de energia elétrica no ponto de uso, oferece praticidade em frentes de trabalho afastadas ou com acesso limitado à rede.",
+        images: [
+          { src: "assets/imagens-catalogo/Bomba-centrifuga-a-gasolina.png", alt: "Bomba centrífuga a gasolina" }
+        ]
+      },
+      {
+        name: "Bomba de mangote",
+        summary: "Bomba de mangote para remoção de água em valas, poços e áreas de difícil acesso.",
+        description: "A bomba de mangote é indicada para drenagem e remoção de água em valas, poços, caixas e pontos de difícil acesso. É uma solução prática para apoiar serviços de obra, manutenção e esgotamento temporário com boa mobilidade no canteiro.",
+        images: [
+          { src: "assets/imagens-catalogo/bomba-de-mangote.png", alt: "Bomba de mangote" }
+        ]
+      },
+      {
+        name: "Bomba submersível",
+        summary: "Bomba submersível para esgotamento de água em áreas alagadas, poços e reservatórios.",
+        description: "A bomba submersível é indicada para esgotamento e drenagem de água em áreas alagadas, poços, caixas, reservatórios e ambientes de obra. Compacta e eficiente, auxilia na retirada rápida de água acumulada e no controle de pontos de alagamento.",
+        images: [
+          { src: "assets/imagens-catalogo/bomba-submersivel.png", alt: "Bomba submersível" }
         ]
       }
     ]
