@@ -33,9 +33,13 @@ const imageSizes = {
   "desbastadora-de-piso.png": [1254, 1254],
   "esmerilhadeira.png": [1254, 1254],
   "escada-multiarticular.png": [1254, 1254],
+  "escada-extensivel-20degraus.png": [1254, 1254],
   "escada_extensivel_37degraus.svg": [1254, 1254],
   "diagonal-andaime.png": [1254, 1254],
   "escada-andaime.png": [1254, 1254],
+  "guincho-coluna-100kg.png": [1254, 1254],
+  "guincho-coluna-200kg.png": [1254, 1254],
+  "guincho-coluna-350kg.png": [1254, 1254],
   "guarda-corpo-andaime.png": [1254, 1254],
   "mangote-vibrador.png": [789, 923],
   "mîsturador-eletrico.png": [1254, 1254],
@@ -52,6 +56,8 @@ const imageSizes = {
   "sapata-fixa-andaime.png": [1254, 1254],
   "serra-de-bancada.png": [1254, 1254],
   "serra-de-marmore.png": [1254, 1254],
+  "talha-manual1T.png": [1254, 1254],
+  "talha-manual2T.png": [1254, 1254],
   "torre-andaime.png": [1122, 1402],
   "travessa-andaime.png": [1122, 1402],
   "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
@@ -239,10 +245,10 @@ const catalogCategories = [
   },
   {
     id: "escadas",
-    label: "Escadas",
-    eyebrow: "Acesso em altura",
-    title: "Escadas",
-    description: "Escadas para obras, reformas e manutenções que precisam de acesso rápido, versátil e seguro.",
+    label: "Acesso e Elevação",
+    eyebrow: "Acesso em altura e içamento",
+    title: "Acesso e Elevação",
+    description: "Escadas, guinchos de coluna e talhas para obras, reformas e manutenções que precisam de acesso, içamento e movimentação de cargas com praticidade.",
     items: [
       {
         name: "Escada extensível 37 degraus",
@@ -252,10 +258,58 @@ const catalogCategories = [
         ]
       },
       {
+        name: "Escada extensível 20 degraus",
+        summary: "Escada extensível para acesso prático em altura em obras, reformas e manutenções.",
+        description: "Escada extensível indicada para acesso em altura em obras, reformas e manutenções, oferecendo alcance prático para serviços rápidos com montagem simples.",
+        images: [
+          { src: "assets/imagens-catalogo/escada-extensivel-20degraus.png", alt: "Escada extensível 20 degraus" }
+        ]
+      },
+      {
         name: "Escada multiarticular",
         summary: "Escada articulada para diferentes posições de trabalho em obras e manutenções.",
         images: [
           { src: "assets/imagens-catalogo/escada-multiarticular.png", alt: "Escada multiarticular" }
+        ]
+      },
+      {
+        name: "Guincho de coluna 100 kg",
+        summary: "Guincho de coluna para içamento vertical de materiais leves no canteiro de obra.",
+        description: "Guincho de coluna para içamento vertical de materiais leves, indicado para apoio em obras e reformas com mais agilidade no transporte de carga entre pavimentos.",
+        images: [
+          { src: "assets/imagens-catalogo/guincho-coluna-100kg.png", alt: "Guincho de coluna 100 kg" }
+        ]
+      },
+      {
+        name: "Guincho de coluna 200 kg",
+        summary: "Guincho de coluna para elevar materiais em obras com operação prática e segura.",
+        description: "Guincho de coluna para elevação vertical de cargas de até 200 kg, ideal para movimentar materiais em canteiros de obra com operação prática e segura.",
+        images: [
+          { src: "assets/imagens-catalogo/guincho-coluna-200kg.png", alt: "Guincho de coluna 200 kg" }
+        ]
+      },
+      {
+        name: "Guincho de coluna 350 kg",
+        summary: "Guincho de coluna de maior capacidade para movimentação vertical de cargas na obra.",
+        description: "Guincho de coluna de maior capacidade para içamento vertical de materiais na obra, ajudando a reduzir esforço manual e acelerar a movimentação de cargas.",
+        images: [
+          { src: "assets/imagens-catalogo/guincho-coluna-350kg.png", alt: "Guincho de coluna 350 kg" }
+        ]
+      },
+      {
+        name: "Talha manual 1 t",
+        summary: "Talha manual para içamento e posicionamento controlado de cargas de até 1 tonelada.",
+        description: "Talha manual com capacidade para 1 tonelada, indicada para içamento e posicionamento controlado de cargas em serviços de montagem, manutenção e obra.",
+        images: [
+          { src: "assets/imagens-catalogo/talha-manual1T.png", alt: "Talha manual 1 tonelada" }
+        ]
+      },
+      {
+        name: "Talha manual 2 t",
+        summary: "Talha manual para movimentação e içamento de cargas mais pesadas com controle manual.",
+        description: "Talha manual com capacidade para 2 toneladas, indicada para movimentação e içamento de cargas mais pesadas com controle manual e apoio seguro na operação.",
+        images: [
+          { src: "assets/imagens-catalogo/talha-manual2T.png", alt: "Talha manual 2 toneladas" }
         ]
       }
     ]
