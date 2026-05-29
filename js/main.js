@@ -25,9 +25,12 @@ let catalogState = null;
 
 const imageSizes = {
   "aspirador-industrial.png": [1292, 1217],
-  "betoneira.png": [800, 960],
+  "alisadora-de-concreto.png": [1254, 1254],
+  "betoneira150L.png": [1211, 1299],
+  "betoneira400L.png": [1254, 1254],
   "compactador-solo-tipo-sapo-gasolina.png": [1086, 1448],
   "compressor-de-ar.png": [1254, 1254],
+  "desbastadora-de-piso.png": [1254, 1254],
   "esmerilhadeira.png": [1254, 1254],
   "escada-multiarticular.png": [1254, 1254],
   "escada_extensivel_37degraus.svg": [1254, 1254],
@@ -35,6 +38,8 @@ const imageSizes = {
   "escada-andaime.png": [1254, 1254],
   "guarda-corpo-andaime.png": [1254, 1254],
   "mangote-vibrador.png": [789, 923],
+  "mîsturador-eletrico.png": [1254, 1254],
+  "fresadora-de-piso-a-gasolina.png": [1254, 1254],
   "piso-metalico-andaime.png": [1254, 1254],
   "pistola-finca-pino.png": [1254, 1254],
   "pistola-finca-pino1.png": [1254, 1254],
@@ -57,7 +62,8 @@ const imageSizes = {
 };
 
 const applyImagePerformanceAttributes = (image) => {
-  const fileName = image.currentSrc.split("/").pop() || image.src.split("/").pop();
+  const rawFileName = image.currentSrc.split("/").pop() || image.src.split("/").pop();
+  const fileName = decodeURIComponent(rawFileName);
   const dimensions = imageSizes[fileName] || [320, 320];
 
   if (!image.hasAttribute("decoding")) {
@@ -394,22 +400,62 @@ const catalogCategories = [
   },
   {
     id: "concreto",
-    label: "Concreto",
+    label: "Concretagem",
     eyebrow: "Preparo e adensamento",
-    title: "Concreto",
-    description: "Equipamentos para preparo, mistura e adensamento do concreto em lajes, vigas, pilares e sapatas.",
+    title: "Concretagem",
+    description: "Equipamentos para preparo, mistura, adensamento e acabamento do concreto em lajes, vigas, pilares, pisos e sapatas.",
     items: [
       {
         name: "Betoneira 400 litros",
         description: "A betoneira 400L é ideal para o preparo eficiente de concreto, argamassa e massa em obras de pequeno, médio e grande porte. Com alta capacidade de mistura e excelente desempenho, o equipamento garante maior produtividade, uniformidade dos materiais e agilidade na execução dos serviços. Robusta, resistente e de fácil operação, a betoneira é indicada para construções, reformas, fundações, calçadas e diversas aplicações da construção civil, proporcionando mais praticidade, economia de tempo e qualidade no canteiro de obras.",
         images: [
-          { src: "assets/imagens-catalogo/betoneira.png", alt: "Betoneira 400 litros" }
+          { src: "assets/imagens-catalogo/betoneira400L.png", alt: "Betoneira 400 litros" }
         ]
       },
       {
         name: "Mangote vibrador",
         description: "O mangote vibrador é essencial para garantir a compactação e o adensamento correto do concreto, eliminando bolhas de ar e evitando falhas estruturais durante a concretagem. Indicado para obras de pequeno, médio e grande porte, o equipamento proporciona maior resistência, uniformidade e qualidade no acabamento de pilares, vigas, lajes, fundações e estruturas em concreto armado. Robusto, eficiente e de fácil operação, o mangote vibrador contribui para mais produtividade, segurança e durabilidade nas etapas de concretagem da obra.",
         images: [{ src: "assets/imagens-catalogo/mangote-vibrador.png", alt: "Mangote vibrador de imersão para concreto" }]
+      },
+      {
+        name: "Betoneira 150 litros",
+        summary: "Betoneira compacta para preparo de concreto e argamassa em obras e reformas menores.",
+        description: "A betoneira 150L é indicada para preparo de concreto, argamassa e massa em obras menores, reformas e serviços de manutenção. Compacta e prática, ajuda a manter a mistura uniforme, reduz o esforço manual e melhora a produtividade no canteiro.",
+        images: [
+          { src: "assets/imagens-catalogo/betoneira150L.png", alt: "Betoneira 150 litros" }
+        ]
+      },
+      {
+        name: "Alisadora de concreto",
+        summary: "Equipamento para acabamento e alisamento de pisos de concreto recém-executados.",
+        description: "A alisadora de concreto é indicada para acabamento de pisos de concreto, ajudando a nivelar, alisar e melhorar a qualidade da superfície após a concretagem. É ideal para obras que precisam de acabamento mais uniforme, produtivo e profissional.",
+        images: [
+          { src: "assets/imagens-catalogo/alisadora-de-concreto.png", alt: "Alisadora de concreto" }
+        ]
+      },
+      {
+        name: "Misturador elétrico",
+        summary: "Misturador elétrico para massas, argamassas, tintas e outros materiais de obra.",
+        description: "O misturador elétrico é indicado para preparar argamassas, massas, tintas, rejuntes e outros materiais com mais agilidade e uniformidade. É uma opção prática para reformas, acabamentos e serviços que exigem mistura constante e bem incorporada.",
+        images: [
+          { src: "assets/imagens-catalogo/mîsturador-eletrico.png", alt: "Misturador elétrico" }
+        ]
+      },
+      {
+        name: "Desbastadora de piso",
+        summary: "Equipamento para regularização, remoção de imperfeições e preparo de pisos.",
+        description: "A desbastadora de piso é indicada para remover irregularidades, resíduos e camadas superficiais, preparando pisos de concreto para acabamento, pintura, revestimento ou recuperação. Ajuda a dar mais produtividade e padronização ao preparo da superfície.",
+        images: [
+          { src: "assets/imagens-catalogo/desbastadora-de-piso.png", alt: "Desbastadora de piso" }
+        ]
+      },
+      {
+        name: "Fresadora de piso a gasolina",
+        summary: "Fresadora para remoção e preparo de superfícies de concreto e pavimentos.",
+        description: "A fresadora de piso a gasolina é indicada para remoção de revestimentos, regularização e preparo de superfícies de concreto ou pavimentos. Robusta e produtiva, auxilia em serviços de recuperação, nivelamento e preparação de bases para novas etapas da obra.",
+        images: [
+          { src: "assets/imagens-catalogo/fresadora-de-piso-a-gasolina.png", alt: "Fresadora de piso a gasolina" }
+        ]
       }
     ]
   },
