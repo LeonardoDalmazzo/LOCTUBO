@@ -975,7 +975,7 @@ h3 {
 
 .about-pillars,
 .about-values,
-.brand-placeholder-grid {
+.brand-logo-grid {
   display: grid;
   gap: var(--space-3);
 }
@@ -1051,21 +1051,42 @@ h3 {
   transform: translateY(-3px);
 }
 
-.brand-placeholder-grid {
+.brand-logo-grid {
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.brand-placeholder-grid span {
+.brand-logo-card {
   display: grid;
   min-height: 5.5rem;
   place-items: center;
-  border: 1px dashed rgb(98 106 115 / 44%);
+  overflow: hidden;
+  border: 1px solid rgb(98 106 115 / 16%);
   border-radius: var(--radius-sm);
-  background: var(--color-surface-strong);
-  color: var(--color-muted);
-  font-size: var(--text-sm);
-  font-weight: 800;
-  text-transform: uppercase;
+  background: #ffffff;
+  padding: clamp(0.75rem, 2.2vw, 1.2rem);
+}
+
+.brand-logo-card img {
+  display: block;
+  width: auto;
+  max-width: 100%;
+  height: auto;
+  max-height: 3.9rem;
+  object-fit: contain;
+}
+
+.brand-logo-card--wide img {
+  max-width: 92%;
+  max-height: 3.45rem;
+}
+
+.brand-logo-card--square img,
+.brand-logo-card--compact img {
+  max-width: 82%;
+}
+
+.brand-logo-card--tall img {
+  max-height: 4.6rem;
 }
 
 .about-page-hero {
@@ -2749,7 +2770,7 @@ h3 {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  .brand-placeholder-grid {
+  .brand-logo-grid {
     grid-template-columns: repeat(4, minmax(0, 1fr));
   }
 
