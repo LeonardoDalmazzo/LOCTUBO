@@ -325,59 +325,32 @@ const catalogCategories = [
     description: "Peças para escoramento, reescoramento e montagem de torres metálicas com ajuste ao projeto da obra.",
     items: [
       {
-        name: "Escoramento metálico",
-        summary: "Configure torres, escoras, sapatas, forcados e longarinas conforme o projeto.",
-        description: "Informe o tipo de escoramento e as peças desejadas para a equipe orientar a composição ideal.",
+        name: "Forcado duplo",
+        description: "Peça de apoio para receber duas longarinas no sistema de escoramento, auxiliando no alinhamento e na distribuição das cargas conforme o projeto da obra.",
         images: [
-          { src: "assets/imagens-catalogo/escoramento-metalico.png", alt: "Escoramento metálico" },
-          { src: "assets/imagens-catalogo/escoramento-metalico2.png", alt: "Escoramento metálico em obra" }
-        ],
-        configurator: {
-          title: "Monte seu escoramento",
-          fields: [
-            {
-              label: "Tipo de escoramento",
-              name: "tipo",
-              options: ["Torre metálica", "Escora pontual", "Sistema misto", "A definir com a equipe"]
-            },
-            {
-              label: "Altura aproximada",
-              name: "altura",
-              options: ["A definir", "Até 3,50 m", "Até 4,20 m", "Acima de 4,20 m"]
-            },
-            {
-              label: "Aplicação",
-              name: "aplicacao",
-              options: ["Laje", "Viga", "Reescoramento", "A definir"]
-            }
-          ],
-          pieces: [
-            {
-              label: "Quadro",
-              options: ["1,0 x 1,5 m reforçado", "1,0 x 1,0 m", "0,4 x 1,0 m", "0,4 x 1,5 m"]
-            },
-            {
-              label: "Sapata ajustável",
-              options: ["30 cm"]
-            },
-            {
-              label: "Forcado ajustável",
-              options: ["30 cm"]
-            },
-            {
-              label: "Escora metálica",
-              options: ["3,50 m", "4,20 m"]
-            },
-            {
-              label: "Forcado metálico",
-              options: ["Simples", "Duplo"]
-            },
-            {
-              label: "Longarina metálica",
-              options: ["2 m", "3 m", "4 m"]
-            }
-          ]
-        }
+          { src: "assets/imagens-catalogo/forcado-duplo.png", alt: "Forcado duplo para escoramento" }
+        ]
+      },
+      {
+        name: "Forcado simples",
+        description: "Peça de apoio para uma longarina ou viga no escoramento de lajes e vigas, indicada para ajuste de nivelamento e apoio das formas.",
+        images: [
+          { src: "assets/imagens-catalogo/forcado-simples.png", alt: "Forcado simples para escoramento" }
+        ]
+      },
+      {
+        name: "Longarina",
+        description: "Perfil metálico usado como elemento de apoio e distribuição de carga em sistemas de escoramento e reescoramento de lajes e vigas.",
+        images: [
+          { src: "assets/imagens-catalogo/longarina.png", alt: "Longarina para escoramento" }
+        ]
+      },
+      {
+        name: "Escora",
+        description: "Escora metálica regulável para apoio pontual de formas, vigas e lajes durante concretagem, cura ou reescoramento.",
+        images: [
+          { src: "assets/imagens-catalogo/escora.png", alt: "Escora metálica regulável" }
+        ]
       }
     ]
   },
