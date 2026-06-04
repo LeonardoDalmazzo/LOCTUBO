@@ -415,8 +415,18 @@ const catalogCategories = [
         ]
       },
       {
-        name: "Compressor de ar",
-        images: [{ src: "assets/imagens-catalogo/compressor-de-ar.png", alt: "Compressor de ar" }]
+        name: "Furadeira de impacto",
+        description: "Furadeira de impacto indicada para perfurações em alvenaria, concreto, madeira e metal, conforme a broca utilizada. É uma ferramenta versátil para obras, reformas e instalações, oferecendo praticidade em fixações, montagem de estruturas, passagem de conduítes e serviços de manutenção.",
+        images: [
+          { src: "assets/imagens-catalogo/furadeira-de-impacto.png", alt: "Furadeira de impacto" }
+        ]
+      },
+      {
+        name: "Lixadeira orbital",
+        description: "Lixadeira orbital indicada para acabamento, nivelamento e preparação de superfícies em madeira, massa corrida, pintura e pequenos reparos. Ajuda a remover imperfeições e deixar a superfície mais uniforme antes da pintura, verniz ou acabamento final.",
+        images: [
+          { src: "assets/imagens-catalogo/lixadeira-orbital.png", alt: "Lixadeira orbital" }
+        ]
       }
     ]
   },
@@ -486,6 +496,22 @@ const catalogCategories = [
         images: [
           { src: "assets/imagens-catalogo/fresadora-de-piso-a-gasolina.png", alt: "Fresadora de piso a gasolina" }
         ]
+      },
+      {
+        name: "Politriz de piso monofásica",
+        summary: "Politriz para acabamento, polimento e recuperação de pisos de concreto.",
+        description: "A politriz de piso monofásica é indicada para acabamento, polimento e recuperação de superfícies de concreto, granilite e pisos industriais. É uma opção prática para obras e reformas que precisam melhorar o nivelamento, remover marcas superficiais e preparar o piso para acabamento ou tratamento final.",
+        images: [
+          { src: "assets/imagens-catalogo/politriz-de-piso-monofasica.png", alt: "Politriz de piso monofásica" }
+        ]
+      },
+      {
+        name: "Lixadeira de parede",
+        summary: "Lixadeira para preparo de paredes, tetos e superfícies antes da pintura.",
+        description: "A lixadeira de parede é indicada para nivelar massa corrida, remover pequenas imperfeições e preparar paredes e tetos para pintura ou acabamento. Ajuda a reduzir esforço manual e entregar uma superfície mais uniforme em reformas, obras e serviços de manutenção.",
+        images: [
+          { src: "assets/imagens-catalogo/lixadeira-de-parede.png", alt: "Lixadeira de parede" }
+        ]
       }
     ]
   },
@@ -542,7 +568,8 @@ const catalogCategories = [
         summary: "Bomba de mangote para remoção de água em valas, poços e áreas de difícil acesso.",
         description: "A bomba de mangote é indicada para drenagem e remoção de água em valas, poços, caixas e pontos de difícil acesso. É uma solução prática para apoiar serviços de obra, manutenção e esgotamento temporário com boa mobilidade no canteiro.",
         images: [
-          { src: "assets/imagens-catalogo/bomba-de-mangote.png", alt: "Bomba de mangote" }
+          { src: "assets/imagens-catalogo/bomba-de-mangote.png", alt: "Bomba de mangote" },
+          { src: "assets/imagens-catalogo/bomba-mangote.png", alt: "Bomba de mangote em detalhe" }
         ]
       },
       {
@@ -557,16 +584,51 @@ const catalogCategories = [
   },
   {
     id: "limpeza",
-    label: "Limpeza",
-    eyebrow: "Organização da obra",
-    title: "Limpeza",
-    description: "Equipamento para limpeza pesada e apoio na organização do canteiro.",
+    label: "Limpeza e Pintura",
+    eyebrow: "Limpeza, lavagem e pintura",
+    title: "Limpeza e Pintura",
+    description: "Equipamentos para limpeza pesada, lavagem de superfícies, acabamento de pisos e apoio em serviços de pintura e manutenção.",
     items: [
       {
         name: "Aspirador industrial",
         description: "O aspirador industrial é ideal para limpeza pesada e remoção eficiente de resíduos sólidos e líquidos em obras, indústrias, oficinas e ambientes comerciais. Com alta capacidade de sucção e excelente desempenho, o equipamento facilita a limpeza de poeira, entulhos, serragem, água e diversos tipos de resíduos, proporcionando mais praticidade, agilidade e organização no ambiente de trabalho. Robusto, resistente e de fácil operação, o aspirador industrial contribui para maior produtividade, segurança e eficiência nas atividades de limpeza e manutenção.",
         images: [
           { src: "assets/imagens-catalogo/aspirador-industrial.png", alt: "Aspirador industrial" }
+        ]
+      },
+      {
+        name: "Compressor de ar 10 PCM",
+        description: "Compressor de ar indicado para serviços leves de pintura, limpeza com ar comprimido, calibragem e acionamento de ferramentas pneumáticas de menor consumo. É uma opção prática para reformas, manutenção e apoio em acabamentos que precisam de mobilidade e operação simples.",
+        images: [
+          { src: "assets/imagens-catalogo/compressor-de-ar-10-PCM.png", alt: "Compressor de ar 10 PCM" }
+        ]
+      },
+      {
+        name: "Compressor de ar 15 PCM",
+        description: "Compressor de ar com maior reserva de desempenho para pintura, pulverização, limpeza técnica e uso com ferramentas pneumáticas em obras, oficinas e serviços de manutenção. Ajuda a manter pressão estável em aplicações de rotina com mais produtividade.",
+        images: [
+          { src: "assets/imagens-catalogo/compressor-de-ar-15-PCM.png", alt: "Compressor de ar 15 PCM" }
+        ]
+      },
+      {
+        name: "Compressor de ar 40 PCM",
+        description: "Compressor de ar de alta capacidade para serviços mais exigentes de pintura, jateamento leve, limpeza industrial e alimentação de ferramentas pneumáticas. Indicado para frentes de trabalho que precisam de maior vazão e operação contínua com robustez.",
+        images: [
+          { src: "assets/imagens-catalogo/compressor-de-ar-40-PCM.png", alt: "Compressor de ar 40 PCM" }
+        ]
+      },
+      {
+        name: "Lavadora de alta pressão profissional",
+        description: "Lavadora de alta pressão profissional indicada para remoção de sujeira pesada em pisos, fachadas, calçadas, máquinas, equipamentos e áreas externas. Facilita a limpeza com jato concentrado, reduzindo esforço manual e agilizando a preparação de superfícies.",
+        images: [
+          { src: "assets/imagens-catalogo/lavadora-de-alta-pressao-profissional.png", alt: "Lavadora de alta pressão profissional" }
+        ]
+      },
+      {
+        name: "Enceradeira industrial",
+        description: "Enceradeira industrial para limpeza, lavagem, polimento e conservação de pisos em obras, comércios, condomínios e áreas de grande circulação. Pode ser usada com acessórios adequados para remover sujeira, recuperar brilho e melhorar o acabamento da superfície.",
+        images: [
+          { src: "assets/imagens-catalogo/enceradeira-industrial.png", alt: "Enceradeira industrial" }
         ]
       }
     ]
