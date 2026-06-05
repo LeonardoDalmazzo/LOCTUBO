@@ -628,14 +628,6 @@ const catalogCategories = [
     ]
   },
   {
-    id: "ferramentas-bateria",
-    label: "Ferramentas a bateria",
-    eyebrow: "Mobilidade no canteiro",
-    title: "Ferramentas a bateria",
-    description: "Opções a bateria para serviços que precisam de mobilidade e agilidade no canteiro.",
-    items: ["Ferramentas a bateria"]
-  },
-  {
     id: "concreto",
     label: "Concretagem",
     eyebrow: "Preparo e adensamento",
