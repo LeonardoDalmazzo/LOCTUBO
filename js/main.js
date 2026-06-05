@@ -194,7 +194,27 @@ const placeholderImage = "assets/imagens-catalogo/Produto-Sem-Imagem-600-x-600px
 // Manutencao rapida: adicione aqui o nome exato do equipamento para deixar indisponivel.
 // Em itens objeto, tambem funciona usar available: false ou className: "is-unavailable".
 const unavailableEquipmentNames = new Set([
-  "Ferramentas a bateria"
+  "Guincho de coluna 100 kg",
+  "Guincho de coluna 200 kg",
+  "Guincho de coluna 350 kg",
+  "Talha manual 1 t",
+  "Talha manual 2 t",
+  "Perfurador de solo a gasolina",
+  "Compactador de solo tipo sapo a gasolina",
+  "Betoneira 150 litros",
+  "Alisadora de concreto",
+  "Misturador elétrico",
+  "Politriz de piso monofásica",
+  "Desbastadora de piso",
+  "Fresadora de piso a gasolina",
+  "Bomba centrífuga a gasolina",
+  "Bomba de mangote",
+  "Enceradeira industrial",
+  "Lavadora de alta pressão profissional",
+  "Serra de bancada",
+  "Furadeira de impacto",
+  "Lixadeira orbital",
+  "Triturador de entulho",
   // "Martelete rompedor 30 kg"
 ]);
 
