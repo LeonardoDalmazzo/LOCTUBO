@@ -192,70 +192,78 @@ const catalogCategories = [
     label: "Andaimes",
     eyebrow: "Acesso e trabalho em altura",
     title: "Andaimes",
-    description: "Quadros, diagonais, travessas, pisos metálicos, rodapés, sapatas, rodas, escadas e guarda-corpos para montar a configuração conforme a altura e a área de trabalho.",
+    description: "Quadros, diagonais, travessas, pisos metálicos, rodapés, sapatas, rodas, escadas e guarda-corpos para diferentes necessidades de acesso e trabalho em altura.",
     items: [
       {
         name: "Andaime",
-        summary: "Monte a configuração com quadros, diagonais, travessas, pisos metálicos, rodapés, sapatas, rodas, escadas e guarda-corpos.",
-        description: "Selecione o tipo de montagem, altura aproximada, tamanhos e quantidades de peças para solicitar um orçamento mais preciso.",
+        description: "Torre de andaime tubular para acesso e trabalho em altura, indicada para obras, reformas e manutenções que precisam de plataforma elevada com montagem modular e estável.",
         manual: "assets/docs/manual-instrucoes/manual_andaime.pdf",
         images: [
-          { src: "assets/imagens-catalogo/torre-andaime.png", alt: "Torre de andaime" },
-          { src: "assets/imagens-catalogo/quadro-andaime.png", alt: "Quadro para andaime" },
-          { src: "assets/imagens-catalogo/diagonal-andaime.png", alt: "Diagonal para andaime" },
-          { src: "assets/imagens-catalogo/travessa-andaime.png", alt: "Travessa para andaime" },
-          { src: "assets/imagens-catalogo/piso-metalico-andaime.png", alt: "Piso metálico para andaime" },
-          { src: "assets/imagens-catalogo/guarda-corpo-andaime.png", alt: "Guarda-corpo para andaime" },
-          { src: "assets/imagens-catalogo/sapata-fixa-andaime.png", alt: "Sapata fixa para andaime" },
-          { src: "assets/imagens-catalogo/sapata-ajustavel-andaime.png", alt: "Sapata ajustável para andaime" },
-          { src: "assets/imagens-catalogo/roda-andaime.png", alt: "Roda para andaime" },
+          { src: "assets/imagens-catalogo/torre-andaime.png", alt: "Torre de andaime" }
+        ]
+      },
+      {
+        name: "Quadro para andaime",
+        description: "Quadro tubular para composição da estrutura vertical do andaime, usado como base de montagem para formar módulos de acesso e apoio em altura.",
+        images: [
+          { src: "assets/imagens-catalogo/quadro-andaime.png", alt: "Quadro para andaime" }
+        ]
+      },
+      {
+        name: "Diagonal para andaime",
+        description: "Diagonal para travamento e contraventamento do andaime, ajudando a dar rigidez à estrutura durante a montagem e o uso na obra.",
+        images: [
+          { src: "assets/imagens-catalogo/diagonal-andaime.png", alt: "Diagonal para andaime" }
+        ]
+      },
+      {
+        name: "Travessa para andaime",
+        description: "Travessa tubular para ligação entre quadros de andaime, utilizada para estabilizar módulos e apoiar a composição da plataforma de trabalho.",
+        images: [
+          { src: "assets/imagens-catalogo/travessa-andaime.png", alt: "Travessa para andaime" }
+        ]
+      },
+      {
+        name: "Piso metálico para andaime",
+        description: "Piso metálico para formar a plataforma de trabalho do andaime, oferecendo superfície de apoio resistente para circulação e execução de serviços em altura.",
+        images: [
+          { src: "assets/imagens-catalogo/piso-metalico-andaime.png", alt: "Piso metálico para andaime" }
+        ]
+      },
+      {
+        name: "Guarda-corpo para andaime",
+        description: "Guarda-corpo para proteção periférica em andaimes, indicado para aumentar a segurança da área de trabalho elevada conforme a configuração da montagem.",
+        images: [
+          { src: "assets/imagens-catalogo/guarda-corpo-andaime.png", alt: "Guarda-corpo para andaime" }
+        ]
+      },
+      {
+        name: "Sapata fixa para andaime",
+        description: "Sapata fixa para apoio de andaimes tubulares, usada na base da estrutura para distribuir carga e manter o conjunto apoiado no piso.",
+        images: [
+          { src: "assets/imagens-catalogo/sapata-fixa-andaime.png", alt: "Sapata fixa para andaime" }
+        ]
+      },
+      {
+        name: "Sapata ajustável para andaime",
+        description: "Sapata ajustável para nivelamento da base do andaime, indicada para compensar pequenas variações do piso e auxiliar na montagem alinhada da estrutura.",
+        images: [
+          { src: "assets/imagens-catalogo/sapata-ajustavel-andaime.png", alt: "Sapata ajustável para andaime" }
+        ]
+      },
+      {
+        name: "Roda para andaime",
+        description: "Roda para andaime móvel, indicada para deslocamento controlado de torres em áreas de trabalho, sempre conforme as condições de uso e segurança da obra.",
+        images: [
+          { src: "assets/imagens-catalogo/roda-andaime.png", alt: "Roda para andaime" }
+        ]
+      },
+      {
+        name: "Escada para andaime",
+        description: "Escada para acesso ao andaime, utilizada para subir e descer entre níveis da estrutura com mais praticidade durante serviços em altura.",
+        images: [
           { src: "assets/imagens-catalogo/escada-andaime.png", alt: "Escada para andaime" }
-        ],
-        configurator: {
-          title: "Monte seu andaime",
-          fields: [
-            {
-              label: "Tipo de montagem",
-              name: "tipo",
-              options: ["Torre", "Fachadeiro", "A definir com a equipe"]
-            },
-            {
-              label: "Altura aproximada",
-              name: "altura",
-              options: ["A definir", "2 m", "4 m", "6 m", "8 m", "10 m ou mais"]
-            }
-          ],
-          pieces: [
-            {
-              label: "Quadro",
-              options: ["1,0 x 1,0 m", "1,0 x 1,5 m", "1,0 x 1,5 m reforçado", "1,0 x 2,0 m", "0,4 x 1,0 m", "0,4 x 1,5 m"]
-            },
-            {
-              label: "Diagonal",
-              options: ["1 m", "1,5 m", "1,8 m", "2 m"]
-            },
-            {
-              label: "Travessa",
-              options: ["1 m", "1 m apoio", "1,5 m", "1,5 m apoio", "1,8 m", "2 m"]
-            },
-            {
-              label: "Piso metálico",
-              options: ["1 m", "1,5 m", "2 m"]
-            },
-            {
-              label: "Rodapé",
-              options: ["1 m", "1,5 m", "2 m"]
-            },
-            {
-              label: "Guarda-corpo",
-              options: ["1 m", "1,5 m", "2 m"]
-            },
-            "Sapata fixa",
-            "Sapata ajustável",
-            "Roda",
-            "Escada"
-          ]
-        }
+        ]
       }
     ]
   },
@@ -337,6 +345,13 @@ const catalogCategories = [
     title: "Escoramento",
     description: "Peças para escoramento, reescoramento e montagem de torres metálicas com ajuste ao projeto da obra.",
     items: [
+      {
+        name: "Escoramento metálico",
+        description: "Sistema de escoramento metálico para apoio de formas, lajes e vigas durante concretagem, cura ou reescoramento, com montagem ajustada conforme a necessidade da obra.",
+        images: [
+          { src: "assets/imagens-catalogo/escoramento-metalico.png", alt: "Escoramento metálico" }
+        ]
+      },
       {
         name: "Forcado duplo",
         description: "Peça de apoio para receber duas longarinas no sistema de escoramento, auxiliando no alinhamento e na distribuição das cargas conforme o projeto da obra.",
