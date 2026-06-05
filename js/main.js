@@ -671,6 +671,29 @@ const normalizeSlug = (value) =>
     .replace(/[^a-z0-9]+/g, "-")
     .replace(/(^-|-$)/g, "");
 
+const catalogFeaturedItemOrder = [
+  "Andaime",
+  "Escoramento metálico",
+  "Escada multiarticular",
+  "Martelete rompedor 30 kg",
+  "Betoneira 400 litros",
+  "Politriz de piso monofásica",
+  "Placa vibratória",
+  "Compactador de solo tipo sapo a gasolina",
+  "Bomba submersível",
+  "Aspirador industrial",
+  "Enceradeira industrial",
+  "Lavadora de alta pressão profissional",
+  "Compressor de ar 40 PCM",
+  "Serra de bancada",
+  "Lixadeira orbital",
+  "Esmerilhadeira"
+];
+
+const catalogFeaturedItemRank = new Map(
+  catalogFeaturedItemOrder.map((name, index) => [normalizeSlug(name), index])
+);
+
 const getCatalogItemImages = (category, item) => {
   if (item.images) return item.images;
   if (category.imageSet) return category.imageSet;
@@ -778,11 +801,44 @@ const setCatalogFilter = (state, filter) => {
   renderCatalogPage(state);
 };
 
+const getCatalogOriginalIndex = (card) => Number(card.dataset.catalogIndex || 0);
+
+const getCatalogFeaturedRank = (card) => {
+  const titleSlug = normalizeSlug(card.dataset.detailTitle || "");
+  return catalogFeaturedItemRank.has(titleSlug)
+    ? catalogFeaturedItemRank.get(titleSlug)
+    : Number.MAX_SAFE_INTEGER;
+};
+
+const getCatalogCardsForFilter = (state) => {
+  const filteredCards = state.cards.filter((card) => (
+    state.filter === "todos" || card.dataset.catalogCategory === state.filter
+  ));
+
+  if (state.filter !== "todos") return filteredCards;
+
+  return filteredCards.slice().sort((firstCard, secondCard) => {
+    const rankDifference = getCatalogFeaturedRank(firstCard) - getCatalogFeaturedRank(secondCard);
+    if (rankDifference !== 0) return rankDifference;
+
+    return getCatalogOriginalIndex(firstCard) - getCatalogOriginalIndex(secondCard);
+  });
+};
+
+const applyCatalogCardOrder = (state, orderedCards) => {
+  const orderedCardIndexes = new Map(orderedCards.map((card, index) => [card, index]));
+
+  state.cards.forEach((card, index) => {
+    const order = orderedCardIndexes.has(card) ? orderedCardIndexes.get(card) : state.cards.length + index;
+    card.style.order = String(order);
+  });
+};
+
 const showCatalogCard = (card) => {
   if (!catalogState || !card) return;
 
   catalogState.filter = "todos";
-  const cards = catalogState.cards;
+  const cards = getCatalogCardsForFilter(catalogState);
   const cardIndex = cards.indexOf(card);
 
   if (cardIndex >= 0) {
@@ -798,10 +854,11 @@ const renderCatalogPage = (state) => {
 
   const { buttons, cards, emptyMessage, itemFeedback, nextButton, pageIndicator, prevButton } = state;
   const pageSize = state.pageSize || 4;
-  const filteredCards = cards.filter((card) => state.filter === "todos" || card.dataset.catalogCategory === state.filter);
+  const filteredCards = getCatalogCardsForFilter(state);
   const totalPages = Math.max(1, Math.ceil(filteredCards.length / pageSize));
 
   state.page = Math.min(Math.max(state.page, 1), totalPages);
+  applyCatalogCardOrder(state, filteredCards);
 
   buttons.forEach((button) => {
     const isActive = button.dataset.catalogFilter === state.filter;
@@ -907,6 +964,10 @@ const setupCatalog = () => {
 
   const buttons = Array.from(filterNav.querySelectorAll("[data-catalog-filter]"));
   const cards = Array.from(grid.querySelectorAll("[data-catalog-category]"));
+  cards.forEach((card, index) => {
+    card.dataset.catalogIndex = String(index);
+  });
+
   const state = {
     buttons,
     cards,
