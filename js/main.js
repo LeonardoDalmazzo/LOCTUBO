@@ -85,6 +85,7 @@ const imageSizes = {
   "talha-manual2T.png": [1254, 1254],
   "talhadeira.png": [1024, 1536],
   "tabuas-de-pinus-3m.png": [1254, 1254],
+  "triturador de entulho.png": [1448, 1086],
   "torre-andaime.png": [1122, 1402],
   "travessa-andaime.png": [1122, 1402],
   "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
@@ -488,6 +489,14 @@ const catalogCategories = [
         name: "Martelete rompedor 30 kg",
         description: "O martelete rompedor 30kg é a escolha ideal para demolições pesadas e trabalhos de grande impacto em concreto armado, asfalto, fundações, pisos industriais e estruturas de alta resistência. Desenvolvido para operações intensivas, o equipamento oferece extrema potência e alta capacidade de rompimento, garantindo máxima eficiência e produtividade em obras de construção civil, infraestrutura e manutenção pesada. Com estrutura robusta e desempenho superior, o martelete de 30kg proporciona mais agilidade na execução dos serviços, redução do tempo de trabalho e excelente rendimento mesmo nas aplicações mais exigentes.",
         images: [{ src: "assets/imagens-catalogo/martelete-rompedor-30kg.png", alt: "Martelete rompedor 30 kg" }]
+      },
+      {
+        name: "Triturador de entulho",
+        summary: "Equipamento para reduzir resíduos de obra e facilitar descarte, transporte e reaproveitamento.",
+        description: "O triturador de entulho é indicado para processar resíduos de construção civil, como restos de alvenaria, concreto e cerâmica, reduzindo o volume do material no canteiro. Ajuda a organizar a frente de trabalho, facilitar o transporte e apoiar rotinas de descarte ou reaproveitamento conforme a necessidade da obra.",
+        images: [
+          { src: "assets/imagens-catalogo/triturador de entulho.png", alt: "Triturador de entulho" }
+        ]
       },
       {
         name: "Ponteira",
