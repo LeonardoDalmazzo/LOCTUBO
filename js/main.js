@@ -876,7 +876,12 @@ const catalogFeaturedItemOrder = [
   "Compressor de ar 40 PCM",
   "Serra de bancada",
   "Lixadeira orbital",
-  "Esmerilhadeira"
+  "Esmerilhadeira",
+  "Escada extensível 37 degraus",
+  "Serra mármore",
+  "Cortadora de cerâmica e porcelanato",
+  "Disco de corte diamantado",
+  "Motosserra à gasolina"
 ];
 
 const catalogFeaturedItemRank = new Map(
