@@ -36,7 +36,10 @@ const imageSizes = {
   "compressor-de-ar-10-PCM.png": [1254, 1254],
   "compressor-de-ar-15-PCM.png": [1254, 1254],
   "compressor-de-ar-40-PCM.png": [1254, 1254],
+  "corrente-oregon-21bpx-motosserra.png": [1536, 1024],
+  "cortadora-de-ceramica-e-porcelanato.png": [1254, 1254],
   "desbastadora-de-piso.png": [1254, 1254],
+  "disco-de-corte-diamantado.png": [1254, 1254],
   "enceradeira-industrial.png": [1024, 1536],
   "escora.png": [1254, 1254],
   "esmerilhadeira.png": [1254, 1254],
@@ -57,7 +60,12 @@ const imageSizes = {
   "lixadeira-orbital.png": [1402, 1122],
   "longarina.png": [1254, 1254],
   "mangote-vibrador.png": [789, 923],
+  "mangueira-bomba-dagua-20m.png": [1273, 1236],
+  "motor-mangote-36.png": [1329, 1183],
+  "motor-mangote-45.png": [1333, 1180],
+  "motosserra-gasolina.png": [1254, 1254],
   "mîsturador-eletrico.png": [1254, 1254],
+  "oleo-para-motor-de-2-tempos.png": [1254, 1254],
   "fresadora-de-piso-a-gasolina.png": [1254, 1254],
   "piso-metalico-andaime.png": [1254, 1254],
   "pistola-finca-pino.png": [1254, 1254],
@@ -65,6 +73,7 @@ const imageSizes = {
   "placa-vibratoria.png": [1254, 1254],
   "politriz-de-piso-monofasica.png": [1254, 1254],
   "perfurador-solo-gasolina .png": [1086, 1448],
+  "ponteira.png": [1254, 1254],
   "Produto-Sem-Imagem-600-x-600px.jpg": [600, 600],
   "quadro-andaime.png": [1254, 1254],
   "roda-andaime.png": [1254, 1254],
@@ -74,6 +83,8 @@ const imageSizes = {
   "serra-de-marmore.png": [1254, 1254],
   "talha-manual1T.png": [1254, 1254],
   "talha-manual2T.png": [1254, 1254],
+  "talhadeira.png": [1024, 1536],
+  "tabuas-de-pinus-3m.png": [1254, 1254],
   "torre-andaime.png": [1122, 1402],
   "travessa-andaime.png": [1122, 1402],
   "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
@@ -186,6 +197,16 @@ const unavailableEquipmentNames = new Set([
   // "Martelete rompedor 30 kg"
 ]);
 
+const createSizeConfigurator = (options) => ({
+  title: "Escolha o tamanho",
+  fields: [
+    {
+      label: "Tamanho",
+      options
+    }
+  ]
+});
+
 const catalogCategories = [
   {
     id: "andaimes-tubulares",
@@ -205,6 +226,14 @@ const catalogCategories = [
       {
         name: "Quadro para andaime",
         description: "Quadro tubular para composição da estrutura vertical do andaime, usado como base de montagem para formar módulos de acesso e apoio em altura.",
+        configurator: createSizeConfigurator([
+          "0,4 x 1,0 m",
+          "0,4 x 1,5 m",
+          "1,0 x 1,0 m",
+          "1,0 x 2,0 m",
+          "Reforçado 1,5 m",
+          "Simples 1,0 x 1,5 m"
+        ]),
         images: [
           { src: "assets/imagens-catalogo/quadro-andaime.png", alt: "Quadro para andaime" }
         ]
@@ -212,6 +241,12 @@ const catalogCategories = [
       {
         name: "Diagonal para andaime",
         description: "Diagonal para travamento e contraventamento do andaime, ajudando a dar rigidez à estrutura durante a montagem e o uso na obra.",
+        configurator: createSizeConfigurator([
+          "1,0 m",
+          "1,5 m",
+          "1,8 m",
+          "2,0 m"
+        ]),
         images: [
           { src: "assets/imagens-catalogo/diagonal-andaime.png", alt: "Diagonal para andaime" }
         ]
@@ -219,6 +254,13 @@ const catalogCategories = [
       {
         name: "Travessa para andaime",
         description: "Travessa tubular para ligação entre quadros de andaime, utilizada para estabilizar módulos e apoiar a composição da plataforma de trabalho.",
+        configurator: createSizeConfigurator([
+          "1,0 m - apoio",
+          "1,5 m - apoio",
+          "Simples 1,0 m",
+          "Simples 1,5 m",
+          "Simples 2,0 m"
+        ]),
         images: [
           { src: "assets/imagens-catalogo/travessa-andaime.png", alt: "Travessa para andaime" }
         ]
@@ -226,13 +268,39 @@ const catalogCategories = [
       {
         name: "Piso metálico para andaime",
         description: "Piso metálico para formar a plataforma de trabalho do andaime, oferecendo superfície de apoio resistente para circulação e execução de serviços em altura.",
+        configurator: createSizeConfigurator([
+          "1,0 x 0,27 m",
+          "1,5 x 0,37 m",
+          "2,0 x 0,37 m"
+        ]),
         images: [
           { src: "assets/imagens-catalogo/piso-metalico-andaime.png", alt: "Piso metálico para andaime" }
         ]
       },
       {
+        name: "Tábuas de Pinus 3 m",
+        summary: "Tábuas de apoio para uso em obra, organização de passagens e composições provisórias.",
+        description: "As tábuas de Pinus 3 m são indicadas para apoio em rotinas de obra, passagens provisórias, proteção de superfícies e composições temporárias conforme a necessidade do canteiro. São uma solução prática para organizar frentes de trabalho e auxiliar serviços de montagem, acabamento e circulação.",
+        images: [
+          { src: "assets/imagens-catalogo/tabuas-de-pinus-3m.png", alt: "Tábuas de Pinus 3 metros" }
+        ]
+      },
+      {
         name: "Guarda-corpo para andaime",
         description: "Guarda-corpo para proteção periférica em andaimes, indicado para aumentar a segurança da área de trabalho elevada conforme a configuração da montagem.",
+        configurator: createSizeConfigurator([
+          "2,0 m com rodapé e porta",
+          "2,0 m com rodapé sem porta",
+          "2,0 m com rodapé sem porta e encaixe",
+          "1,0 m com rodapé e porta",
+          "1,0 m com rodapé sem porta",
+          "1,0 m com rodapé sem porta e encaixe",
+          "1,5 m com rodapé e porta",
+          "1,5 m com rodapé sem porta",
+          "1,5 m com rodapé sem porta e encaixe",
+          "Rodapé metálico 1,0 m",
+          "Rodapé metálico 1,5 m"
+        ]),
         images: [
           { src: "assets/imagens-catalogo/guarda-corpo-andaime.png", alt: "Guarda-corpo para andaime" }
         ]
@@ -261,6 +329,9 @@ const catalogCategories = [
       {
         name: "Escada para andaime",
         description: "Escada para acesso ao andaime, utilizada para subir e descer entre níveis da estrutura com mais praticidade durante serviços em altura.",
+        configurator: createSizeConfigurator([
+          "2,0 x 0,35 m"
+        ]),
         images: [
           { src: "assets/imagens-catalogo/escada-andaime.png", alt: "Escada para andaime" }
         ]
@@ -369,6 +440,11 @@ const catalogCategories = [
       {
         name: "Longarina",
         description: "Perfil metálico usado como elemento de apoio e distribuição de carga em sistemas de escoramento e reescoramento de lajes e vigas.",
+        configurator: createSizeConfigurator([
+          "Comprimento 2,0 m",
+          "Comprimento 3,0 m",
+          "Comprimento 4,0 m"
+        ]),
         images: [
           { src: "assets/imagens-catalogo/longarina.png", alt: "Longarina para escoramento" }
         ]
@@ -376,6 +452,10 @@ const catalogCategories = [
       {
         name: "Escora",
         description: "Escora metálica regulável para apoio pontual de formas, vigas e lajes durante concretagem, cura ou reescoramento.",
+        configurator: createSizeConfigurator([
+          "3,50 m",
+          "4,0 m"
+        ]),
         images: [
           { src: "assets/imagens-catalogo/escora.png", alt: "Escora metálica regulável" }
         ]
@@ -408,6 +488,26 @@ const catalogCategories = [
         name: "Martelete rompedor 30 kg",
         description: "O martelete rompedor 30kg é a escolha ideal para demolições pesadas e trabalhos de grande impacto em concreto armado, asfalto, fundações, pisos industriais e estruturas de alta resistência. Desenvolvido para operações intensivas, o equipamento oferece extrema potência e alta capacidade de rompimento, garantindo máxima eficiência e produtividade em obras de construção civil, infraestrutura e manutenção pesada. Com estrutura robusta e desempenho superior, o martelete de 30kg proporciona mais agilidade na execução dos serviços, redução do tempo de trabalho e excelente rendimento mesmo nas aplicações mais exigentes.",
         images: [{ src: "assets/imagens-catalogo/martelete-rompedor-30kg.png", alt: "Martelete rompedor 30 kg" }]
+      },
+      {
+        name: "Ponteira",
+        summary: "Acessório para martelete rompedor em abertura, quebra e remoção de concreto.",
+        description: "A ponteira é indicada para uso com marteletes rompedores em serviços de demolição, abertura de pontos, quebra localizada e remoção de concreto ou alvenaria. Ajuda a concentrar o impacto em uma área menor, oferecendo mais precisão em intervenções de obra e manutenção.",
+        configurator: createSizeConfigurator([
+          "400 mm",
+          "500 mm"
+        ]),
+        images: [{ src: "assets/imagens-catalogo/ponteira.png", alt: "Ponteira para martelete rompedor" }]
+      },
+      {
+        name: "Talhadeira",
+        summary: "Acessório para martelete rompedor em remoções, rasgos e acabamentos de demolição.",
+        description: "A talhadeira é indicada para uso com marteletes rompedores em remoção de revestimentos, abertura de canaletas, rasgos e ajustes em concreto ou alvenaria. O formato em lâmina ajuda a distribuir o impacto para cortes e destacamentos com mais controle.",
+        configurator: createSizeConfigurator([
+          "400 mm",
+          "500 mm"
+        ]),
+        images: [{ src: "assets/imagens-catalogo/talhadeira.png", alt: "Talhadeira para martelete rompedor" }]
       }
     ]
   },
@@ -428,6 +528,22 @@ const catalogCategories = [
         description: "A serra mármore é ideal para cortes precisos e eficientes em materiais como porcelanato, cerâmica, mármore, granito, concreto e alvenaria. Compacta, potente e de fácil manuseio, o equipamento proporciona excelente acabamento e alto desempenho em obras, reformas e instalações, garantindo mais agilidade e precisão nos cortes. Indicada para profissionais da construção civil e acabamentos, a serra mármore oferece praticidade, segurança e produtividade em diferentes tipos de aplicação.",
         images: [
           { src: "assets/imagens-catalogo/serra-de-marmore.png", alt: "Serra mármore" }
+        ]
+      },
+      {
+        name: "Cortadora de cerâmica e porcelanato",
+        summary: "Cortadora para cortes retos e precisos em revestimentos cerâmicos e porcelanatos.",
+        description: "A cortadora de cerâmica e porcelanato é indicada para cortes retos, limpos e precisos em pisos e revestimentos. É uma solução prática para assentamento, reformas e acabamento, ajudando a reduzir quebras, melhorar o aproveitamento das peças e dar mais produtividade à instalação.",
+        images: [
+          { src: "assets/imagens-catalogo/cortadora-de-ceramica-e-porcelanato.png", alt: "Cortadora de cerâmica e porcelanato" }
+        ]
+      },
+      {
+        name: "Disco de corte diamantado",
+        summary: "Disco diamantado para cortes em materiais de obra, conforme a ferramenta compatível.",
+        description: "O disco de corte diamantado é indicado para cortes em materiais como concreto, cerâmica, porcelanato, pedra e alvenaria, conforme a aplicação e a ferramenta utilizada. É um acessório essencial para serviços de acabamento, ajustes de peças e cortes precisos em obra.",
+        images: [
+          { src: "assets/imagens-catalogo/disco-de-corte-diamantado.png", alt: "Disco de corte diamantado" }
         ]
       },
       {
@@ -454,6 +570,30 @@ const catalogCategories = [
         description: "Lixadeira orbital indicada para acabamento, nivelamento e preparação de superfícies em madeira, massa corrida, pintura e pequenos reparos. Ajuda a remover imperfeições e deixar a superfície mais uniforme antes da pintura, verniz ou acabamento final.",
         images: [
           { src: "assets/imagens-catalogo/lixadeira-orbital.png", alt: "Lixadeira orbital" }
+        ]
+      },
+      {
+        name: "Motosserra à gasolina",
+        summary: "Motosserra para cortes em madeira, poda pesada e apoio em serviços externos.",
+        description: "A motosserra à gasolina é indicada para cortes em madeira, poda pesada, limpeza de áreas e apoio em serviços externos onde mobilidade e autonomia são importantes. O equipamento oferece bom desempenho para frentes de trabalho sem ponto de energia próximo, sempre com operação orientada e uso dos acessórios de segurança adequados.",
+        images: [
+          { src: "assets/imagens-catalogo/motosserra-gasolina.png", alt: "Motosserra à gasolina" }
+        ]
+      },
+      {
+        name: "Corrente Oregon 21BPX para motosserra",
+        summary: "Corrente para motosserra indicada para reposição e manutenção do corte.",
+        description: "A corrente Oregon 21BPX para motosserra é indicada para manter o corte eficiente em serviços com madeira. É um acessório de reposição para operações que exigem bom rendimento, acabamento regular e manutenção correta do conjunto de corte.",
+        images: [
+          { src: "assets/imagens-catalogo/corrente-oregon-21bpx-motosserra.png", alt: "Corrente Oregon 21BPX para motosserra" }
+        ]
+      },
+      {
+        name: "Óleo para motor de 2 tempos",
+        summary: "Óleo para mistura e lubrificação de equipamentos com motor 2 tempos.",
+        description: "O óleo para motor de 2 tempos é indicado para preparo da mistura e manutenção adequada de equipamentos a gasolina que utilizam esse tipo de motor. Ajuda a proteger componentes internos, reduzir desgaste e manter o equipamento operando com mais confiabilidade durante o serviço.",
+        images: [
+          { src: "assets/imagens-catalogo/oleo-para-motor-de-2-tempos.png", alt: "Óleo para motor de 2 tempos" }
         ]
       }
     ]
@@ -483,7 +623,27 @@ const catalogCategories = [
       {
         name: "Mangote vibrador",
         description: "O mangote vibrador é essencial para garantir a compactação e o adensamento correto do concreto, eliminando bolhas de ar e evitando falhas estruturais durante a concretagem. Indicado para obras de pequeno, médio e grande porte, o equipamento proporciona maior resistência, uniformidade e qualidade no acabamento de pilares, vigas, lajes, fundações e estruturas em concreto armado. Robusto, eficiente e de fácil operação, o mangote vibrador contribui para mais produtividade, segurança e durabilidade nas etapas de concretagem da obra.",
+        configurator: createSizeConfigurator([
+          "36",
+          "45"
+        ]),
         images: [{ src: "assets/imagens-catalogo/mangote-vibrador.png", alt: "Mangote vibrador de imersão para concreto" }]
+      },
+      {
+        name: "Motor Mangote 36",
+        summary: "Motor para acionamento de mangote vibrador 36 em concretagens.",
+        description: "O motor para mangote 36 é indicado para acionar o vibrador de imersão em serviços de concretagem, ajudando no adensamento correto do concreto em pilares, vigas, lajes e fundações. É uma opção prática para obras que precisam combinar produtividade, mobilidade e acabamento estrutural mais uniforme.",
+        images: [
+          { src: "assets/imagens-catalogo/motor-mangote-36.png", alt: "Motor para mangote 36" }
+        ]
+      },
+      {
+        name: "Motor Mangote 45",
+        summary: "Motor para acionamento de mangote vibrador 45 em concretagens.",
+        description: "O motor para mangote 45 é indicado para acionar o vibrador de imersão em concretagens que exigem adensamento eficiente e contínuo. Ajuda a eliminar bolhas de ar, melhorar o preenchimento das formas e aumentar a qualidade final de peças estruturais em concreto.",
+        images: [
+          { src: "assets/imagens-catalogo/motor-mangote-45.png", alt: "Motor para mangote 45" }
+        ]
       },
       {
         name: "Betoneira 150 litros",
@@ -598,6 +758,14 @@ const catalogCategories = [
         images: [
           { src: "assets/imagens-catalogo/bomba-de-mangote.png", alt: "Bomba de mangote" },
           { src: "assets/imagens-catalogo/bomba-mangote.png", alt: "Bomba de mangote em detalhe" }
+        ]
+      },
+      {
+        name: "Mangueira bomba d'água 20 m",
+        summary: "Mangueira de 20 m para apoio em drenagem, esgotamento e transferência de água.",
+        description: "A mangueira para bomba d'água 20 m é indicada para conduzir água em serviços de drenagem, esgotamento e transferência no canteiro de obras. Auxilia na conexão entre bomba e ponto de descarte, trazendo mais alcance e praticidade para áreas alagadas, valas, poços e reservatórios.",
+        images: [
+          { src: "assets/imagens-catalogo/mangueira-bomba-dagua-20m.png", alt: "Mangueira para bomba d'água 20 metros" }
         ]
       },
       {
