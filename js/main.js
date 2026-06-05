@@ -999,14 +999,21 @@ const getCatalogFeaturedRank = (card) => {
     : Number.MAX_SAFE_INTEGER;
 };
 
+const getCatalogAvailabilityRank = (card) => card.dataset.available === "false" ? 1 : 0;
+
 const getCatalogCardsForFilter = (state) => {
   const filteredCards = state.cards.filter((card) => (
     state.filter === "todos" || card.dataset.catalogCategory === state.filter
   ));
 
-  if (state.filter !== "todos") return filteredCards;
-
   return filteredCards.slice().sort((firstCard, secondCard) => {
+    const availabilityDifference = getCatalogAvailabilityRank(firstCard) - getCatalogAvailabilityRank(secondCard);
+    if (availabilityDifference !== 0) return availabilityDifference;
+
+    if (state.filter !== "todos") {
+      return getCatalogOriginalIndex(firstCard) - getCatalogOriginalIndex(secondCard);
+    }
+
     const rankDifference = getCatalogFeaturedRank(firstCard) - getCatalogFeaturedRank(secondCard);
     if (rankDifference !== 0) return rankDifference;
 
