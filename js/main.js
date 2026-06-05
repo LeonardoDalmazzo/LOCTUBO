@@ -1709,8 +1709,9 @@ const createGeneratedEquipmentDetail = (card) => {
     actions.append(manualLink);
   }
 
-  detail.append(intro, specList, actions);
+  detail.append(intro);
   if (configurator) detail.append(configurator);
+  detail.append(specList, actions);
   return detail;
 };
 
@@ -1738,7 +1739,8 @@ const openEquipmentDrawer = (detailId, trigger, card) => {
     if (quoteLink) {
       if (configurator && !detail.querySelector(".equipment-configurator")) {
         detail.classList.add("has-configurator");
-        quoteLink.after(configurator);
+        const intro = detail.querySelector("#equipment-drawer-title")?.closest("div");
+        (intro || quoteLink).after(configurator);
       }
 
       if (isAvailable) {

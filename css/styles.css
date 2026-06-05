@@ -3016,11 +3016,11 @@ h3 {
 
   .equipment-drawer__content .equipment-detail.has-configurator .equipment-gallery {
     position: static;
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 4;
   }
 
   .equipment-drawer__content .equipment-detail.has-configurator > .equipment-configurator {
-    grid-column: 1 / -1;
+    grid-column: 2;
   }
 
   .split,
