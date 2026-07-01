@@ -2656,6 +2656,12 @@ h3 {
 
 /* Responsive */
 @media (max-width: 41.99rem) {
+  .hero,
+  .hero__content {
+    min-height: 40rem;
+    min-height: clamp(37rem, 86svh, 42rem);
+  }
+
   .site-header {
     padding-inline: 1rem;
   }
@@ -2714,6 +2720,10 @@ h3 {
 
   .hero .eyebrow {
     max-width: 24ch;
+  }
+
+  .hero-social {
+    display: none;
   }
 
   .hero__actions .button,
