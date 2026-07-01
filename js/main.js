@@ -56,7 +56,7 @@ const imageSizes = {
   "guincho-coluna-350kg.png": [1254, 1254],
   "guarda-corpo-andaime.png": [1254, 1254],
   "lavadora-de-alta-pressao-profissional.png": [1180, 1333],
-  "lixadeira-de-parede.png": [1536, 1024],
+  "lixadeira-de-parede.png": [1254, 1254],
   "lixadeira-orbital.png": [1402, 1122],
   "longarina.png": [1254, 1254],
   "mangote-vibrador.png": [789, 923],
@@ -64,7 +64,7 @@ const imageSizes = {
   "motor-mangote-36.png": [1329, 1183],
   "motor-mangote-45.png": [1333, 1180],
   "motosserra-gasolina.png": [1254, 1254],
-  "mîsturador-eletrico.png": [1254, 1254],
+  "misturador-eletrico.png": [1254, 1254],
   "oleo-para-motor-de-2-tempos.png": [1254, 1254],
   "fresadora-de-piso-a-gasolina.png": [1254, 1254],
   "piso-metalico-andaime.png": [1254, 1254],
@@ -687,7 +687,7 @@ const catalogCategories = [
         summary: "Misturador elétrico para massas, argamassas, tintas e outros materiais de obra.",
         description: "O misturador elétrico é indicado para preparar argamassas, massas, tintas, rejuntes e outros materiais com mais agilidade e uniformidade. É uma opção prática para reformas, acabamentos e serviços que exigem mistura constante e bem incorporada.",
         images: [
-          { src: "assets/imagens-catalogo/mîsturador-eletrico.png", alt: "Misturador elétrico" }
+          { src: "assets/imagens-catalogo/misturador-eletrico.png", alt: "Misturador elétrico" }
         ]
       },
       {
@@ -715,11 +715,11 @@ const catalogCategories = [
         ]
       },
       {
-        name: "Lixadeira de parede",
-        summary: "Lixadeira para preparo de paredes, tetos e superfícies antes da pintura.",
-        description: "A lixadeira de parede é indicada para nivelar massa corrida, remover pequenas imperfeições e preparar paredes e tetos para pintura ou acabamento. Ajuda a reduzir esforço manual e entregar uma superfície mais uniforme em reformas, obras e serviços de manutenção.",
+        name: "Lixadeira de Parede",
+        summary: "Lixadeira elétrica 750W com LED e coletor de pó para acabamento de paredes e tetos.",
+        description: "A Lixadeira de Parede Menegotti MLP750 LED Elétrica 750W com Coletor de Pó 220V é indicada para nivelar massa corrida, remover pequenas imperfeições e preparar paredes e tetos para pintura ou acabamento. Ajuda a reduzir esforço manual, controlar melhor a poeira no ambiente e entregar uma superfície mais uniforme em reformas, obras e serviços de manutenção.",
         images: [
-          { src: "assets/imagens-catalogo/lixadeira-de-parede.png", alt: "Lixadeira de parede" }
+          { src: "assets/imagens-catalogo/lixadeira-de-parede.png", alt: "Lixadeira de Parede Menegotti MLP750 LED" }
         ]
       }
     ]
