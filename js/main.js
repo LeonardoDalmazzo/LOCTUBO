@@ -60,7 +60,8 @@ const imageSizes = {
   "lixadeira-orbital.png": [1402, 1122],
   "longarina.png": [1254, 1254],
   "mangote-vibrador.png": [789, 923],
-  "mangueira-bomba-dagua-20m.png": [1273, 1236],
+  "MangueiraAguaFlatchata.png": [1254, 1254],
+  "mangueira-bomba-dagua-20m.png": [1254, 1254],
   "motor-mangote-36.png": [1329, 1183],
   "motor-mangote-45.png": [1333, 1180],
   "motosserra-gasolina.png": [1254, 1254],
@@ -788,6 +789,20 @@ const catalogCategories = [
         description: "A mangueira para bomba d'água 20 m é indicada para conduzir água em serviços de drenagem, esgotamento e transferência no canteiro de obras. Auxilia na conexão entre bomba e ponto de descarte, trazendo mais alcance e praticidade para áreas alagadas, valas, poços e reservatórios.",
         images: [
           { src: "assets/imagens-catalogo/mangueira-bomba-dagua-20m.png", alt: "Mangueira para bomba d'água 20 metros" }
+        ]
+      },
+      {
+        name: "Mangueira Água Flat/chata Azul 3 Polegadas - 20 Metros",
+        summary: "Mangueira flat/chata azul de 3 polegadas e 20 metros para drenagem e transferência de água.",
+        description: "A mangueira água flat/chata azul de 3 polegadas e 20 metros é indicada para condução temporária de água em drenagem, esgotamento e transferência no canteiro de obras. O formato chato facilita o transporte, o armazenamento e a montagem junto a bombas compatíveis, oferecendo mais alcance para descarte em valas, áreas alagadas, poços, caixas e reservatórios.",
+        specs: [
+          "Tipo: mangueira flat/chata",
+          "Diâmetro: 3 polegadas",
+          "Comprimento: 20 metros",
+          "Uso indicado: drenagem e transferência de água"
+        ],
+        images: [
+          { src: "assets/imagens-catalogo/MangueiraAguaFlatchata.png", alt: "Mangueira água flat/chata azul 3 polegadas 20 metros" }
         ]
       },
       {
