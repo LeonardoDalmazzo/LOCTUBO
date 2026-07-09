@@ -212,6 +212,7 @@ const unavailableEquipmentNames = new Set([
   "Enceradeira industrial",
   "Lavadora de alta pressão profissional",
   "Serra de bancada",
+  "Cortadora de cerâmica e porcelanato",
   "Furadeira de impacto",
   "Lixadeira orbital",
   "Triturador de entulho",
