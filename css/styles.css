@@ -178,8 +178,8 @@ button {
 }
 
 .brand__logo {
-  width: 1.72rem;
-  height: 3.85rem;
+  width: 3.15rem;
+  height: 3.15rem;
   flex: 0 0 auto;
   object-fit: contain;
   border-radius: 0;
@@ -2837,8 +2837,8 @@ h3 {
   }
 
   .brand__logo {
-    width: 1.45rem;
-    height: 3.25rem;
+    width: 2.75rem;
+    height: 2.75rem;
   }
 
   .brand strong {
@@ -3260,9 +3260,15 @@ h3 {
 
 @media (min-width: 78rem) {
   :root {
+    --header-height: 5.15rem;
     --title-sm: 2rem;
     --title-md: 3rem;
     --title-lg: 4.65rem;
+  }
+
+  .brand__logo {
+    width: 3.65rem;
+    height: 3.65rem;
   }
 
   .hero__content {

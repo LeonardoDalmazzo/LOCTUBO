@@ -91,8 +91,8 @@ const imageSizes = {
   "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
   "bg-Slide-Equipamentos.png": [1684, 934],
   "bg-Slide-Equipamentos-concretagem.png": [1685, 934],
-  "isotipo loctubo.png": [55, 123],
-  "loctubo-logo.png": [93, 83]
+  "isotipo loctubo.png": [1024, 1024],
+  "loctubo-logo.png": [1024, 1024]
 };
 
 const applyImagePerformanceAttributes = (image) => {
