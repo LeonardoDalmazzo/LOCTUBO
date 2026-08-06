@@ -4,7 +4,7 @@ Este passo a passo serve para publicar o site estatico da LOCTUBO pelo Gerenciad
 
 ## Resumo rapido
 
-- Arquivo de deploy recomendado: `deploy/loctubo-site-hostgator-"DATA".zip`
+- Arquivo de deploy recomendado: `deploy/loctubo-site-hostgator-2026-08-06.zip`
 - Pasta correta na hospedagem: `/home1/loctub90/public_html`
 - O zip deve ser extraido dentro de `public_html`
 - Os arquivos do site precisam ficar diretamente em `public_html`, sem uma pasta extra por cima
@@ -25,7 +25,7 @@ Estrutura correta depois da extracao:
 Estrutura errada:
 
 ```text
-/home1/loctub90/public_html/loctubo-site-hostgator-2026-07-09/
+/home1/loctub90/public_html/loctubo-site-hostgator-2026-08-06/
 |-- index.html
 |-- sobre.html
 |-- assets/
@@ -94,7 +94,7 @@ sobre.html
 8. Envie este arquivo do computador:
 
 ```text
-C:\Users\ADML\Desktop\repositories\onGitHub\LOCTUBO\deploy\loctubo-site-hostgator-2026-07-09.zip
+C:\Users\ADML\Desktop\repositories\onGitHub\LOCTUBO\deploy\loctubo-site-hostgator-2026-08-06.zip
 ```
 
 9. Volte para o Gerenciador de Arquivos e clique em **Recarregar**.
@@ -141,7 +141,7 @@ Confira tambem se:
 Se aparecer uma pasta assim dentro de `public_html`:
 
 ```text
-loctubo-site-hostgator-2026-07-09/
+loctubo-site-hostgator-2026-08-06/
 ```
 
 faca isto:
@@ -166,7 +166,7 @@ sobre.html
 
 5. Confirme a substituicao se o cPanel perguntar.
 6. Volte para `public_html`.
-7. Apague a pasta vazia `loctubo-site-hostgator-2026-07-09/`.
+7. Apague a pasta vazia `loctubo-site-hostgator-2026-08-06/`.
 8. Apague tambem o arquivo `.zip` enviado.
 
 ## Permissoes esperadas
