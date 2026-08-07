@@ -123,8 +123,8 @@ sobre.html
 
 Abra o site no navegador e teste:
 
-- pagina inicial: `https://seudominio.com.br/`
-- pagina sobre: `https://seudominio.com.br/sobre.html`
+- pagina inicial: `https://loctubo.com.br/`
+- pagina sobre: `https://loctubo.com.br/sobre.html`
 
 Use `Ctrl + F5` para forcar atualizacao sem cache.
 
