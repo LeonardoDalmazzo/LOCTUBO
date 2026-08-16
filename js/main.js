@@ -92,14 +92,93 @@ const imageSizes = {
   "bg-Slide-Andaime-LOCTUBO.png": [1684, 934],
   "bg-Slide-Equipamentos.png": [1684, 934],
   "bg-Slide-Equipamentos-concretagem.png": [1685, 934],
+  "hero-andaime-768.jpg": [768, 426],
+  "hero-andaime-1200.jpg": [1200, 666],
+  "hero-andaime-1684.jpg": [1684, 934],
+  "hero-equipamentos-768.jpg": [768, 426],
+  "hero-equipamentos-1200.jpg": [1200, 666],
+  "hero-equipamentos-1684.jpg": [1684, 934],
+  "hero-concretagem-768.jpg": [768, 426],
+  "hero-concretagem-1200.jpg": [1200, 665],
+  "hero-concretagem-1684.jpg": [1684, 934],
+  "isotipo-loctubo-128.png": [128, 128],
   "isotipo loctubo.png": [1024, 1024],
   "loctubo-logo.png": [1024, 1024]
 };
 
-const applyImagePerformanceAttributes = (image) => {
-  const rawFileName = image.currentSrc.split("/").pop() || image.src.split("/").pop();
+const getImageDimensions = (source) => {
+  const rawFileName = String(source || "").split("/").pop() || "";
   const fileName = decodeURIComponent(rawFileName);
-  const dimensions = imageSizes[fileName] || [320, 320];
+
+  return imageSizes[fileName] || [320, 320];
+};
+
+const getCatalogImageVariants = (source) => {
+  const cleanSource = String(source || "").split(/[?#]/)[0];
+  const isCatalogRaster =
+    cleanSource.startsWith("assets/imagens-catalogo/") &&
+    !cleanSource.includes("/otimizadas/") &&
+    /\.(?:png|jpe?g)$/i.test(cleanSource);
+
+  if (!isCatalogRaster) return null;
+
+  const fileName = cleanSource.split("/").pop() || "";
+  const baseName = fileName.replace(/\.[^.]+$/, "");
+  const [sourceWidth] = getImageDimensions(cleanSource);
+  const smallWidth = Math.min(480, sourceWidth);
+  const largeWidth = Math.min(960, sourceWidth);
+  const optimizedBase = `assets/imagens-catalogo/otimizadas/${baseName}`;
+  const smallSource = `${optimizedBase}-480.jpg`;
+  const largeSource = `${optimizedBase}-960.jpg`;
+
+  return {
+    src: smallSource,
+    srcset: `${encodeURI(smallSource)} ${smallWidth}w, ${encodeURI(largeSource)} ${largeWidth}w`
+  };
+};
+
+const setCatalogImageSource = (image, source, alt, options = {}) => {
+  if (!image || !source) return;
+
+  const {
+    loading = "lazy",
+    sizes = "(min-width: 78rem) 25vw, (min-width: 58rem) 33vw, (min-width: 42rem) 50vw, 100vw"
+  } = options;
+  const [width, height] = getImageDimensions(source);
+  const variants = getCatalogImageVariants(source);
+
+  image.dataset.originalSource = source;
+  image.loading = loading;
+  image.decoding = "async";
+  image.width = width;
+  image.height = height;
+  image.sizes = sizes;
+  image.alt = alt || "";
+
+  if (variants) {
+    image.dataset.optimizedFallback = "false";
+    image.onerror = () => {
+      if (image.dataset.optimizedFallback === "true") return;
+
+      image.dataset.optimizedFallback = "true";
+      image.removeAttribute("srcset");
+      image.src = source;
+    };
+    image.srcset = variants.srcset;
+    image.src = variants.src;
+    return;
+  }
+
+  image.onerror = null;
+  image.removeAttribute("srcset");
+  image.src = source;
+};
+
+const applyImagePerformanceAttributes = (image) => {
+  const source = image.dataset.originalSource || image.getAttribute("src");
+  if (!source) return;
+
+  const dimensions = getImageDimensions(source);
 
   if (!image.hasAttribute("decoding")) {
     image.decoding = "async";
@@ -120,7 +199,7 @@ const applyImagePerformanceAttributes = (image) => {
   }
 
   if (!image.hasAttribute("srcset") && image.src) {
-    image.srcset = `${image.src} ${dimensions[0]}w`;
+    image.srcset = `${encodeURI(image.src)} ${dimensions[0]}w`;
   }
 
   if (!image.closest(".hero-carousel") && !image.closest(".site-header") && !image.hasAttribute("loading")) {
@@ -129,6 +208,30 @@ const applyImagePerformanceAttributes = (image) => {
 };
 
 document.querySelectorAll("img").forEach(applyImagePerformanceAttributes);
+
+const loadMapFrame = (frame) => {
+  if (!frame || frame.dataset.mapLoaded === "true") return;
+
+  const source = frame.dataset.mapSrc;
+  if (!source) return;
+
+  const iframe = document.createElement("iframe");
+  iframe.src = source;
+  iframe.width = "600";
+  iframe.height = "450";
+  iframe.loading = "eager";
+  iframe.allowFullscreen = true;
+  iframe.referrerPolicy = "no-referrer-when-downgrade";
+  iframe.title = frame.dataset.mapTitle || "Mapa da LocTubo";
+  frame.dataset.mapLoaded = "true";
+  frame.replaceChildren(iframe);
+};
+
+document.querySelectorAll("[data-map-frame]").forEach((frame) => {
+  frame.querySelector("[data-map-load]")?.addEventListener("click", () => {
+    loadMapFrame(frame);
+  });
+});
 
 const setHeaderState = () => {
   if (!header) return;
@@ -152,36 +255,73 @@ scrollTopButton?.addEventListener("click", () => {
 if (menuButton) {
   const menu = document.querySelector(menuButton.dataset.menuToggle);
   const desktopMenuQuery = window.matchMedia("(min-width: 58rem)");
+  const menuLinks = Array.from(menu?.querySelectorAll("a") || []);
 
-  const closeMenu = () => {
-    menu?.classList.remove("is-open");
-    menuButton.setAttribute("aria-expanded", "false");
-    header?.classList.remove("is-open");
-    document.body.classList.remove("menu-open");
+  const syncMenuState = (isOpen, options = {}) => {
+    const isDesktop = desktopMenuQuery.matches;
+    const shouldBeInteractive = isDesktop || isOpen;
+    const shouldShowMobileMenu = !isDesktop && isOpen;
+
+    menu?.classList.toggle("is-open", shouldShowMobileMenu);
+    menu?.toggleAttribute("inert", !shouldBeInteractive);
+    menu?.setAttribute("aria-hidden", String(!shouldBeInteractive));
+    menuLinks.forEach((link) => {
+      link.tabIndex = shouldBeInteractive ? 0 : -1;
+    });
+    menuButton.setAttribute("aria-expanded", String(shouldShowMobileMenu));
+    menuButton.setAttribute("aria-label", shouldShowMobileMenu ? "Fechar menu" : "Abrir menu");
+    header?.classList.toggle("is-open", shouldShowMobileMenu);
+    document.body.classList.toggle("menu-open", shouldShowMobileMenu);
+
+    if (shouldShowMobileMenu && options.focusFirst) {
+      window.requestAnimationFrame(() => menuLinks[0]?.focus());
+    }
   };
 
   menuButton.addEventListener("click", () => {
-    const isOpen = menu?.classList.toggle("is-open") ?? false;
-    menuButton.setAttribute("aria-expanded", String(isOpen));
-    header?.classList.toggle("is-open", isOpen);
-    document.body.classList.toggle("menu-open", isOpen);
+    const isOpen = !menu?.classList.contains("is-open");
+    syncMenuState(isOpen, { focusFirst: isOpen });
   });
 
-  menu?.querySelectorAll("a").forEach((link) => {
+  menuLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      closeMenu();
+      if (!desktopMenuQuery.matches) {
+        window.requestAnimationFrame(() => syncMenuState(false));
+      }
     });
   });
 
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape" && menu?.classList.contains("is-open")) {
-      closeMenu();
+      syncMenuState(false);
       menuButton.focus();
+      return;
+    }
+
+    if (event.key !== "Tab" || desktopMenuQuery.matches || !menu?.classList.contains("is-open")) {
+      return;
+    }
+
+    const focusableItems = menuLinks.filter((link) => link.getClientRects().length > 0);
+    if (focusableItems.length === 0) {
+      event.preventDefault();
+      menuButton.focus();
+      return;
+    }
+
+    const firstItem = focusableItems[0];
+    const lastItem = focusableItems[focusableItems.length - 1];
+    if (event.shiftKey && document.activeElement === firstItem) {
+      event.preventDefault();
+      lastItem.focus();
+    } else if (!event.shiftKey && document.activeElement === lastItem) {
+      event.preventDefault();
+      firstItem.focus();
     }
   });
 
   const handleDesktopMenuChange = (event) => {
-    if (event.matches) closeMenu();
+    syncMenuState(false);
   };
 
   if (typeof desktopMenuQuery.addEventListener === "function") {
@@ -189,6 +329,8 @@ if (menuButton) {
   } else if (typeof desktopMenuQuery.addListener === "function") {
     desktopMenuQuery.addListener(handleDesktopMenuChange);
   }
+
+  syncMenuState(false);
 }
 
 const placeholderImage = "assets/imagens-catalogo/Produto-Sem-Imagem-600-x-600px.jpg";
@@ -956,9 +1098,7 @@ const createProductCard = (category, rawItem) => {
   images.forEach((image, index) => {
     const element = document.createElement("img");
     element.className = index === 0 ? "card-carousel__image is-active" : "card-carousel__image";
-    element.src = image.src;
-    element.alt = image.alt || item.name;
-    applyImagePerformanceAttributes(element);
+    setCatalogImageSource(element, image.src, image.alt || item.name);
     media.append(element);
   });
 
@@ -1114,6 +1254,8 @@ const renderCatalogPage = (state) => {
 };
 
 const setupCatalog = () => {
+  if (catalogState) return;
+
   const catalogShell = document.querySelector(".catalog-shell");
   if (!catalogShell) return;
 
@@ -1235,11 +1377,35 @@ const setupCatalog = () => {
   };
 
   catalogShell.replaceChildren(filterNav, content, emptyMessage, pagination);
+  catalogShell.setAttribute("aria-busy", "false");
   renderCatalogPage(state);
+  setupCardCarousels(catalogShell);
   window.addEventListener("resize", handleCatalogResize);
 };
 
-setupCatalog();
+const ensureCatalogIsReady = () => {
+  setupCatalog();
+  return catalogState;
+};
+
+const catalogShell = document.querySelector(".catalog-shell");
+
+if (catalogShell) {
+  if ("IntersectionObserver" in window) {
+    const catalogObserver = new IntersectionObserver((entries, observer) => {
+      if (!entries.some((entry) => entry.isIntersecting)) return;
+
+      window.requestAnimationFrame(() => {
+        setupCatalog();
+        observer.disconnect();
+      });
+    }, { rootMargin: "0px 0px -12% 0px" });
+
+    catalogObserver.observe(catalogShell);
+  } else {
+    window.setTimeout(setupCatalog, 0);
+  }
+}
 
 
 if (heroCarousel) {
@@ -1248,8 +1414,21 @@ if (heroCarousel) {
   let activeIndex = 0;
   const dots = [];
 
+  const hydrateHeroSlide = (slide) => {
+    if (!slide || slide.hasAttribute("src") || !slide.dataset.src) return;
+
+    if (slide.dataset.srcset) {
+      slide.srcset = slide.dataset.srcset;
+    }
+
+    slide.loading = "eager";
+    slide.src = slide.dataset.src;
+  };
+
   const setActiveSlide = (index) => {
     activeIndex = index;
+    hydrateHeroSlide(slides[activeIndex]);
+
     slides.forEach((slide, slideIndex) => {
       slide.classList.toggle("is-active", slideIndex === activeIndex);
     });
@@ -1277,64 +1456,78 @@ if (heroCarousel) {
   }
 }
 
-document.querySelectorAll("[data-card-carousel]").forEach((carousel) => {
-  const slides = Array.from(carousel.querySelectorAll(".card-carousel__image"));
-  const dotsContainer = carousel.querySelector("[data-card-carousel-dots]");
-  const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-  const dots = [];
-  let activeIndex = 0;
-  let autoAdvanceId = null;
+const setupCardCarousels = (container = document) => {
+  container.querySelectorAll("[data-card-carousel]:not([data-card-carousel-ready])").forEach((carousel) => {
+    carousel.dataset.cardCarouselReady = "true";
 
-  const setActiveSlide = (index) => {
-    activeIndex = index;
-    slides.forEach((slide, slideIndex) => {
-      slide.classList.toggle("is-active", slideIndex === activeIndex);
-    });
-    dots.forEach((dot, dotIndex) => {
-      dot.classList.toggle("is-active", dotIndex === activeIndex);
-    });
-  };
+    const slides = Array.from(carousel.querySelectorAll(".card-carousel__image"));
+    const dotsContainer = carousel.querySelector("[data-card-carousel-dots]");
 
-  slides.forEach((_, index) => {
-    const dot = document.createElement("span");
-    dot.className = index === activeIndex ? "is-active" : "";
-    dotsContainer?.append(dot);
-    dots.push(dot);
+    if (slides.length <= 1) {
+      dotsContainer?.remove();
+      return;
+    }
+
+    const shouldReduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    const dots = [];
+    let activeIndex = 0;
+    let autoAdvanceId = null;
+
+    const setActiveSlide = (index) => {
+      activeIndex = index;
+      slides.forEach((slide, slideIndex) => {
+        slide.classList.toggle("is-active", slideIndex === activeIndex);
+      });
+      dots.forEach((dot, dotIndex) => {
+        dot.classList.toggle("is-active", dotIndex === activeIndex);
+      });
+    };
+
+    slides.forEach((_, index) => {
+      const dot = document.createElement("span");
+      dot.className = index === activeIndex ? "is-active" : "";
+      dotsContainer?.append(dot);
+      dots.push(dot);
+    });
+
+    setActiveSlide(activeIndex);
+
+    const startAutoAdvance = () => {
+      if (autoAdvanceId || shouldReduceMotion) return;
+
+      autoAdvanceId = window.setInterval(() => {
+        setActiveSlide((activeIndex + 1) % slides.length);
+      }, 3600);
+    };
+
+    if ("IntersectionObserver" in window) {
+      const observer = new IntersectionObserver(
+        (entries) => {
+          if (entries.some((entry) => entry.isIntersecting)) {
+            startAutoAdvance();
+            observer.disconnect();
+          }
+        },
+        { rootMargin: "240px 0px" }
+      );
+
+      observer.observe(carousel);
+    } else {
+      startAutoAdvance();
+    }
   });
-
-  setActiveSlide(activeIndex);
-
-  const startAutoAdvance = () => {
-    if (autoAdvanceId || slides.length <= 1 || shouldReduceMotion) return;
-
-    autoAdvanceId = window.setInterval(() => {
-      setActiveSlide((activeIndex + 1) % slides.length);
-    }, 3600);
-  };
-
-  if ("IntersectionObserver" in window) {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries.some((entry) => entry.isIntersecting)) {
-          startAutoAdvance();
-          observer.disconnect();
-        }
-      },
-      { rootMargin: "240px 0px" }
-    );
-
-    observer.observe(carousel);
-  } else {
-    startAutoAdvance();
-  }
-});
+};
 
 const updatePhotoViewer = () => {
   if (!photoViewerImage || !photoViewerTitle || !photoViewerCount || photoViewerImages.length === 0) return;
 
   const currentImage = photoViewerImages[photoViewerIndex];
-  photoViewerImage.src = currentImage.src;
-  photoViewerImage.alt = currentImage.alt;
+  setCatalogImageSource(
+    photoViewerImage,
+    currentImage.source || currentImage.src,
+    currentImage.alt,
+    { loading: "eager", sizes: "min(70rem, calc(100vw - 3rem))" }
+  );
   photoViewerTitle.textContent = currentImage.title;
   photoViewerCount.textContent = `${photoViewerIndex + 1} de ${photoViewerImages.length}`;
 
@@ -1455,7 +1648,7 @@ const closeEquipmentDrawer = (restoreFocus = true) => {
 
 const getCardImages = (card) =>
   Array.from(card.querySelectorAll(".card-carousel__image")).map((image) => ({
-    src: image.currentSrc || image.src,
+    source: image.dataset.originalSource || image.currentSrc || image.src,
     alt: image.alt || card.querySelector("h4")?.textContent?.trim() || "Foto do equipamento"
   }));
 
@@ -1478,7 +1671,6 @@ const createEquipmentGallery = (card) => {
   viewerButton.setAttribute("aria-label", `Ampliar foto de ${title}`);
 
   const mainImage = document.createElement("img");
-  applyImagePerformanceAttributes(mainImage);
   viewerButton.append(mainImage);
 
   const counter = document.createElement("span");
@@ -1506,9 +1698,10 @@ const createEquipmentGallery = (card) => {
     button.setAttribute("aria-label", `Ver foto ${index + 1} de ${title}`);
 
     const thumb = document.createElement("img");
-    thumb.src = image.src;
-    thumb.alt = "";
-    applyImagePerformanceAttributes(thumb);
+    setCatalogImageSource(thumb, image.source || image.src, "", {
+      loading: "eager",
+      sizes: "5rem"
+    });
     button.append(thumb);
     thumbnails.append(button);
     return button;
@@ -1519,8 +1712,10 @@ const createEquipmentGallery = (card) => {
 
     currentIndex = (index + images.length) % images.length;
     const image = images[currentIndex];
-    mainImage.src = image.src;
-    mainImage.alt = image.alt;
+    setCatalogImageSource(mainImage, image.source || image.src, image.alt, {
+      loading: "eager",
+      sizes: "(min-width: 58rem) 34rem, calc(100vw - 3rem)"
+    });
     counter.textContent = `${currentIndex + 1} de ${images.length}`;
     thumbButtons.forEach((button, buttonIndex) => {
       button.classList.toggle("is-active", buttonIndex === currentIndex);
@@ -1818,14 +2013,15 @@ const openEquipmentDrawer = (detailId, trigger, card) => {
   equipmentDrawerPanel?.focus();
 };
 
-document.querySelectorAll(".product-card[href^='#']").forEach((card) => {
-  card.addEventListener("click", (event) => {
-    const detailId = card.getAttribute("href")?.slice(1);
-    if (!detailId) return;
+document.addEventListener("click", (event) => {
+  const card = event.target.closest(".product-card[href^='#']");
+  if (!card) return;
 
-    event.preventDefault();
-    openEquipmentDrawer(detailId, card, card);
-  });
+  const detailId = card.getAttribute("href")?.slice(1);
+  if (!detailId) return;
+
+  event.preventDefault();
+  openEquipmentDrawer(detailId, card, card);
 });
 
 document.querySelectorAll("[data-equipment-drawer-close]").forEach((trigger) => {
@@ -2068,6 +2264,8 @@ const normalizeText = (value) =>
 if (searchPanel) {
   searchPanel.addEventListener("submit", (event) => {
     event.preventDefault();
+    ensureCatalogIsReady();
+
     const input = searchPanel.querySelector("input[type='search']");
     const term = normalizeText(input?.value.trim() || "");
     const targets = Array.from(document.querySelectorAll(".product-card"));
