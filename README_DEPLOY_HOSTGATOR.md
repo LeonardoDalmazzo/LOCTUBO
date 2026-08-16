@@ -4,7 +4,7 @@ Este passo a passo serve para publicar o site estatico da LOCTUBO pelo Gerenciad
 
 ## Resumo rapido
 
-- Arquivo de deploy recomendado: `deploy/loctubo-site-hostgator-2026-08-06.zip`
+- Arquivo de deploy recomendado: `deploy/loctubo-site-hostgator-2026-08-16.zip`
 - Pasta correta na hospedagem: `/home1/loctub90/public_html`
 - O zip deve ser extraido dentro de `public_html`
 - Os arquivos do site precisam ficar diretamente em `public_html`, sem uma pasta extra por cima
@@ -15,19 +15,35 @@ Estrutura correta depois da extracao:
 /home1/loctub90/public_html/
 |-- index.html
 |-- sobre.html
+|-- locacao-andaimes-sao-paulo.html
+|-- locacao-escoramento-metalico-sao-paulo.html
+|-- locacao-martelete-rompedor-sao-paulo.html
+|-- locacao-betoneira-vibrador-concreto-sao-paulo.html
+|-- robots.txt
+|-- sitemap.xml
 |-- assets/
 |-- css/
+|   |-- landing-pages.css
 |   `-- styles.css
 `-- js/
-    `-- main.js
+    |-- about.js
+    |-- landing-pages.js
+    |-- main.js
+    `-- third-party.js
 ```
 
 Estrutura errada:
 
 ```text
-/home1/loctub90/public_html/loctubo-site-hostgator-2026-08-06/
+/home1/loctub90/public_html/loctubo-site-hostgator-2026-08-16/
 |-- index.html
 |-- sobre.html
+|-- locacao-andaimes-sao-paulo.html
+|-- locacao-escoramento-metalico-sao-paulo.html
+|-- locacao-martelete-rompedor-sao-paulo.html
+|-- locacao-betoneira-vibrador-concreto-sao-paulo.html
+|-- robots.txt
+|-- sitemap.xml
 |-- assets/
 |-- css/
 `-- js/
@@ -35,20 +51,25 @@ Estrutura errada:
 
 Se ficar assim, o dominio nao vai abrir o site novo corretamente, porque o `index.html` ficou dentro de uma subpasta.
 
-## O que manter no servidor
+## Itens que nao entram no ZIP
 
-Dentro de `public_html`, mantenha estes itens se eles ja existirem:
+### Preserve no servidor
+
+Dentro de `public_html`, nao inclua estes itens no ZIP do projeto:
 
 - `.well-known/`
 - `cgi-bin/`
-- `.htaccess`
-- `.htaccess.no_htaccess.phpupgrader`
 - `BingSiteAuth.xml`
 - `google9cdc32375c8a1b46.html`
 - `googleaedc1ca54f347ed7.html`
-- `robots.txt`
 
-Esses arquivos/pastas podem estar ligados a SSL, validacao do Google/Bing, regras do Apache ou configuracao da hospedagem. Nao precisa apagar para publicar o site.
+As pastas podem ser usadas pelo SSL/cPanel. Os arquivos Google e Bing devem permanecer ate a propriedade do dominio ser confirmada ou migrada para outra forma de validacao.
+
+### Revise depois do backup
+
+- `.htaccess`: nao apague automaticamente. O arquivo legado contem regras de WordPress/PHP e deve ser salvo e revisado antes de qualquer alteracao.
+
+Os arquivos `robots.txt` e `sitemap.xml` pertencem ao projeto atual e serao substituidos pela extracao do novo ZIP.
 
 ## O que apagar ou substituir
 
@@ -59,6 +80,12 @@ Antes de extrair o novo zip, apague ou substitua somente os arquivos antigos do 
 - `js/`
 - `index.html`
 - `sobre.html`
+- `locacao-andaimes-sao-paulo.html`
+- `locacao-escoramento-metalico-sao-paulo.html`
+- `locacao-martelete-rompedor-sao-paulo.html`
+- `locacao-betoneira-vibrador-concreto-sao-paulo.html`
+- `robots.txt`
+- `sitemap.xml`
 
 Nao apague a pasta `public_html` e nao mexa nas pastas fora dela, como `.cpanel`, `mail`, `ssl`, `tmp`, `logs` ou outras pastas da conta.
 
@@ -88,13 +115,19 @@ css/
 js/
 index.html
 sobre.html
+locacao-andaimes-sao-paulo.html
+locacao-escoramento-metalico-sao-paulo.html
+locacao-martelete-rompedor-sao-paulo.html
+locacao-betoneira-vibrador-concreto-sao-paulo.html
+robots.txt
+sitemap.xml
 ```
 
 7. Ainda dentro de `public_html`, clique em **Carregar**.
 8. Envie este arquivo do computador:
 
 ```text
-C:\Users\ADML\Desktop\repositories\onGitHub\LOCTUBO\deploy\loctubo-site-hostgator-2026-08-06.zip
+C:\Users\ADML\Desktop\repositories\onGitHub\LOCTUBO\deploy\loctubo-site-hostgator-2026-08-16.zip
 ```
 
 9. Volte para o Gerenciador de Arquivos e clique em **Recarregar**.
@@ -115,6 +148,12 @@ css/
 js/
 index.html
 sobre.html
+locacao-andaimes-sao-paulo.html
+locacao-escoramento-metalico-sao-paulo.html
+locacao-martelete-rompedor-sao-paulo.html
+locacao-betoneira-vibrador-concreto-sao-paulo.html
+robots.txt
+sitemap.xml
 ```
 
 15. Apague o arquivo `.zip` de dentro de `public_html` depois da extracao.
@@ -125,6 +164,12 @@ Abra o site no navegador e teste:
 
 - pagina inicial: `https://loctubo.com.br/`
 - pagina sobre: `https://loctubo.com.br/sobre.html`
+- campanha de andaimes: `https://loctubo.com.br/locacao-andaimes-sao-paulo.html`
+- campanha de escoramento: `https://loctubo.com.br/locacao-escoramento-metalico-sao-paulo.html`
+- campanha de demolição: `https://loctubo.com.br/locacao-martelete-rompedor-sao-paulo.html`
+- campanha de concretagem: `https://loctubo.com.br/locacao-betoneira-vibrador-concreto-sao-paulo.html`
+- regras de rastreamento: `https://www.loctubo.com.br/robots.txt`
+- sitemap: `https://www.loctubo.com.br/sitemap.xml`
 
 Use `Ctrl + F5` para forcar atualizacao sem cache.
 
@@ -135,13 +180,16 @@ Confira tambem se:
 - o menu funciona;
 - os arquivos PDF dos manuais abrem;
 - a pagina `sobre.html` abre sem erro 404.
+- as quatro paginas de campanha abrem sem erro 404.
+- os CTAs e formularios das paginas de campanha abrem o WhatsApp correto.
+- o `robots.txt` referencia `https://www.loctubo.com.br/sitemap.xml`.
 
 ## Se o zip extrair em uma pasta errada
 
 Se aparecer uma pasta assim dentro de `public_html`:
 
 ```text
-loctubo-site-hostgator-2026-08-06/
+loctubo-site-hostgator-2026-08-16/
 ```
 
 faca isto:
@@ -155,6 +203,12 @@ css/
 js/
 index.html
 sobre.html
+locacao-andaimes-sao-paulo.html
+locacao-escoramento-metalico-sao-paulo.html
+locacao-martelete-rompedor-sao-paulo.html
+locacao-betoneira-vibrador-concreto-sao-paulo.html
+robots.txt
+sitemap.xml
 ```
 
 3. Clique em **Mover**.
@@ -166,7 +220,7 @@ sobre.html
 
 5. Confirme a substituicao se o cPanel perguntar.
 6. Volte para `public_html`.
-7. Apague a pasta vazia `loctubo-site-hostgator-2026-08-06/`.
+7. Apague a pasta vazia `loctubo-site-hostgator-2026-08-16/`.
 8. Apague tambem o arquivo `.zip` enviado.
 
 ## Permissoes esperadas
@@ -247,11 +301,11 @@ Depois teste de novo. Se o site der erro 500, remova esse `.htaccess` novo e aci
 O favicon do site ja esta configurado no HTML:
 
 ```html
-<link rel="icon" type="image/png" sizes="1024x1024" href="assets/logos/loctubo-logo.png">
-<link rel="apple-touch-icon" href="assets/logos/loctubo-logo.png">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon-32.png">
+<link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon-180.png">
 ```
 
-O arquivo `assets/logos/loctubo-logo.png` e quadrado (`1024x1024`), entao esta adequado para favicon.
+Os arquivos de favicon foram reduzidos para os tamanhos usados pelo navegador, evitando baixar a arte original de alta resolução na primeira visita.
 
 Importante:
 
@@ -285,6 +339,9 @@ O correto e:
 ```text
 /home1/loctub90/public_html/css/styles.css
 /home1/loctub90/public_html/js/main.js
+/home1/loctub90/public_html/js/about.js
+/home1/loctub90/public_html/js/landing-pages.js
+/home1/loctub90/public_html/js/third-party.js
 /home1/loctub90/public_html/assets/
 ```
 
@@ -301,6 +358,12 @@ Quando precisar criar outro zip de deploy, compacte apenas estes itens da raiz d
 ```text
 index.html
 sobre.html
+locacao-andaimes-sao-paulo.html
+locacao-escoramento-metalico-sao-paulo.html
+locacao-martelete-rompedor-sao-paulo.html
+locacao-betoneira-vibrador-concreto-sao-paulo.html
+robots.txt
+sitemap.xml
 assets/
 css/
 js/
@@ -313,11 +376,14 @@ Nao compacte a pasta `LOCTUBO` inteira e nao inclua:
 - `.vscode/`
 - `deploy/`
 - arquivos de backup
+- `.well-known/`
+- `cgi-bin/`
+- `.htaccess`
 
 Com PowerShell, rode na raiz do projeto:
 
 ```powershell
-Compress-Archive -Path index.html,sobre.html,assets,css,js -DestinationPath deploy\loctubo-site-hostgator-NOVA-DATA.zip -Force
+Compress-Archive -Path index.html,sobre.html,locacao-andaimes-sao-paulo.html,locacao-escoramento-metalico-sao-paulo.html,locacao-martelete-rompedor-sao-paulo.html,locacao-betoneira-vibrador-concreto-sao-paulo.html,robots.txt,sitemap.xml,assets,css,js -DestinationPath deploy\loctubo-site-hostgator-NOVA-DATA.zip -Force
 ```
 
 Antes de enviar para a HostGator, abra o zip e confira se ele comeca assim:
@@ -325,6 +391,12 @@ Antes de enviar para a HostGator, abra o zip e confira se ele comeca assim:
 ```text
 index.html
 sobre.html
+locacao-andaimes-sao-paulo.html
+locacao-escoramento-metalico-sao-paulo.html
+locacao-martelete-rompedor-sao-paulo.html
+locacao-betoneira-vibrador-concreto-sao-paulo.html
+robots.txt
+sitemap.xml
 assets/
 css/
 js/

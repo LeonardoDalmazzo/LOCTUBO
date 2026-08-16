@@ -9,25 +9,28 @@
     >
     <meta name="theme-color" content="#10181d">
     <link rel="canonical" href="https://www.loctubo.com.br/">
-    <link rel="icon" type="image/png" sizes="1024x1024" href="assets/logos/loctubo-logo.png">
-    <link rel="apple-touch-icon" href="assets/logos/loctubo-logo.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/logos/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/logos/apple-touch-icon-180.png">
     <meta property="og:type" content="business.business">
     <meta property="og:title" content="LocTubo | Locação de equipamentos para construção">
     <meta property="og:description" content="Locação de andaimes, escoramento metálico, marteletes, betoneiras e equipamentos para construção civil em São Paulo.">
     <meta property="og:locale" content="pt_BR">
-    <meta property="og:image" content="assets/backgrounds/bg-andaimeLocTubo.png">
+    <meta property="og:url" content="https://www.loctubo.com.br/">
+    <meta property="og:image" content="https://www.loctubo.com.br/assets/backgrounds/hero-andaime-1200.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="666">
     <title>LocTubo | Locação de equipamentos para construção</title>
-    <link rel="stylesheet" href="css/styles.css?v=20260701">
-    <script src="js/main.js?v=20260701" defer></script>
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-18308865189"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', 'AW-18308865189');
-    </script>
+    <link
+      rel="preload"
+      as="image"
+      href="assets/backgrounds/hero-andaime-768.jpg"
+      imagesrcset="assets/backgrounds/hero-andaime-768.jpg 768w, assets/backgrounds/hero-andaime-1200.jpg 1200w, assets/backgrounds/hero-andaime-1684.jpg 1684w"
+      imagesizes="100vw"
+      fetchpriority="high"
+    >
+    <link rel="stylesheet" href="css/styles.css?v=20260816-3">
+    <script src="js/third-party.js?v=20260816-2" defer></script>
+    <script src="js/main.js?v=20260816-3" defer></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -57,16 +60,17 @@
     </script>
   </head>
   <body>
+    <a class="skip-link" href="#main-content">Pular para o conteúdo principal</a>
     <header class="site-header" data-header>
       <a class="brand" href="#inicio" aria-label="LocTubo início">
-        <img class="brand__logo" src="assets/logos/isotipo loctubo.png" width="1024" height="1024" alt="">
+        <img class="brand__logo" src="assets/logos/isotipo-loctubo-128.png" width="128" height="128" decoding="async" alt="">
         <span class="brand__text">
           <strong>LOCTUBO</strong>
           <small>comércio e locação de equipamentos</small>
         </span>
       </a>
 
-      <button class="menu-button" type="button" data-menu-toggle="#primary-menu" aria-expanded="false" aria-label="Abrir menu">
+      <button class="menu-button" type="button" data-menu-toggle="#primary-menu" aria-controls="primary-menu" aria-expanded="false" aria-label="Abrir menu">
         <span></span>
         <span></span>
         <span></span>
@@ -106,13 +110,14 @@
       </nav>
     </header>
 
-    <main id="inicio">
+    <main id="main-content">
+      <span id="inicio" class="anchor-target" aria-hidden="true"></span>
       <section class="hero" aria-labelledby="hero-title">
         <div class="hero-carousel" data-hero-carousel aria-hidden="true">
           <img
             class="hero-carousel__image is-active"
-            src="assets/backgrounds/bg-Slide-Andaime-LOCTUBO.png"
-            srcset="assets/backgrounds/bg-Slide-Andaime-LOCTUBO.png 1684w"
+            src="assets/backgrounds/hero-andaime-768.jpg"
+            srcset="assets/backgrounds/hero-andaime-768.jpg 768w, assets/backgrounds/hero-andaime-1200.jpg 1200w, assets/backgrounds/hero-andaime-1684.jpg 1684w"
             sizes="100vw"
             width="1684"
             height="934"
@@ -122,8 +127,8 @@
           >
           <img
             class="hero-carousel__image"
-            src="assets/backgrounds/bg-Slide-Equipamentos.png"
-            srcset="assets/backgrounds/bg-Slide-Equipamentos.png 1684w"
+            data-src="assets/backgrounds/hero-equipamentos-768.jpg"
+            data-srcset="assets/backgrounds/hero-equipamentos-768.jpg 768w, assets/backgrounds/hero-equipamentos-1200.jpg 1200w, assets/backgrounds/hero-equipamentos-1684.jpg 1684w"
             sizes="100vw"
             width="1684"
             height="934"
@@ -133,8 +138,8 @@
           >
           <img
             class="hero-carousel__image"
-            src="assets/backgrounds/bg-Slide-Equipamentos-concretagem.png"
-            srcset="assets/backgrounds/bg-Slide-Equipamentos-concretagem.png 1685w"
+            data-src="assets/backgrounds/hero-concretagem-768.jpg"
+            data-srcset="assets/backgrounds/hero-concretagem-768.jpg 768w, assets/backgrounds/hero-concretagem-1200.jpg 1200w, assets/backgrounds/hero-concretagem-1684.jpg 1684w"
             sizes="100vw"
             width="1685"
             height="934"
@@ -208,7 +213,17 @@
           </p>
         </div>
 
-        <div class="container catalog-shell" data-catalog-shell></div>
+        <div class="container catalog-shell" data-catalog-shell aria-busy="true">
+          <div class="catalog-shell__loading" role="status">
+            <p>Carregando catálogo de equipamentos…</p>
+            <noscript>
+              <p>
+                Consulte a disponibilidade pelo <a href="https://wa.me/5511986740961">WhatsApp da LocTubo</a>
+                ou ligue para <a href="tel:+551137468886">(11) 3746-8886</a>.
+              </p>
+            </noscript>
+          </div>
+        </div>
       </section>
 
       <div class="equipment-details-source" hidden>
@@ -494,8 +509,19 @@
               Abrir no Google Maps
             </a>
           </div>
-          <div class="map-frame">
-            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.3584980816095!2d-46.74485992378745!3d-23.59147256270081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce56846d227925%3A0xf8e684933fd21629!2sR.%20Manoel%20de%20Afonseca%2C%2061%20-%20Jardim%20das%20Vertentes%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005541-150!5e0!3m2!1sen!2sbr!4v1777287641230!5m2!1sen!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade" title="Mapa da LocTubo no Butantã, São Paulo"></iframe>
+          <div
+            class="map-frame"
+            data-map-frame
+            data-map-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3656.3584980816095!2d-46.74485992378745!3d-23.59147256270081!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce56846d227925%3A0xf8e684933fd21629!2sR.%20Manoel%20de%20Afonseca%2C%2061%20-%20Jardim%20das%20Vertentes%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2005541-150!5e0!3m2!1sen!2sbr!4v1777287641230!5m2!1sen!2sbr"
+            data-map-title="Mapa da LocTubo no Butantã, São Paulo"
+          >
+            <div class="map-frame__placeholder">
+              <p>Carregue o mapa interativo somente se precisar traçar sua rota até a LocTubo.</p>
+              <button class="button button--secondary" type="button" data-map-load>Carregar mapa interativo</button>
+            </div>
+            <noscript>
+              <p>Ative o JavaScript para carregar o mapa ou use o botão “Abrir no Google Maps”.</p>
+            </noscript>
           </div>
         </div>
       </section>
@@ -549,7 +575,7 @@
       <div class="container footer-grid">
         <div class="footer-brand">
           <a class="brand brand--footer" href="#inicio">
-            <img class="brand__logo" src="assets/logos/isotipo loctubo.png" width="1024" height="1024" loading="lazy" decoding="async" alt="">
+            <img class="brand__logo" src="assets/logos/isotipo-loctubo-128.png" width="128" height="128" loading="lazy" decoding="async" alt="">
             <span class="brand__text">
               <strong>LOCTUBO</strong>
               <small>comércio e locação de equipamentos</small>

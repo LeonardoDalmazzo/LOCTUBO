@@ -1,0 +1,5 @@
+# Regras de rastreamento do site público da LocTubo.
+User-agent: *
+Allow: /
+
+Sitemap: https://www.loctubo.com.br/sitemap.xml

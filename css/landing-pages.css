@@ -1,0 +1,600 @@
+/* Landing pages de campanha: foco em orçamento via WhatsApp. */
+.landing-page {
+  background: #f5f7f8;
+  color: var(--color-ink);
+}
+
+.landing-page .site-nav__cta {
+  background: var(--color-primary);
+}
+
+.landing-hero {
+  position: relative;
+  overflow: hidden;
+  min-height: 44rem;
+  padding: calc(var(--header-height) + var(--space-10)) 0 var(--space-10);
+  background-color: var(--color-dark);
+  background-position: center;
+  background-size: cover;
+  color: #ffffff;
+}
+
+.landing-page--andaimes .landing-hero {
+  background-image:
+    linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 86%) 52%, rgb(16 24 29 / 68%) 100%),
+    url("../assets/backgrounds/hero-andaime-768.jpg");
+}
+
+.landing-page--escoramento .landing-hero {
+  background-image:
+    linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 86%) 52%, rgb(16 24 29 / 68%) 100%),
+    url("../assets/backgrounds/hero-concretagem-768.jpg");
+}
+
+.landing-page--martelete .landing-hero {
+  background-image:
+    linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 86%) 52%, rgb(16 24 29 / 68%) 100%),
+    url("../assets/backgrounds/hero-equipamentos-768.jpg");
+}
+
+.landing-page--concretagem .landing-hero {
+  background-image:
+    linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 86%) 52%, rgb(16 24 29 / 68%) 100%),
+    url("../assets/backgrounds/hero-concretagem-768.jpg");
+}
+
+.landing-hero__layout {
+  display: grid;
+  gap: var(--space-8);
+  align-items: center;
+}
+
+.landing-hero__copy {
+  min-width: 0;
+  max-width: 46rem;
+}
+
+.landing-hero__copy h1 {
+  max-width: 14ch;
+  margin-bottom: var(--space-5);
+  font-size: clamp(2.35rem, 9vw, 4.4rem);
+  line-height: 0.98;
+}
+
+.landing-hero__copy > p:not(.eyebrow) {
+  max-width: 39rem;
+  margin-bottom: var(--space-6);
+  color: rgb(255 255 255 / 88%);
+  font-size: clamp(1.05rem, 2.7vw, 1.25rem);
+}
+
+.landing-hero__eyebrow {
+  color: #ffffff;
+}
+
+.landing-hero__eyebrow::before {
+  display: inline-block;
+  width: 0.68rem;
+  height: 0.68rem;
+  margin-right: var(--space-2);
+  border-radius: 50%;
+  background: var(--color-accent);
+  content: "";
+}
+
+.landing-hero__checks {
+  display: grid;
+  gap: var(--space-3);
+  margin: 0 0 var(--space-6);
+  padding: 0;
+  list-style: none;
+}
+
+.landing-hero__checks li {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-3);
+  color: rgb(255 255 255 / 90%);
+  font-weight: 700;
+}
+
+.landing-hero__checks li::before {
+  display: grid;
+  width: 1.45rem;
+  height: 1.45rem;
+  flex: 0 0 auto;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  content: "✓";
+  font-size: 0.85rem;
+  line-height: 1;
+}
+
+.landing-actions {
+  display: grid;
+  gap: var(--space-3);
+  max-width: 27rem;
+}
+
+.landing-button {
+  display: inline-flex;
+  min-height: 3.5rem;
+  align-items: center;
+  gap: var(--space-2);
+  justify-content: center;
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  padding: 0.95rem 1.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  transition: background var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast), transform var(--transition-fast);
+}
+
+.landing-button:hover {
+  transform: translateY(-1px);
+}
+
+.landing-button--whatsapp {
+  background: #168c4a;
+  color: #ffffff;
+}
+
+.landing-button--whatsapp:hover {
+  background: #0e713a;
+}
+
+.landing-button--outline {
+  border-color: rgb(255 255 255 / 42%);
+  background: rgb(255 255 255 / 8%);
+  color: #ffffff;
+}
+
+.landing-button--outline:hover {
+  border-color: #ffffff;
+  background: rgb(255 255 255 / 16%);
+}
+
+.landing-button__icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: 0 0 auto;
+  fill: currentColor;
+}
+
+.landing-hero__note {
+  margin: 0;
+  color: rgb(255 255 255 / 72%);
+  font-size: var(--text-sm);
+}
+
+.landing-lead-form {
+  display: grid;
+  gap: var(--space-4);
+  min-width: 0;
+  border: 1px solid rgb(255 255 255 / 30%);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 97%);
+  color: var(--color-ink);
+  padding: var(--space-5);
+  box-shadow: 0 22px 54px rgb(0 0 0 / 24%);
+}
+
+.landing-lead-form__heading {
+  margin: 0;
+}
+
+.landing-lead-form__heading strong,
+.landing-lead-form__heading span {
+  display: block;
+}
+
+.landing-lead-form__heading strong {
+  font-size: 1.25rem;
+  line-height: 1.2;
+}
+
+.landing-lead-form__heading span {
+  margin-top: var(--space-1);
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.landing-form-grid {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.landing-lead-form label {
+  display: grid;
+  gap: var(--space-1);
+  color: var(--color-secondary-dark);
+  font-size: var(--text-sm);
+  font-weight: 800;
+}
+
+.landing-lead-form input,
+.landing-lead-form select,
+.landing-lead-form textarea {
+  width: 100%;
+  min-height: 3.1rem;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: #ffffff;
+  color: var(--color-ink);
+  padding: 0.78rem 0.9rem;
+}
+
+.landing-lead-form textarea {
+  min-height: 6.5rem;
+  resize: vertical;
+}
+
+.landing-lead-form [aria-invalid="true"] {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgb(215 25 32 / 16%);
+}
+
+.landing-form-feedback {
+  margin: 0;
+  border: 1px solid rgb(169 15 22 / 24%);
+  border-radius: var(--radius-sm);
+  background: rgb(215 25 32 / 9%);
+  color: var(--color-primary-dark);
+  padding: var(--space-3);
+  font-size: var(--text-sm);
+  font-weight: 700;
+}
+
+.landing-form-feedback[hidden] {
+  display: none;
+}
+
+.landing-lead-form .landing-button {
+  width: 100%;
+  border: 0;
+  cursor: pointer;
+}
+
+.landing-form-privacy {
+  margin: 0;
+  color: var(--color-muted);
+  font-size: 0.78rem;
+  line-height: 1.45;
+}
+
+.landing-section {
+  padding: clamp(3.75rem, 8vw, 6.5rem) 0;
+}
+
+.landing-section__heading {
+  max-width: 47rem;
+  margin: 0 auto var(--space-8);
+  text-align: center;
+}
+
+.landing-section__heading h2 {
+  margin-bottom: var(--space-3);
+  font-size: clamp(1.9rem, 5vw, 3rem);
+}
+
+.landing-section__heading p:not(.eyebrow) {
+  margin-bottom: 0;
+  color: var(--color-muted);
+}
+
+.landing-proof-section {
+  background: #f5f7f8;
+  padding: clamp(2rem, 5vw, 3.5rem) 0;
+}
+
+.landing-proof-strip {
+  display: grid;
+  gap: var(--space-3);
+}
+
+.landing-proof {
+  display: grid;
+  gap: var(--space-1);
+  min-width: 0;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  padding: var(--space-5);
+  box-shadow: 0 14px 36px rgb(16 24 29 / 10%);
+}
+
+.landing-proof strong {
+  color: var(--color-secondary-dark);
+  font-size: 1.1rem;
+}
+
+.landing-proof span {
+  color: var(--color-muted);
+  font-size: var(--text-sm);
+}
+
+.landing-solutions {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f3f5f7 100%);
+}
+
+.landing-solution-grid,
+.landing-steps,
+.landing-faq-layout {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.landing-solution-card {
+  display: grid;
+  grid-template-rows: auto minmax(0, 1fr);
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-md);
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgb(16 24 29 / 8%);
+}
+
+.landing-solution-card picture {
+  position: relative;
+  display: block;
+  min-height: 0;
+  overflow: hidden;
+  aspect-ratio: 4 / 3;
+  background: #ffffff;
+}
+
+.landing-solution-card img {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  min-height: 0;
+  object-fit: contain;
+  object-position: center;
+  background: #ffffff;
+}
+
+.landing-solution-card__body {
+  display: grid;
+  gap: var(--space-2);
+  padding: var(--space-5);
+}
+
+.landing-solution-card__body h3,
+.landing-solution-card__body p {
+  margin: 0;
+}
+
+.landing-solution-card__body p {
+  color: var(--color-muted);
+}
+
+.landing-how {
+  overflow-x: clip;
+  background: var(--color-dark);
+  color: #ffffff;
+}
+
+.landing-how .landing-section__heading p:not(.eyebrow) {
+  color: rgb(255 255 255 / 76%);
+}
+
+.landing-steps article {
+  position: relative;
+  display: grid;
+  gap: var(--space-3);
+  min-width: 0;
+  border: 1px solid rgb(255 255 255 / 17%);
+  border-radius: var(--radius-md);
+  background: rgb(255 255 255 / 8%);
+  padding: var(--space-5);
+}
+
+.landing-steps span {
+  display: grid;
+  width: 2.25rem;
+  height: 2.25rem;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--color-primary);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.landing-steps h3,
+.landing-steps p {
+  margin: 0;
+}
+
+.landing-steps p {
+  color: rgb(255 255 255 / 76%);
+}
+
+.landing-faq {
+  background: #ffffff;
+}
+
+.landing-faq details {
+  border: 1px solid var(--color-line);
+  border-radius: var(--radius-sm);
+  background: var(--color-surface);
+  padding: 0 var(--space-4);
+}
+
+.landing-faq summary {
+  min-height: 3.75rem;
+  cursor: pointer;
+  padding: var(--space-4) var(--space-6) var(--space-4) 0;
+  color: var(--color-secondary-dark);
+  font-weight: 800;
+}
+
+.landing-faq details p {
+  margin: 0 0 var(--space-4);
+  color: var(--color-muted);
+}
+
+.landing-contact-band {
+  background:
+    linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 54%, #7c0e13 100%);
+  color: #ffffff;
+}
+
+.landing-contact-band__layout {
+  display: grid;
+  gap: var(--space-5);
+  align-items: center;
+}
+
+.landing-contact-band h2,
+.landing-contact-band p {
+  margin-bottom: var(--space-3);
+}
+
+.landing-contact-band p {
+  color: rgb(255 255 255 / 86%);
+}
+
+.landing-contact-band .landing-button {
+  width: 100%;
+}
+
+.landing-footer {
+  padding-bottom: var(--space-10);
+}
+
+.landing-footer .footer-grid {
+  grid-template-columns: 1fr;
+}
+
+.landing-footer__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.landing-footer__links a {
+  color: var(--color-chrome-muted);
+}
+
+@media (min-width: 42rem) {
+  .landing-form-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .landing-form-grid .landing-form-wide {
+    grid-column: 1 / -1;
+  }
+
+  .landing-proof-strip,
+  .landing-steps {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .landing-solution-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .landing-contact-band .landing-button {
+    width: fit-content;
+  }
+}
+
+@media (min-width: 58rem) {
+  .landing-hero {
+    min-height: 44rem;
+    padding-bottom: var(--space-12);
+  }
+
+  .landing-page--andaimes .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 78%) 56%, rgb(16 24 29 / 42%) 100%),
+      url("../assets/backgrounds/hero-andaime-1200.jpg");
+  }
+
+  .landing-page--escoramento .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 78%) 56%, rgb(16 24 29 / 42%) 100%),
+      url("../assets/backgrounds/hero-concretagem-1200.jpg");
+  }
+
+  .landing-page--martelete .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 78%) 56%, rgb(16 24 29 / 42%) 100%),
+      url("../assets/backgrounds/hero-equipamentos-1200.jpg");
+  }
+
+  .landing-page--concretagem .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 78%) 56%, rgb(16 24 29 / 42%) 100%),
+      url("../assets/backgrounds/hero-concretagem-1200.jpg");
+  }
+
+  .landing-hero__layout {
+    grid-template-columns: minmax(0, 1.15fr) minmax(21rem, 0.85fr);
+  }
+
+  .landing-lead-form {
+    padding: var(--space-6);
+  }
+
+  .landing-contact-band__layout {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+
+  .landing-footer .footer-grid {
+    grid-template-columns: 1.5fr 1fr 1fr;
+  }
+}
+
+@media (min-width: 78rem) {
+  .landing-page--andaimes .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 76%) 58%, rgb(16 24 29 / 32%) 100%),
+      url("../assets/backgrounds/hero-andaime-1684.jpg");
+  }
+
+  .landing-page--escoramento .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 76%) 58%, rgb(16 24 29 / 32%) 100%),
+      url("../assets/backgrounds/hero-concretagem-1684.jpg");
+  }
+
+  .landing-page--martelete .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 76%) 58%, rgb(16 24 29 / 32%) 100%),
+      url("../assets/backgrounds/hero-equipamentos-1684.jpg");
+  }
+
+  .landing-page--concretagem .landing-hero {
+    background-image:
+      linear-gradient(90deg, rgb(16 24 29 / 96%) 0%, rgb(16 24 29 / 76%) 58%, rgb(16 24 29 / 32%) 100%),
+      url("../assets/backgrounds/hero-concretagem-1684.jpg");
+  }
+
+  .landing-hero__layout {
+    grid-template-columns: minmax(0, 1.18fr) minmax(25rem, 0.82fr);
+  }
+
+  .landing-hero__copy h1 {
+    font-size: clamp(3.6rem, 5vw, 5.25rem);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .landing-button {
+    transition: none;
+  }
+
+  .landing-button:hover {
+    transform: none;
+  }
+}
