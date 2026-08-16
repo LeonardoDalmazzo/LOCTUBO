@@ -22,6 +22,7 @@
 - [Estrutura do repositorio](#estrutura-do-repositorio)
 - [Como rodar localmente](#como-rodar-localmente)
 - [Manutencao do catalogo](#manutencao-do-catalogo)
+- [Paginas de campanha e conversoes](#paginas-de-campanha-e-conversoes)
 - [SEO e presenca local](#seo-e-presenca-local)
 - [Deploy na HostGator](#deploy-na-hostgator)
 - [Backups e Git LFS](#backups-e-git-lfs)
@@ -45,6 +46,12 @@ Paginas principais:
 
 - `index.html`: pagina inicial, catalogo, localizacao, contato e formulario de orcamento.
 - `sobre.html`: pagina institucional com historia, missao, visao, valores, diferenciais e marcas.
+- `locacao-andaimes-sao-paulo.html`: landing page de campanha para locacao de andaimes, com cotacao pelo WhatsApp.
+- `locacao-escoramento-metalico-sao-paulo.html`: landing page de campanha para escoramento metalico, com envio de medidas pelo WhatsApp.
+- `locacao-martelete-rompedor-sao-paulo.html`: landing page de campanha para demolição, com cotacao de martelete pelo WhatsApp.
+- `locacao-betoneira-vibrador-concreto-sao-paulo.html`: landing page de campanha para concretagem, com cotacao de betoneira e vibrador pelo WhatsApp.
+- `robots.txt`: regras de rastreamento do site publico e referencia ao sitemap.
+- `sitemap.xml`: lista das seis paginas publicas canonicas.
 - `README_DEPLOY_HOSTGATOR.md`: manual operacional para publicar o ZIP de deploy na HostGator.
 
 ## Principais recursos
@@ -65,6 +72,8 @@ Paginas principais:
 - Mapa incorporado do Google Maps.
 - Dados estruturados `LocalBusiness` para SEO local.
 - Favicon e metadados Open Graph.
+- Landing pages leves para campanhas de Google Ads, sem carrossel, mapa ou catalogo completo.
+- Eventos de intencao de conversao para WhatsApp, telefone e formulario.
 - Guia de deploy para HostGator/cPanel.
 - Backups de publicacao versionados com Git LFS.
 
@@ -88,6 +97,12 @@ Nao ha dependencias de Node.js, bundler, framework ou banco de dados para execut
 .
 |-- index.html
 |-- sobre.html
+|-- locacao-andaimes-sao-paulo.html
+|-- locacao-escoramento-metalico-sao-paulo.html
+|-- locacao-martelete-rompedor-sao-paulo.html
+|-- locacao-betoneira-vibrador-concreto-sao-paulo.html
+|-- robots.txt
+|-- sitemap.xml
 |-- README.md
 |-- README_DEPLOY_HOSTGATOR.md
 |-- .gitattributes
@@ -96,11 +111,16 @@ Nao ha dependencias de Node.js, bundler, framework ou banco de dados para execut
 |   |-- docs/
 |   |   `-- manual-instrucoes/
 |   |-- imagens-catalogo/
+|   |   `-- otimizadas/
 |   `-- logos/
 |-- css/
+|   |-- landing-pages.css
 |   `-- styles.css
 |-- js/
-|   `-- main.js
+|   |-- about.js
+|   |-- landing-pages.js
+|   |-- main.js
+|   `-- third-party.js
 `-- deploy/
     |-- loctubo-site-hostgator-2026-07-09.zip
     |-- loctubo-site-hostgator.zip
@@ -110,11 +130,16 @@ Nao ha dependencias de Node.js, bundler, framework ou banco de dados para execut
 ### Pastas importantes
 
 - `assets/backgrounds/`: imagens de fundo e slides do hero.
-- `assets/imagens-catalogo/`: fotos dos equipamentos usados no catalogo.
+- `assets/imagens-catalogo/`: fotos originais dos equipamentos usados no catalogo.
+- `assets/imagens-catalogo/otimizadas/`: versoes JPEG responsivas de 480 px e 960 px usadas nos cards e galerias.
 - `assets/logos/`: logos da LOCTUBO e marcas exibidas na pagina Sobre.
 - `assets/docs/manual-instrucoes/`: PDFs de manuais vinculados a itens do catalogo.
 - `css/styles.css`: todos os estilos do site.
-- `js/main.js`: comportamento do menu, carrossel, catalogo, visualizador, formulario e WhatsApp.
+- `css/landing-pages.css`: estilos complementares e responsivos das landing pages de campanha.
+- `js/main.js`: comportamento da pagina inicial, incluindo menu, carrossel, catalogo, visualizador, formulario e WhatsApp.
+- `js/about.js`: comportamento leve da pagina institucional (menu, botao de topo e revelacao de secoes).
+- `js/landing-pages.js`: menu, validacao do formulario e abertura do WhatsApp nas landing pages.
+- `js/third-party.js`: carregamento adiado da tag do Google Ads e emissao de eventos sem dados pessoais.
 - `deploy/`: pacotes ZIP e backups para publicacao e recuperacao.
 
 ## Como rodar localmente
@@ -193,7 +218,8 @@ Tambem e possivel usar `available: false` diretamente no item, quando fizer sent
 1. Coloque a imagem em `assets/imagens-catalogo/`.
 2. Referencie a imagem no item do catalogo.
 3. Se necessario, atualize o objeto `imageSizes` em `js/main.js` para melhorar carregamento e evitar layout shift.
-4. Teste em desktop e mobile.
+4. Gere tambem as variantes JPEG correspondentes em `assets/imagens-catalogo/otimizadas/` com os sufixos `-480.jpg` e `-960.jpg`; se elas ainda nao existirem, o site volta automaticamente para a imagem original.
+5. Teste em desktop e mobile.
 
 ### Atualizar telefone ou WhatsApp
 
@@ -218,9 +244,31 @@ As paginas carregam CSS e JS com query string:
 ```html
 css/styles.css?v=20260701
 js/main.js?v=20260701
+js/about.js?v=20260701
+css/landing-pages.css?v=20260701
+js/landing-pages.js?v=20260701
 ```
 
-Ao publicar mudancas importantes, atualize o valor `v=` em `index.html` e `sobre.html` para reduzir cache antigo no navegador.
+Ao publicar mudancas importantes, atualize o valor `v=` em todas as paginas que carregam o arquivo alterado para reduzir cache antigo no navegador.
+
+## Paginas de campanha e conversoes
+
+As landing pages de campanha sao curtas e foram feitas para trafego pago: CTA de WhatsApp acima da dobra, provas objetivas, formulario enxuto e FAQ. Elas nao carregam o catalogo completo, mapa ou carrossel.
+
+- `locacao-andaimes-sao-paulo.html`: CTA principal `Cotar andaime pelo WhatsApp`.
+- `locacao-escoramento-metalico-sao-paulo.html`: CTA principal `Enviar medidas para cotar`.
+- `locacao-martelete-rompedor-sao-paulo.html`: CTA principal `Cotar martelete pelo WhatsApp`.
+- `locacao-betoneira-vibrador-concreto-sao-paulo.html`: CTA principal `Cotar betoneira e vibrador pelo WhatsApp`.
+
+Os eventos abaixo sao emitidos sem nome, telefone, endereco, texto do formulario ou outros dados pessoais:
+
+- `whatsapp_click`: clique em um CTA direto de WhatsApp.
+- `click_to_call`: clique em um telefone `tel:`.
+- `generate_lead`: envio valido do formulario que abre o WhatsApp.
+
+No formulario, apenas `generate_lead` e disparado para evitar contabilizar duas conversoes para a mesma solicitacao. Os campos preenchidos seguem somente na mensagem que o usuario escolhe enviar no WhatsApp.
+
+Para que um evento conte como conversao no Google Ads, crie a acao correspondente no Google Ads e preencha o label fornecido no objeto `googleAdsConversionLabels` de `js/third-party.js`. Enquanto os labels estiverem vazios, os eventos ficam disponiveis para a Google tag/dataLayer, mas nao sao conversoes de Ads configuradas. Sugestao: usar `generate_lead` como primaria e `whatsapp_click`/`click_to_call` como secundarias.
 
 ## SEO e presenca local
 
@@ -289,23 +337,30 @@ css/
 js/
 index.html
 sobre.html
+locacao-andaimes-sao-paulo.html
+locacao-escoramento-metalico-sao-paulo.html
+locacao-martelete-rompedor-sao-paulo.html
+locacao-betoneira-vibrador-concreto-sao-paulo.html
+robots.txt
+sitemap.xml
 ```
 
 6. Enviar o ZIP mais recente de `deploy/`.
 7. Extrair diretamente em `public_html`.
-8. Garantir que `index.html`, `sobre.html`, `assets/`, `css/` e `js/` fiquem diretamente dentro de `public_html`.
+8. Garantir que os seis arquivos HTML, `robots.txt`, `sitemap.xml`, `assets/`, `css/` e `js/` fiquem diretamente dentro de `public_html`.
 9. Apagar o ZIP do servidor depois da extracao.
-10. Testar home, pagina Sobre, imagens, formulario, WhatsApp e manuais em PDF.
+10. Testar home, pagina Sobre, paginas de campanha, imagens, formularios, WhatsApp e manuais em PDF.
 
-### Arquivos que normalmente devem ser mantidos no servidor
+### Itens que permanecem somente no servidor
 
-No `public_html`, nao remova sem necessidade:
+No `public_html`, nao inclua no ZIP nem remova sem revisao:
 
 - `.well-known/`
 - `cgi-bin/`
 - `.htaccess`
 - arquivos de validacao do Google/Bing
-- `robots.txt`
+
+Os arquivos `robots.txt` e `sitemap.xml` pertencem ao projeto atual e devem ser substituidos pela extracao do ZIP.
 
 ### Permissoes esperadas
 
@@ -391,7 +446,7 @@ git push origin main
 
 Antes de gerar ou enviar um ZIP de deploy:
 
-- Conferir `index.html` e `sobre.html` no navegador.
+- Conferir `index.html`, `sobre.html` e as quatro paginas de campanha no navegador.
 - Testar menu mobile.
 - Testar busca do catalogo.
 - Testar filtros e paginacao.
@@ -403,7 +458,7 @@ Antes de gerar ou enviar um ZIP de deploy:
 - Testar links para Google Maps.
 - Testar PDFs dos manuais.
 - Conferir imagens do catalogo.
-- Validar se `css/styles.css` e `js/main.js` carregam sem cache antigo.
+- Validar se `css/styles.css`, `css/landing-pages.css`, `js/main.js`, `js/about.js`, `js/landing-pages.js` e `js/third-party.js` carregam sem cache antigo.
 - Atualizar `README_DEPLOY_HOSTGATOR.md` se o fluxo de hospedagem mudar.
 - Criar backup antes de substituir arquivos no cPanel.
 
@@ -412,7 +467,7 @@ Antes de gerar ou enviar um ZIP de deploy:
 Na raiz do projeto, compacte somente os arquivos necessarios para producao:
 
 ```powershell
-Compress-Archive -Path index.html,sobre.html,assets,css,js -DestinationPath deploy\loctubo-site-hostgator-NOVA-DATA.zip -Force
+Compress-Archive -Path index.html,sobre.html,locacao-andaimes-sao-paulo.html,locacao-escoramento-metalico-sao-paulo.html,locacao-martelete-rompedor-sao-paulo.html,locacao-betoneira-vibrador-concreto-sao-paulo.html,robots.txt,sitemap.xml,assets,css,js -DestinationPath deploy\loctubo-site-hostgator-NOVA-DATA.zip -Force
 ```
 
 O ZIP deve abrir com esta estrutura:
@@ -420,6 +475,12 @@ O ZIP deve abrir com esta estrutura:
 ```text
 index.html
 sobre.html
+locacao-andaimes-sao-paulo.html
+locacao-escoramento-metalico-sao-paulo.html
+locacao-martelete-rompedor-sao-paulo.html
+locacao-betoneira-vibrador-concreto-sao-paulo.html
+robots.txt
+sitemap.xml
 assets/
 css/
 js/
