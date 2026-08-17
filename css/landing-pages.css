@@ -287,7 +287,10 @@
 }
 
 .landing-proof-section {
-  background: #f5f7f8;
+  background:
+    linear-gradient(180deg, rgb(248 250 252 / 96%) 0%, rgb(232 235 239 / 92%) 100%),
+    var(--bg-metal-diamond) center / 34rem auto repeat;
+  border-block: 1px solid rgb(216 224 229 / 70%);
   padding: clamp(2rem, 5vw, 3.5rem) 0;
 }
 
@@ -377,6 +380,64 @@
   color: var(--color-muted);
 }
 
+.landing-page--martelete .landing-solution-card,
+.landing-page--concretagem .landing-solution-card,
+.landing-page--andaimes .landing-solution-card,
+.landing-page--escoramento .landing-solution-card {
+  border-color: rgb(16 24 29 / 14%);
+  box-shadow: 0 16px 36px rgb(16 24 29 / 11%);
+  transition: box-shadow var(--transition-fast), transform var(--transition-fast);
+}
+
+.landing-page--martelete .landing-solution-card picture,
+.landing-page--concretagem .landing-solution-card picture,
+.landing-page--andaimes .landing-solution-card picture,
+.landing-page--escoramento .landing-solution-card picture {
+  background: linear-gradient(145deg, #ffffff 0%, #edf1f3 100%);
+}
+
+.landing-page--martelete .landing-solution-card img,
+.landing-page--concretagem .landing-solution-card img,
+.landing-page--andaimes .landing-solution-card img,
+.landing-page--escoramento .landing-solution-card img {
+  padding: var(--space-3);
+}
+
+.landing-page--martelete .landing-solution-card__body,
+.landing-page--concretagem .landing-solution-card__body,
+.landing-page--andaimes .landing-solution-card__body,
+.landing-page--escoramento .landing-solution-card__body {
+  gap: var(--space-3);
+  padding: var(--space-5) var(--space-5) var(--space-6);
+}
+
+.landing-page--martelete .landing-solution-card__body h3,
+.landing-page--concretagem .landing-solution-card__body h3,
+.landing-page--andaimes .landing-solution-card__body h3,
+.landing-page--escoramento .landing-solution-card__body h3 {
+  color: var(--color-secondary-dark);
+  font-size: 1.2rem;
+  line-height: 1.2;
+}
+
+.landing-page--martelete .landing-solution-card__body p,
+.landing-page--concretagem .landing-solution-card__body p,
+.landing-page--andaimes .landing-solution-card__body p,
+.landing-page--escoramento .landing-solution-card__body p {
+  font-size: 0.95rem;
+  line-height: 1.55;
+}
+
+@media (hover: hover) {
+  .landing-page--martelete .landing-solution-card:hover,
+  .landing-page--concretagem .landing-solution-card:hover,
+  .landing-page--andaimes .landing-solution-card:hover,
+  .landing-page--escoramento .landing-solution-card:hover {
+    box-shadow: 0 22px 44px rgb(16 24 29 / 16%);
+    transform: translateY(-0.25rem);
+  }
+}
+
 .landing-how {
   overflow-x: clip;
   background: var(--color-dark);
@@ -444,8 +505,10 @@
 
 .landing-contact-band {
   background:
-    linear-gradient(135deg, var(--color-primary-dark) 0%, var(--color-primary) 54%, #7c0e13 100%);
-  color: #ffffff;
+    linear-gradient(180deg, rgb(248 250 252 / 96%) 0%, rgb(232 235 239 / 92%) 100%),
+    var(--bg-metal-diamond) center / 34rem auto repeat;
+  border-block: 1px solid rgb(216 224 229 / 70%);
+  color: var(--color-ink);
 }
 
 .landing-contact-band__layout {
@@ -460,7 +523,7 @@
 }
 
 .landing-contact-band p {
-  color: rgb(255 255 255 / 86%);
+  color: var(--color-muted);
 }
 
 .landing-contact-band .landing-button {
@@ -509,6 +572,11 @@
 }
 
 @media (min-width: 58rem) {
+  .landing-page .site-nav__cta {
+    flex: 0 0 12.75rem;
+    width: 12.75rem;
+  }
+
   .landing-hero {
     min-height: 44rem;
     padding-bottom: var(--space-12);
@@ -594,7 +662,18 @@
     transition: none;
   }
 
-  .landing-button:hover {
+  .landing-page--martelete .landing-solution-card,
+  .landing-page--concretagem .landing-solution-card,
+  .landing-page--andaimes .landing-solution-card,
+  .landing-page--escoramento .landing-solution-card {
+    transition: none;
+  }
+
+  .landing-button:hover,
+  .landing-page--martelete .landing-solution-card:hover,
+  .landing-page--concretagem .landing-solution-card:hover,
+  .landing-page--andaimes .landing-solution-card:hover,
+  .landing-page--escoramento .landing-solution-card:hover {
     transform: none;
   }
 }
