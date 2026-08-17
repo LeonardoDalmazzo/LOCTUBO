@@ -578,7 +578,8 @@
   }
 
   .landing-hero {
-    min-height: 44rem;
+    min-height: max(44rem, 100vh);
+    min-height: max(44rem, 100svh);
     padding-bottom: var(--space-12);
   }
 
