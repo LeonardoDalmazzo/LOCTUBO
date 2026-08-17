@@ -4,7 +4,7 @@ Este passo a passo serve para publicar o site estatico da LOCTUBO pelo Gerenciad
 
 ## Resumo rapido
 
-- Arquivo de deploy recomendado: `deploy/loctubo-site-hostgator-2026-08-16.zip`
+- Arquivo de deploy recomendado: `deploy/loctubo-site-hostgator-2026-08-17.zip`
 - Pasta correta na hospedagem: `/home1/loctub90/public_html`
 - O zip deve ser extraido dentro de `public_html`
 - Os arquivos do site precisam ficar diretamente em `public_html`, sem uma pasta extra por cima
@@ -35,7 +35,7 @@ Estrutura correta depois da extracao:
 Estrutura errada:
 
 ```text
-/home1/loctub90/public_html/loctubo-site-hostgator-2026-08-16/
+/home1/loctub90/public_html/loctubo-site-hostgator-2026-08-17/
 |-- index.html
 |-- sobre.html
 |-- locacao-andaimes-sao-paulo.html
@@ -64,10 +64,6 @@ Dentro de `public_html`, nao inclua estes itens no ZIP do projeto:
 - `googleaedc1ca54f347ed7.html`
 
 As pastas podem ser usadas pelo SSL/cPanel. Os arquivos Google e Bing devem permanecer ate a propriedade do dominio ser confirmada ou migrada para outra forma de validacao.
-
-### Revise depois do backup
-
-- `.htaccess`: nao apague automaticamente. O arquivo legado contem regras de WordPress/PHP e deve ser salvo e revisado antes de qualquer alteracao.
 
 Os arquivos `robots.txt` e `sitemap.xml` pertencem ao projeto atual e serao substituidos pela extracao do novo ZIP.
 
@@ -127,7 +123,7 @@ sitemap.xml
 8. Envie este arquivo do computador:
 
 ```text
-C:\Users\ADML\Desktop\repositories\onGitHub\LOCTUBO\deploy\loctubo-site-hostgator-2026-08-16.zip
+C:\Users\ADML\Desktop\repositories\onGitHub\LOCTUBO\deploy\loctubo-site-hostgator-2026-08-17.zip
 ```
 
 9. Volte para o Gerenciador de Arquivos e clique em **Recarregar**.
@@ -189,7 +185,7 @@ Confira tambem se:
 Se aparecer uma pasta assim dentro de `public_html`:
 
 ```text
-loctubo-site-hostgator-2026-08-16/
+loctubo-site-hostgator-2026-08-17/
 ```
 
 faca isto:
@@ -220,7 +216,7 @@ sitemap.xml
 
 5. Confirme a substituicao se o cPanel perguntar.
 6. Volte para `public_html`.
-7. Apague a pasta vazia `loctubo-site-hostgator-2026-08-16/`.
+7. Apague a pasta vazia `loctubo-site-hostgator-2026-08-17/`.
 8. Apague tambem o arquivo `.zip` enviado.
 
 ## Permissoes esperadas
