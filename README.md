@@ -24,6 +24,7 @@
 - [Manutencao do catalogo](#manutencao-do-catalogo)
 - [Paginas de campanha e conversoes](#paginas-de-campanha-e-conversoes)
 - [SEO e presenca local](#seo-e-presenca-local)
+- [Historico de versoes e releases](#historico-de-versoes-e-releases)
 - [Deploy na HostGator](#deploy-na-hostgator)
 - [Backups e Git LFS](#backups-e-git-lfs)
 - [Fluxo Git e commits](#fluxo-git-e-commits)
@@ -49,9 +50,9 @@ Paginas principais:
 - `locacao-andaimes-sao-paulo.html`: landing page de campanha para locacao de andaimes, com cotacao pelo WhatsApp.
 - `locacao-escoramento-metalico-sao-paulo.html`: landing page de campanha para escoramento metalico, com envio de medidas pelo WhatsApp.
 - `locacao-martelete-rompedor-sao-paulo.html`: landing page de campanha para demolição, com cotacao de martelete pelo WhatsApp.
-- `locacao-betoneira-vibrador-concreto-sao-paulo.html`: landing page de campanha para concretagem, com cotacao de betoneira e vibrador pelo WhatsApp.
+- `locacao-betoneira-vibrador-concreto-sao-paulo.html`: landing page de concretagem mantida no codigo-fonte, mas pausada e fora do deploy `v1.0.0`.
 - `robots.txt`: regras de rastreamento do site publico e referencia ao sitemap.
-- `sitemap.xml`: lista das seis paginas publicas canonicas.
+- `sitemap.xml`: lista das cinco paginas publicas canonicas da versao `v1.0.0`.
 - `README_DEPLOY_HOSTGATOR.md`: manual operacional para publicar o ZIP de deploy na HostGator.
 
 ## Principais recursos
@@ -105,6 +106,7 @@ Nao ha dependencias de Node.js, bundler, framework ou banco de dados para execut
 |-- sitemap.xml
 |-- README.md
 |-- README_DEPLOY_HOSTGATOR.md
+|-- CHANGELOG.md
 |-- .gitattributes
 |-- assets/
 |   |-- backgrounds/
@@ -121,9 +123,11 @@ Nao ha dependencias de Node.js, bundler, framework ou banco de dados para execut
 |   |-- landing-pages.js
 |   |-- main.js
 |   `-- third-party.js
+|-- scripts/
+|   `-- gerar-deploy.ps1
 `-- deploy/
-    |-- loctubo-site-hostgator-2026-07-09.zip
-    |-- loctubo-site-hostgator.zip
+    |-- loctubo-site-hostgator-v1.0.0.zip
+    |-- pacotes legados com data
     `-- backup site antigo loctubo/
 ```
 
@@ -140,7 +144,8 @@ Nao ha dependencias de Node.js, bundler, framework ou banco de dados para execut
 - `js/about.js`: comportamento leve da pagina institucional (menu, botao de topo e revelacao de secoes).
 - `js/landing-pages.js`: menu, validacao do formulario e abertura do WhatsApp nas landing pages.
 - `js/third-party.js`: carregamento adiado da tag do Google Ads e emissao de eventos sem dados pessoais.
-- `deploy/`: pacotes ZIP e backups para publicacao e recuperacao.
+- `scripts/gerar-deploy.ps1`: gera o pacote de publicacao com nome baseado na versao SemVer.
+- `deploy/`: pacotes ZIP versionados e backups para publicacao e recuperacao.
 
 ## Como rodar localmente
 
@@ -253,12 +258,13 @@ Ao publicar mudancas importantes, atualize o valor `v=` em todas as paginas que 
 
 ## Paginas de campanha e conversoes
 
-As landing pages de campanha sao curtas e foram feitas para trafego pago: CTA de WhatsApp acima da dobra, provas objetivas, formulario enxuto e FAQ. Elas nao carregam o catalogo completo, mapa ou carrossel.
+As landing pages de campanha sao curtas e foram feitas para trafego pago: CTA de WhatsApp acima da dobra, provas objetivas, formulario enxuto e FAQ. Elas nao carregam o catalogo completo, mapa ou carrossel. A versao `v1.0.0` publica tres campanhas:
 
 - `locacao-andaimes-sao-paulo.html`: CTA principal `Cotar andaime pelo WhatsApp`.
 - `locacao-escoramento-metalico-sao-paulo.html`: CTA principal `Enviar medidas para cotar`.
 - `locacao-martelete-rompedor-sao-paulo.html`: CTA principal `Cotar martelete pelo WhatsApp`.
-- `locacao-betoneira-vibrador-concreto-sao-paulo.html`: CTA principal `Cotar betoneira e vibrador pelo WhatsApp`.
+
+A pagina `locacao-betoneira-vibrador-concreto-sao-paulo.html` permanece no repositorio para o proximo ciclo de trabalho, mas nao integra o ZIP nem o sitemap da versao `v1.0.0`.
 
 Os eventos abaixo sao emitidos sem nome, telefone, endereco, texto do formulario ou outros dados pessoais:
 
@@ -308,6 +314,24 @@ Documentacao:
 - https://developers.google.com/search/docs/appearance/favicon-in-search
 - https://developers.google.com/search/docs/crawling-indexing/ask-google-to-recrawl
 
+## Historico de versoes e releases
+
+O projeto usa versionamento semantico no formato `vMAJOR.MINOR.PATCH`:
+
+- `PATCH`: correcoes compativeis, como `v1.0.1`.
+- `MINOR`: novas funcionalidades compativeis, como `v1.1.0`.
+- `MAJOR`: mudancas incompativeis ou um novo ciclo principal, como `v2.0.0`.
+
+Cada release deve manter a mesma versao em tres pontos:
+
+```text
+Commit final: chore(release): publica vX.Y.Z
+Tag anotada: vX.Y.Z
+Pacote: deploy/loctubo-site-hostgator-vX.Y.Z.zip
+```
+
+As mudancas importantes e os commits incluidos em cada versao ficam em [`CHANGELOG.md`](CHANGELOG.md). Os ZIPs antigos com data permanecem apenas como historico legado; novos pacotes usam somente a versao.
+
 ## Deploy na HostGator
 
 O deploy e feito por ZIP no Gerenciador de Arquivos do cPanel.
@@ -345,9 +369,11 @@ robots.txt
 sitemap.xml
 ```
 
-6. Enviar o ZIP mais recente de `deploy/`.
+Na versao `v1.0.0`, a landing de concretagem deve ser removida do servidor e nao sera reposta pelo ZIP.
+
+6. Enviar o ZIP versionado correspondente a tag da release, atualmente `deploy/loctubo-site-hostgator-v1.0.0.zip`.
 7. Extrair diretamente em `public_html`.
-8. Garantir que os seis arquivos HTML, `robots.txt`, `sitemap.xml`, `assets/`, `css/` e `js/` fiquem diretamente dentro de `public_html`.
+8. Garantir que os cinco arquivos HTML publicados, `robots.txt`, `sitemap.xml`, `assets/`, `css/` e `js/` fiquem diretamente dentro de `public_html`.
 9. Apagar o ZIP do servidor depois da extracao.
 10. Testar home, pagina Sobre, paginas de campanha, imagens, formularios, WhatsApp e manuais em PDF.
 
@@ -446,7 +472,7 @@ git push origin main
 
 Antes de gerar ou enviar um ZIP de deploy:
 
-- Conferir `index.html`, `sobre.html` e as quatro paginas de campanha no navegador.
+- Conferir `index.html`, `sobre.html` e as tres paginas de campanha publicadas no navegador.
 - Testar menu mobile.
 - Testar busca do catalogo.
 - Testar filtros e paginacao.
@@ -459,16 +485,21 @@ Antes de gerar ou enviar um ZIP de deploy:
 - Testar PDFs dos manuais.
 - Conferir imagens do catalogo.
 - Validar se `css/styles.css`, `css/landing-pages.css`, `js/main.js`, `js/about.js`, `js/landing-pages.js` e `js/third-party.js` carregam sem cache antigo.
+- Confirmar que a landing de concretagem nao esta no ZIP nem no `sitemap.xml` enquanto estiver pausada.
+- Confirmar que a versao da tag e a versao no nome do ZIP sao iguais.
+- Atualizar o `CHANGELOG.md` com os commits e destaques da release.
 - Atualizar `README_DEPLOY_HOSTGATOR.md` se o fluxo de hospedagem mudar.
 - Criar backup antes de substituir arquivos no cPanel.
 
 ## Gerar novo ZIP de deploy
 
-Na raiz do projeto, compacte somente os arquivos necessarios para producao:
+Na raiz do projeto, informe a versao sem o prefixo `v`:
 
 ```powershell
-Compress-Archive -Path index.html,sobre.html,locacao-andaimes-sao-paulo.html,locacao-escoramento-metalico-sao-paulo.html,locacao-martelete-rompedor-sao-paulo.html,locacao-betoneira-vibrador-concreto-sao-paulo.html,robots.txt,sitemap.xml,assets,css,js -DestinationPath deploy\loctubo-site-hostgator-NOVA-DATA.zip -Force
+.\scripts\gerar-deploy.ps1 -Versao 1.0.0
 ```
+
+O script valida o formato `MAJOR.MINOR.PATCH`, cria `deploy\loctubo-site-hostgator-v1.0.0.zip` e omite intencionalmente a landing de concretagem enquanto ela estiver pausada.
 
 O ZIP deve abrir com esta estrutura:
 
@@ -478,7 +509,6 @@ sobre.html
 locacao-andaimes-sao-paulo.html
 locacao-escoramento-metalico-sao-paulo.html
 locacao-martelete-rompedor-sao-paulo.html
-locacao-betoneira-vibrador-concreto-sao-paulo.html
 robots.txt
 sitemap.xml
 assets/
