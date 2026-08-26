@@ -4,7 +4,7 @@ Este passo a passo serve para publicar o site estatico da LOCTUBO pelo Gerenciad
 
 ## Resumo rapido
 
-- Arquivo de deploy recomendado: `deploy/loctubo-site-hostgator-2026-08-17.zip`
+- Arquivo de deploy recomendado: `deploy/loctubo-site-hostgator-v1.0.0.zip`
 - Pasta correta na hospedagem: `/home1/loctub90/public_html`
 - O zip deve ser extraido dentro de `public_html`
 - Os arquivos do site precisam ficar diretamente em `public_html`, sem uma pasta extra por cima
@@ -18,7 +18,6 @@ Estrutura correta depois da extracao:
 |-- locacao-andaimes-sao-paulo.html
 |-- locacao-escoramento-metalico-sao-paulo.html
 |-- locacao-martelete-rompedor-sao-paulo.html
-|-- locacao-betoneira-vibrador-concreto-sao-paulo.html
 |-- robots.txt
 |-- sitemap.xml
 |-- assets/
@@ -35,13 +34,12 @@ Estrutura correta depois da extracao:
 Estrutura errada:
 
 ```text
-/home1/loctub90/public_html/loctubo-site-hostgator-2026-08-17/
+/home1/loctub90/public_html/loctubo-site-hostgator-v1.0.0/
 |-- index.html
 |-- sobre.html
 |-- locacao-andaimes-sao-paulo.html
 |-- locacao-escoramento-metalico-sao-paulo.html
 |-- locacao-martelete-rompedor-sao-paulo.html
-|-- locacao-betoneira-vibrador-concreto-sao-paulo.html
 |-- robots.txt
 |-- sitemap.xml
 |-- assets/
@@ -83,6 +81,8 @@ Antes de extrair o novo zip, apague ou substitua somente os arquivos antigos do 
 - `robots.txt`
 - `sitemap.xml`
 
+Na release `v1.0.0`, remova a landing de concretagem do servidor. Ela permanece no repositorio, mas esta pausada e nao sera reposta pelo novo ZIP.
+
 Nao apague a pasta `public_html` e nao mexa nas pastas fora dela, como `.cpanel`, `mail`, `ssl`, `tmp`, `logs` ou outras pastas da conta.
 
 ## Passo a passo no cPanel/HostGator
@@ -119,11 +119,13 @@ robots.txt
 sitemap.xml
 ```
 
+A landing de concretagem aparece nessa lista somente para apagar a copia publicada pelo pacote anterior.
+
 7. Ainda dentro de `public_html`, clique em **Carregar**.
 8. Envie este arquivo do computador:
 
 ```text
-C:\Users\ADML\Desktop\repositories\onGitHub\LOCTUBO\deploy\loctubo-site-hostgator-2026-08-17.zip
+C:\Users\ADML\Desktop\repositories\onGitHub\LocTubo\deploy\loctubo-site-hostgator-v1.0.0.zip
 ```
 
 9. Volte para o Gerenciador de Arquivos e clique em **Recarregar**.
@@ -147,7 +149,6 @@ sobre.html
 locacao-andaimes-sao-paulo.html
 locacao-escoramento-metalico-sao-paulo.html
 locacao-martelete-rompedor-sao-paulo.html
-locacao-betoneira-vibrador-concreto-sao-paulo.html
 robots.txt
 sitemap.xml
 ```
@@ -163,9 +164,10 @@ Abra o site no navegador e teste:
 - campanha de andaimes: `https://loctubo.com.br/locacao-andaimes-sao-paulo.html`
 - campanha de escoramento: `https://loctubo.com.br/locacao-escoramento-metalico-sao-paulo.html`
 - campanha de demolição: `https://loctubo.com.br/locacao-martelete-rompedor-sao-paulo.html`
-- campanha de concretagem: `https://loctubo.com.br/locacao-betoneira-vibrador-concreto-sao-paulo.html`
 - regras de rastreamento: `https://www.loctubo.com.br/robots.txt`
 - sitemap: `https://www.loctubo.com.br/sitemap.xml`
+
+A URL `https://loctubo.com.br/locacao-betoneira-vibrador-concreto-sao-paulo.html` deve ficar indisponivel nesta release. Se ela ainda abrir, remova manualmente o arquivo antigo de `public_html`.
 
 Use `Ctrl + F5` para forcar atualizacao sem cache.
 
@@ -176,7 +178,7 @@ Confira tambem se:
 - o menu funciona;
 - os arquivos PDF dos manuais abrem;
 - a pagina `sobre.html` abre sem erro 404.
-- as quatro paginas de campanha abrem sem erro 404.
+- as tres paginas de campanha publicadas abrem sem erro 404.
 - os CTAs e formularios das paginas de campanha abrem o WhatsApp correto.
 - o `robots.txt` referencia `https://www.loctubo.com.br/sitemap.xml`.
 
@@ -185,7 +187,7 @@ Confira tambem se:
 Se aparecer uma pasta assim dentro de `public_html`:
 
 ```text
-loctubo-site-hostgator-2026-08-17/
+loctubo-site-hostgator-v1.0.0/
 ```
 
 faca isto:
@@ -202,7 +204,6 @@ sobre.html
 locacao-andaimes-sao-paulo.html
 locacao-escoramento-metalico-sao-paulo.html
 locacao-martelete-rompedor-sao-paulo.html
-locacao-betoneira-vibrador-concreto-sao-paulo.html
 robots.txt
 sitemap.xml
 ```
@@ -216,7 +217,7 @@ sitemap.xml
 
 5. Confirme a substituicao se o cPanel perguntar.
 6. Volte para `public_html`.
-7. Apague a pasta vazia `loctubo-site-hostgator-2026-08-17/`.
+7. Apague a pasta vazia `loctubo-site-hostgator-v1.0.0/`.
 8. Apague tambem o arquivo `.zip` enviado.
 
 ## Permissoes esperadas
@@ -347,6 +348,20 @@ O correto e:
 - Nao apague o `.htaccess`; se suspeitar dele, renomeie temporariamente para `.htaccess.bak` apenas para teste.
 - Depois do teste, restaure o nome `.htaccess`.
 
+## Versionamento dos pacotes
+
+Cada publicacao usa versionamento semantico no formato `vMAJOR.MINOR.PATCH`. O commit final, a tag anotada e o ZIP devem compartilhar exatamente a mesma versao:
+
+```text
+Commit: chore(release): publica vX.Y.Z
+Tag: vX.Y.Z
+ZIP: deploy/loctubo-site-hostgator-vX.Y.Z.zip
+```
+
+Use `PATCH` para correcoes, `MINOR` para funcionalidades compativeis e `MAJOR` para mudancas incompativeis ou um novo ciclo principal. Os pacotes antigos com data sao apenas historico legado e nao devem servir de modelo para novas releases.
+
+Consulte [`CHANGELOG.md`](CHANGELOG.md) antes de publicar para conferir o escopo e os commits da versao.
+
 ## Como gerar um novo zip no futuro
 
 Quando precisar criar outro zip de deploy, compacte apenas estes itens da raiz do projeto:
@@ -357,7 +372,6 @@ sobre.html
 locacao-andaimes-sao-paulo.html
 locacao-escoramento-metalico-sao-paulo.html
 locacao-martelete-rompedor-sao-paulo.html
-locacao-betoneira-vibrador-concreto-sao-paulo.html
 robots.txt
 sitemap.xml
 assets/
@@ -376,11 +390,15 @@ Nao compacte a pasta `LOCTUBO` inteira e nao inclua:
 - `cgi-bin/`
 - `.htaccess`
 
-Com PowerShell, rode na raiz do projeto:
+Enquanto estiver pausada, `locacao-betoneira-vibrador-concreto-sao-paulo.html` deve permanecer fora dessa lista, do ZIP e do sitemap.
+
+Com PowerShell, rode na raiz do projeto e informe a versao sem o prefixo `v`:
 
 ```powershell
-Compress-Archive -Path index.html,sobre.html,locacao-andaimes-sao-paulo.html,locacao-escoramento-metalico-sao-paulo.html,locacao-martelete-rompedor-sao-paulo.html,locacao-betoneira-vibrador-concreto-sao-paulo.html,robots.txt,sitemap.xml,assets,css,js -DestinationPath deploy\loctubo-site-hostgator-NOVA-DATA.zip -Force
+.\scripts\gerar-deploy.ps1 -Versao 1.0.0
 ```
+
+O comando cria `deploy\loctubo-site-hostgator-v1.0.0.zip`. Nas proximas releases, substitua `1.0.0` pela nova versao SemVer.
 
 Antes de enviar para a HostGator, abra o zip e confira se ele comeca assim:
 
@@ -390,7 +408,6 @@ sobre.html
 locacao-andaimes-sao-paulo.html
 locacao-escoramento-metalico-sao-paulo.html
 locacao-martelete-rompedor-sao-paulo.html
-locacao-betoneira-vibrador-concreto-sao-paulo.html
 robots.txt
 sitemap.xml
 assets/

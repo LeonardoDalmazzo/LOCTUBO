@@ -4,9 +4,9 @@
   // Enquanto vazios, os eventos continuam disponíveis no dataLayer/Google tag,
   // mas não são enviados como conversões do Google Ads.
   const googleAdsConversionLabels = Object.freeze({
-    whatsapp_click: "",
-    click_to_call: "",
-    generate_lead: ""
+    whatsapp_click: "F7QvCOOxxeccEKW5rJpE",
+    click_to_call: "oZ8RCJak1uccEKW5rJpE",
+    generate_lead: "2qMHCNiX0OccEKW5rJpE"
   });
   const allowedEventParameters = new Set([
     "campaign_name",
